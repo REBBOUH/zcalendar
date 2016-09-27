@@ -32,6 +32,8 @@ class ApiManager {
                 
                 print(error)
                 
+                NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationconxerror, object: nil)
+                
                 return
             }else{
                 
@@ -59,7 +61,7 @@ class ApiManager {
     }
     
     
-    class func checkValue(success:(userInfo:[[String:AnyObject]])->()){
+    class func checkValue(begin:()->(),success:(userInfo:[[String:AnyObject]])->()){
         
         let urlString = "\(Constants.urlServerLocalHost)/check"
         
@@ -74,6 +76,8 @@ class ApiManager {
             if (error != nil) {
                 
                 print(error)
+                
+                 NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationconxerror, object: nil)
                 
                 return
             }else{

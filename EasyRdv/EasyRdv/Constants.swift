@@ -32,11 +32,8 @@ struct Constants {
     static let notificationeventupdateerror:String = "notificationeventupdateerror"
 
     
-    static let notificationmailexist:String = "notificationmailexist"
     
-    static let notificationuseradded:String = "notificationuseradded"
-    
-    static let notificationuseradderror:String = "notificationuseradderror"
+    static let notificationconxerror:String = "notificationconxerror"
     
     
 }

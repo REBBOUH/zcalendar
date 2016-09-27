@@ -10,11 +10,19 @@ import UIKit
 
 class PriseRdvController: UIViewController {
     
+    let loadingImage = UIImage(named: "activity_indicator")
+    
+    var loadingView:LoadingViewCustome!
+    
     @IBOutlet weak var dateField: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
+        
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateok, object: nil)
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateerror, object: nil)
+        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
         
         dispatch_async(dispatch_get_main_queue(), {
             self.dateField.text = CalendarSingleton.sharedInstance.event.start?.asDateString
@@ -25,6 +33,16 @@ class PriseRdvController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         
     }
+    override func viewDidLayoutSubviews() {
+        
+        let imageProfil = self.view.viewWithTag(3) as! UIImageView
+        imageProfil.layer.cornerRadius = imageProfil.frame.size.width/2
+        imageProfil.clipsToBounds = true
+        imageProfil.layer.borderWidth = 3.0
+        imageProfil.layer.borderColor = UIColor.cyanColor().CGColor
+        imageProfil.layer.backgroundColor = UIColor.brownColor().CGColor
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -32,6 +50,8 @@ class PriseRdvController: UIViewController {
     }
     
     @IBAction func valider(sender: UIButton) {
+        self.view.addSubview(loadingView)
+        self.view.multipleTouchEnabled = false
         ApiManager.UpdateCalendar(CalendarSingleton.sharedInstance.event.id!)
         
     }
@@ -62,12 +82,13 @@ class PriseRdvController: UIViewController {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    
-                    let viewAlert = UIAlertController(title: "réservation éffectuée", message: "votre réservartion a été bien éffectuée ", preferredStyle: .Alert)
+                    self.loadingView.hideLoadingIndicator()
+                    self.view.multipleTouchEnabled = true
+                    let viewAlert = UIAlertController(title: "réservation", message: "votre réservartion a été bien éffectuée ", preferredStyle: .Alert)
                     
                     let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: { _ in
                         self.dismissViewControllerAnimated(true, completion: {
-                         NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationeventupdateokreload, object: nil)
+                            NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationeventupdateokreload, object: nil)
                         })
                         
                     })
@@ -82,10 +103,13 @@ class PriseRdvController: UIViewController {
         if notification.name == Constants.notificationeventupdateerror {
             
             dispatch_async(dispatch_get_main_queue(), {
+                self.loadingView.hideLoadingIndicator()
+                self.view.multipleTouchEnabled = true
                 let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
             })
         }
+        
         
         NSNotificationCenter.defaultCenter().removeObserver(notification.name)
         

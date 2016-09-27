@@ -24,7 +24,7 @@ class Event:NSObject {
    func  initWithDic(eventInfo:[String:AnyObject]){
         id = eventInfo["id"] as? String
         nom = eventInfo["summary"] as? String
-        end = (eventInfo["end"]!["dateTime"] as! String).asDate
+        end = (eventInfo["end"]!["dateTime"] as? String)!.asDate
         start = (eventInfo["start"]!["dateTime"] as? String)!.asDate
         descriptionEvent = eventInfo["description"] as? String
         location = eventInfo["location"] as? String

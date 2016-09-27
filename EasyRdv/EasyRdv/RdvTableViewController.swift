@@ -13,6 +13,10 @@ class RdvTableViewController: UITableViewController {
     
     var calender:Calendar?
     
+    let loadingImage = UIImage(named: "activity_indicator")
+    
+    var loadingView:LoadingViewCustome!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,12 +29,19 @@ class RdvTableViewController: UITableViewController {
         //        self.tableView.estimatedRowHeight = 89
         calender = Calendar()
         
-        ApiManager.checkValue({_ in })
+        loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
+        
+        ApiManager.checkValue({_ in
+            self.view.addSubview(self.loadingView)
+            self.view.multipleTouchEnabled = false
+            },success: {_ in })
         
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationmailpasswordok, object: nil)
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationmailpassworderror, object: nil)
         
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventupdateokreload, object: nil)
+        
+        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -146,6 +157,7 @@ class RdvTableViewController: UITableViewController {
         if notification.name == Constants.notificationmailpassworderror {
             
             dispatch_async(dispatch_get_main_queue(), {
+               
                 let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
             })
@@ -156,12 +168,27 @@ class RdvTableViewController: UITableViewController {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 
                 self.calender?.listCalandar?.removeObjectAtIndex(CalendarSingleton.sharedInstance.index.row)
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     
+                    self.loadingView.hideLoadingIndicator()
+                    self.view.multipleTouchEnabled = true
                     self.tableView.reloadData()
                     
                 })
             })
+        }
+        
+        if notification.name == Constants.notificationconxerror {
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                self.loadingView.hideLoadingIndicator()
+                let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
+                alerview.show()
+            
+            })
+            
         }
         
         NSNotificationCenter.defaultCenter().removeObserver(notification.name)

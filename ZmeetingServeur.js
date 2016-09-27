@@ -13,6 +13,8 @@ var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
   process.env.USERPROFILE) + '/.credentials/';
 var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
 
+var calendarId = "zsoft-consulting.com_8ok1o3t4hjjfiqp2b41356g1is@group.calendar.google.com"
+
 // Load client secrets from a local file.
 fs.readFile('client_secret.json', function processClientSecrets(err, content) {
   if (err) {
@@ -107,14 +109,17 @@ fs.readFile('client_secret.json', function processClientSecrets(err, content) {
   var calendar = google.calendar('v3');
   calendar.events.list({
     auth: ownAuth,
-    calendarId: 'zsoft-consulting.com_1qocb5qma3cgrsjr8aof1e5n04@group.calendar.google.com',
+    calendarId: calendarId,
     timeMin: (new Date()).toISOString(),
-    maxResults: 10,
+    maxResults: 50,
     singleEvents: true,
     orderBy: 'startTime'
   }, function(err, response) {
+    
     if (err) {
+    
       console.log('The API returned an error: ' + err);
+    
       return;
     }
     var events = response.items;
@@ -149,7 +154,7 @@ function updateEvent(req,res) {
   var calendar = google.calendar('v3');
   calendar.events.get({
     auth: ownAuth,
-    calendarId: 'zsoft-consulting.com_1qocb5qma3cgrsjr8aof1e5n04@group.calendar.google.com',
+    calendarId: calendarId,
     eventId: req.params.eventId
   }, function(err, response) {
     if(err) {
@@ -159,7 +164,7 @@ function updateEvent(req,res) {
     response.summary = "RDV"
    calendar.events.update({
     auth: ownAuth,
-    calendarId: 'zsoft-consulting.com_1qocb5qma3cgrsjr8aof1e5n04@group.calendar.google.com',
+    calendarId: calendarId,
     eventId: req.params.eventId,
     resource : response
   },function(err,response){

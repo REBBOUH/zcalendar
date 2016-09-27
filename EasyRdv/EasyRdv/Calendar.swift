@@ -23,6 +23,8 @@ class Calendar {
         
         listCalandar = NSMutableArray()
         
+        print(eventInfos)
+        
         for eventInfo in eventInfos {
             
             let event:Event = Event()

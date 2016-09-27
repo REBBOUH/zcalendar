@@ -15,6 +15,8 @@
 		E53F9E6A1D92BF4100393343 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E691D92BF4100393343 /* Constants.swift */; };
 		E53F9E6C1D92D31B00393343 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E6B1D92D31B00393343 /* Tools.swift */; };
 		E53F9E6E1D92F18900393343 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E6D1D92F18900393343 /* Event.swift */; };
+		E56C536F1D9ABAFA00EA7053 /* LoadingViewCustome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C536D1D9ABAFA00EA7053 /* LoadingViewCustome.swift */; };
+		E56C53701D9ABAFA00EA7053 /* LoadingViewCustome.xib in Resources */ = {isa = PBXBuildFile; fileRef = E56C536E1D9ABAFA00EA7053 /* LoadingViewCustome.xib */; };
 		E56E31161D95310D00359EF9 /* ClientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E31151D95310D00359EF9 /* ClientCell.swift */; };
 		E56E31181D95365F00359EF9 /* mourad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56E31171D95365F00359EF9 /* mourad.jpg */; };
 		E56E311A1D955E9B00359EF9 /* PriseRdvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E31191D955E9B00359EF9 /* PriseRdvController.swift */; };
@@ -50,6 +52,8 @@
 		E53F9E691D92BF4100393343 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E53F9E6B1D92D31B00393343 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		E53F9E6D1D92F18900393343 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		E56C536D1D9ABAFA00EA7053 /* LoadingViewCustome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewCustome.swift; sourceTree = "<group>"; };
+		E56C536E1D9ABAFA00EA7053 /* LoadingViewCustome.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingViewCustome.xib; sourceTree = "<group>"; };
 		E56E31151D95310D00359EF9 /* ClientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientCell.swift; sourceTree = "<group>"; };
 		E56E31171D95365F00359EF9 /* mourad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mourad.jpg; sourceTree = "<group>"; };
 		E56E31191D955E9B00359EF9 /* PriseRdvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriseRdvController.swift; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 		E57C581B1D93E83F00E57BCB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E56C536D1D9ABAFA00EA7053 /* LoadingViewCustome.swift */,
+				E56C536E1D9ABAFA00EA7053 /* LoadingViewCustome.xib */,
 				E57C581C1D93E85A00E57BCB /* RdvCell.swift */,
 				E56E31151D95310D00359EF9 /* ClientCell.swift */,
 			);
@@ -294,6 +300,7 @@
 			files = (
 				E57881F81D916E7D00B3656E /* client_id.json in Resources */,
 				E56E31181D95365F00359EF9 /* mourad.jpg in Resources */,
+				E56C53701D9ABAFA00EA7053 /* LoadingViewCustome.xib in Resources */,
 				E57881D81D91412600B3656E /* LaunchScreen.storyboard in Resources */,
 				E57881D51D91412600B3656E /* Assets.xcassets in Resources */,
 				E57881D01D91412600B3656E /* Main.storyboard in Resources */,
@@ -418,6 +425,7 @@
 				E57C581A1D93D54E00E57BCB /* RdvTableViewController.swift in Sources */,
 				E53F9E6E1D92F18900393343 /* Event.swift in Sources */,
 				E56E311A1D955E9B00359EF9 /* PriseRdvController.swift in Sources */,
+				E56C536F1D9ABAFA00EA7053 /* LoadingViewCustome.swift in Sources */,
 				E57881CB1D91412600B3656E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
