@@ -1,0 +1,28 @@
+["colorId": 2, "hangoutLink": https://plus.google.com/hangouts/_/zsoft-consulting.com/dsp?hceid=enNvZnQtY29uc3VsdGluZy5jb21fY2RzZG9pbWJrZ3BpbzdkaWFtYWcyZmg5ZXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ.unrak68sidugfek5spka8nqimo, "creator": {
+    email = "yassir.aberni@zsoft-consulting.com";
+}, "start": {
+    dateTime = "2016-10-01T14:00:00+02:00";
+}, "kind": calendar#event, "iCalUID": unrak68sidugfek5spka8nqimo@google.com, "etag": "2950287013726000", "end": {
+    dateTime = "2016-10-01T15:00:00+02:00";
+}, "updated": 2016-09-29T10:05:06.863Z, "organizer": {
+    displayName = "mourad Aissou";
+    email = "zsoft-consulting.com_cdsdoimbkgpio7diamag2fh9es@group.calendar.google.com";
+    self = 1;
+}, "summary": DSP, "reminders": {
+    useDefault = 1;
+}, "sequence": 0, "id": unrak68sidugfek5spka8nqimo, "htmlLink": https://www.google.com/calendar/event?eid=dW5yYWs2OHNpZHVnZmVrNXNwa2E4bnFpbW8genNvZnQtY29uc3VsdGluZy5jb21fY2RzZG9pbWJrZ3BpbzdkaWFtYWcyZmg5ZXNAZw, "created": 2016-09-28T16:12:09.000Z, "status": confirmed]
+
+
+["hangoutLink": https://plus.google.com/hangouts/_/zsoft-consulting.com/dsp?hceid=enNvZnQtY29uc3VsdGluZy5jb21fOG9rMW8zdDRoampmaXFwMmI0MTM1NmcxaXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ.sti9eo5egrkmrqvfj1ftmphco8, "creator": {
+    email = "yassir.aberni@zsoft-consulting.com";
+}, "start": {
+    dateTime = "2016-10-06T13:30:00+02:00";
+}, "kind": calendar#event, "iCalUID": sti9eo5egrkmrqvfj1ftmphco8@google.com, "etag": "2949981893978000", "end": {
+    dateTime = "2016-10-06T16:30:00+02:00";
+}, "summary": DSP, "reminders": {
+    useDefault = 1;
+}, "updated": 2016-09-27T15:42:26.989Z, "organizer": {
+    displayName = pro;
+    email = "zsoft-consulting.com_8ok1o3t4hjjfiqp2b41356g1is@group.calendar.google.com";
+    self = 1;
+}, "sequence": 0, "id": sti9eo5egrkmrqvfj1ftmphco8, "htmlLink": https://www.google.com/calendar/event?eid=c3RpOWVvNWVncmttcnF2ZmoxZnRtcGhjbzggenNvZnQtY29uc3VsdGluZy5jb21fOG9rMW8zdDRoampmaXFwMmI0MTM1NmcxaXNAZw, "created": 2016-09-27T15:42:25.000Z, "status": confirmed]

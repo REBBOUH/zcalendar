@@ -20,9 +20,13 @@ class PriseRdvController: UIViewController {
         
         loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
         
+        
+
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateok, object: nil)
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateerror, object: nil)
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
+        
+        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventconxerror, object: nil)
         
         dispatch_async(dispatch_get_main_queue(), {
             self.dateField.text = CalendarSingleton.sharedInstance.event.start?.asDateString
@@ -34,6 +38,12 @@ class PriseRdvController: UIViewController {
         
     }
     override func viewDidLayoutSubviews() {
+        self.view.viewWithTag(2)?.layer.cornerRadius = 10
+        self.view.viewWithTag(1)?.layer.cornerRadius = 10
+        self.view.viewWithTag(2)?.layer.borderWidth = 3.0
+        self.view.viewWithTag(2)?.layer.borderColor = UIColor.brownColor().CGColor
+        self.view.viewWithTag(1)?.layer.borderWidth = 3.0
+        self.view.viewWithTag(1)?.layer.borderColor = UIColor.brownColor().CGColor
         
         let imageProfil = self.view.viewWithTag(3) as! UIImageView
         imageProfil.layer.cornerRadius = imageProfil.frame.size.width/2
@@ -50,9 +60,10 @@ class PriseRdvController: UIViewController {
     }
     
     @IBAction func valider(sender: UIButton) {
-        self.view.addSubview(loadingView)
+        self.view.addSubview(self.loadingView)
+        self.loadingView.showLoadingIndicator()
         self.view.multipleTouchEnabled = false
-        ApiManager.UpdateCalendar(CalendarSingleton.sharedInstance.event.id!)
+        ApiManager.UpdateCalendar(UserSingleton.sharedInstance.user.calendarId!,eventId: CalendarSingleton.sharedInstance.event.id!)
         
     }
     
@@ -61,8 +72,7 @@ class PriseRdvController: UIViewController {
     
     @IBAction func annuler(sender: UIButton) {
         
-        self.dismissViewControllerAnimated(true, completion: {})
-        
+        self.navigationController?.popViewControllerAnimated(true);
     }
     /*
      // MARK: - Navigation
@@ -87,10 +97,8 @@ class PriseRdvController: UIViewController {
                     let viewAlert = UIAlertController(title: "réservation", message: "votre réservartion a été bien éffectuée ", preferredStyle: .Alert)
                     
                     let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: { _ in
-                        self.dismissViewControllerAnimated(true, completion: {
-                            NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationeventupdateokreload, object: nil)
-                        })
-                        
+                        self.navigationController?.popViewControllerAnimated(true)
+                        NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationeventupdateokreload, object: nil)
                     })
                     
                     viewAlert.addAction(defaultAction)
@@ -101,6 +109,16 @@ class PriseRdvController: UIViewController {
         }
         
         if notification.name == Constants.notificationeventupdateerror {
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.loadingView.hideLoadingIndicator()
+                self.view.multipleTouchEnabled = true
+                let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
+                alerview.show()
+            })
+        }
+        
+        if notification.name == Constants.notificationeventconxerror {
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.loadingView.hideLoadingIndicator()

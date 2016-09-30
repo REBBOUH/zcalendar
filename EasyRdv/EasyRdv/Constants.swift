@@ -9,31 +9,42 @@
 import Foundation
 
 
+
 struct Constants {
     
     static let username:String = "yassir"
     
     static let password:String = "aberni"
     
-    static let urlServer:String = "http://192.168.15.247:8080"
+   // static let urlServer:String = "http://192.168.15.247:8080"
     
-    static let urlServerLocalHost:String = "http://localhost:8080"
+    static let urlServer:String = "http://localhost:8080"
+    
+    static let urlServercheck:String = "\(Constants.urlServer)/check/"
+    
+    static let urlServerUpdateEvent:String = "\(Constants.urlServer)/update/"
+    
+    static let urlServerchecklist:String = "\(Constants.urlServer)/checklist"
     
     
+//    static let urlServercheck:String = "http://192.168.15.247:8080/check/"
+//    
+//    static let urlServerUpdateEvent:String = "http://192.168.15.247:8080/update/"
+//    
+//    static let urlServerchecklist:String = "http://192.168.15.247:8080/checklist"
+    
+    //MARK: - Notification String
+    // user notification
+    static let notificationusergetok:String = "notificationusergetok"
+    static let notificationusergeterror:String = "notificationusergeterror"
+    //event notifcation
     static let notificationmailpasswordok:String = "notificationmailpasswordok"
-    
-    
-    
     static let notificationmailpassworderror:String = "notificationmailpassworderror"
-    
     static let notificationeventupdateok:String = "notificationeventupdateok"
     static let notificationeventupdateokreload:String = "notificationeventupdateokreload"
-    
     static let notificationeventupdateerror:String = "notificationeventupdateerror"
-
-    
-    
     static let notificationconxerror:String = "notificationconxerror"
+    static let notificationeventconxerror:String = "notificationeventconxerror"
     
     
 }
@@ -55,37 +66,28 @@ extension NSDateFormatter {
 }
 
 extension NSDate {
-    struct Formatter {
-        static let custom = NSDateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
-
-    }
+    
     var customFormatted: String {
-        Formatter.custom.timeZone = NSTimeZone.localTimeZone()
-        return Formatter.custom.stringFromDate(self)
+        let custom = NSDateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
+        custom.timeZone = NSTimeZone.localTimeZone()
+        return custom.stringFromDate(self)
     }
     
     var asDateString :String {
+        let custom = NSDateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
+        custom.timeZone = NSTimeZone.localTimeZone()
+         custom.locale = NSLocale(localeIdentifier: "fr_FR")
+        custom.dateStyle = NSDateFormatterStyle.FullStyle
+        custom.timeStyle = NSDateFormatterStyle.ShortStyle
+       
         
-Formatter.custom.timeZone = NSTimeZone.localTimeZone()
-        Formatter.custom.locale = NSLocale(localeIdentifier: "fr_FR")
-        Formatter.custom.dateStyle = NSDateFormatterStyle.FullStyle
-        Formatter.custom.timeStyle = NSDateFormatterStyle.ShortStyle
-//        let calendar = NSCalendar.currentCalendar()
-//        let components = calendar.components([.Weekday , .Month , .Year], fromDate: self)
-//        let year =  components.year
-//        let month = components.month
-//        let day = components.weekday
-//        let hour = components.hour
-//        let minute = components.minute
-//        let dateString = "\(day)\(month)"
-        
-        return Formatter.custom.stringFromDate(self)
+        return custom.stringFromDate(self)
     }
 }
 extension String {
     var asDate: NSDate? {
-        
-        return NSDate.Formatter.custom.dateFromString(self)
+       let custom = NSDateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
+        return custom.dateFromString(self)
     }
     
     func asDateFormatted(with dateFormat: String) -> NSDate? {

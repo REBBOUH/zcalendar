@@ -15,6 +15,9 @@
 		E53F9E6A1D92BF4100393343 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E691D92BF4100393343 /* Constants.swift */; };
 		E53F9E6C1D92D31B00393343 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E6B1D92D31B00393343 /* Tools.swift */; };
 		E53F9E6E1D92F18900393343 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E6D1D92F18900393343 /* Event.swift */; };
+		E569ED831D9C0A750034FF82 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569ED811D9C0A750034FF82 /* User.swift */; };
+		E569ED841D9C0A750034FF82 /* UserSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569ED821D9C0A750034FF82 /* UserSingleton.swift */; };
+		E569ED861D9C1F090034FF82 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569ED851D9C1F090034FF82 /* UserTableViewController.swift */; };
 		E56C536F1D9ABAFA00EA7053 /* LoadingViewCustome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C536D1D9ABAFA00EA7053 /* LoadingViewCustome.swift */; };
 		E56C53701D9ABAFA00EA7053 /* LoadingViewCustome.xib in Resources */ = {isa = PBXBuildFile; fileRef = E56C536E1D9ABAFA00EA7053 /* LoadingViewCustome.xib */; };
 		E56E31161D95310D00359EF9 /* ClientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E31151D95310D00359EF9 /* ClientCell.swift */; };
@@ -26,7 +29,6 @@
 		E57881D51D91412600B3656E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57881D41D91412600B3656E /* Assets.xcassets */; };
 		E57881D81D91412600B3656E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57881D61D91412600B3656E /* LaunchScreen.storyboard */; };
 		E57881E31D91412600B3656E /* EasyRdvTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57881E21D91412600B3656E /* EasyRdvTests.swift */; };
-		E57881F81D916E7D00B3656E /* client_id.json in Resources */ = {isa = PBXBuildFile; fileRef = E57881F71D916E7D00B3656E /* client_id.json */; };
 		E57C581A1D93D54E00E57BCB /* RdvTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57C58191D93D54E00E57BCB /* RdvTableViewController.swift */; };
 		E57C581D1D93E85A00E57BCB /* RdvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57C581C1D93E85A00E57BCB /* RdvCell.swift */; };
 		E586EF2D1D93CE9E009E8672 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586EF2C1D93CE9E009E8672 /* Calendar.swift */; };
@@ -52,6 +54,9 @@
 		E53F9E691D92BF4100393343 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E53F9E6B1D92D31B00393343 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		E53F9E6D1D92F18900393343 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		E569ED811D9C0A750034FF82 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E569ED821D9C0A750034FF82 /* UserSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSingleton.swift; sourceTree = "<group>"; };
+		E569ED851D9C1F090034FF82 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		E56C536D1D9ABAFA00EA7053 /* LoadingViewCustome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewCustome.swift; sourceTree = "<group>"; };
 		E56C536E1D9ABAFA00EA7053 /* LoadingViewCustome.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingViewCustome.xib; sourceTree = "<group>"; };
 		E56E31151D95310D00359EF9 /* ClientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientCell.swift; sourceTree = "<group>"; };
@@ -71,7 +76,6 @@
 		E57881EE1D91542800B3656E /* libGTMOAuth2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGTMOAuth2.a; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/libGTMOAuth2.a"; sourceTree = "<group>"; };
 		E57881EF1D91542800B3656E /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGTMSessionFetcher.a; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/libGTMSessionFetcher.a"; sourceTree = "<group>"; };
 		E57881F01D91542800B3656E /* libPods-EasyRdvTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-EasyRdvTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-EasyRdvTests.a"; sourceTree = "<group>"; };
-		E57881F71D916E7D00B3656E /* client_id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = client_id.json; sourceTree = "<group>"; };
 		E57881F91D91707600B3656E /* GoogleAPIClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAPIClient.framework; path = "../../../../Library/Developer/Xcode/DerivedData/EasyRdv-gweklbkdftzuzrdfvovyunhvirsu/Build/Products/Debug-iphonesimulator/GoogleAPIClient/GoogleAPIClient.framework"; sourceTree = "<group>"; };
 		E57881FA1D91707600B3656E /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "../../../../Library/Developer/Xcode/DerivedData/EasyRdv-gweklbkdftzuzrdfvovyunhvirsu/Build/Products/Debug-iphonesimulator/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
 		E57881FB1D91707600B3656E /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "../../../../Library/Developer/Xcode/DerivedData/EasyRdv-gweklbkdftzuzrdfvovyunhvirsu/Build/Products/Debug-iphonesimulator/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
@@ -159,7 +163,6 @@
 				E57881CE1D91412600B3656E /* Main.storyboard */,
 				E57881D41D91412600B3656E /* Assets.xcassets */,
 				E57881D61D91412600B3656E /* LaunchScreen.storyboard */,
-				E57881F71D916E7D00B3656E /* client_id.json */,
 				E57881D91D91412600B3656E /* Info.plist */,
 				E57881D11D91412600B3656E /* EasyRdv.xcdatamodeld */,
 			);
@@ -189,6 +192,8 @@
 		E586EF2A1D93CC1B009E8672 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				E569ED811D9C0A750034FF82 /* User.swift */,
+				E569ED821D9C0A750034FF82 /* UserSingleton.swift */,
 				E53F9E691D92BF4100393343 /* Constants.swift */,
 				E53F9E671D92BEFD00393343 /* ApiManager.swift */,
 				E53F9E6B1D92D31B00393343 /* Tools.swift */,
@@ -202,6 +207,7 @@
 		E586EF2B1D93CC31009E8672 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E569ED851D9C1F090034FF82 /* UserTableViewController.swift */,
 				E57C58191D93D54E00E57BCB /* RdvTableViewController.swift */,
 				E56E31191D955E9B00359EF9 /* PriseRdvController.swift */,
 			);
@@ -259,7 +265,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Yassir Aberni";
 				TargetAttributes = {
 					E57881C61D91412600B3656E = {
@@ -298,7 +304,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E57881F81D916E7D00B3656E /* client_id.json in Resources */,
 				E56E31181D95365F00359EF9 /* mourad.jpg in Resources */,
 				E56C53701D9ABAFA00EA7053 /* LoadingViewCustome.xib in Resources */,
 				E57881D81D91412600B3656E /* LaunchScreen.storyboard in Resources */,
@@ -420,12 +425,15 @@
 				E57881D31D91412600B3656E /* EasyRdv.xcdatamodeld in Sources */,
 				E586EF2D1D93CE9E009E8672 /* Calendar.swift in Sources */,
 				E53F9E6C1D92D31B00393343 /* Tools.swift in Sources */,
+				E569ED831D9C0A750034FF82 /* User.swift in Sources */,
 				E56E31161D95310D00359EF9 /* ClientCell.swift in Sources */,
+				E569ED841D9C0A750034FF82 /* UserSingleton.swift in Sources */,
 				E57C581D1D93E85A00E57BCB /* RdvCell.swift in Sources */,
 				E57C581A1D93D54E00E57BCB /* RdvTableViewController.swift in Sources */,
 				E53F9E6E1D92F18900393343 /* Event.swift in Sources */,
 				E56E311A1D955E9B00359EF9 /* PriseRdvController.swift in Sources */,
 				E56C536F1D9ABAFA00EA7053 /* LoadingViewCustome.swift in Sources */,
+				E569ED861D9C1F090034FF82 /* UserTableViewController.swift in Sources */,
 				E57881CB1D91412600B3656E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,8 +490,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -527,8 +537,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -547,6 +559,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

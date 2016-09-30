@@ -8,32 +8,33 @@
 
 import Foundation
 
-class Calendar {
+class Calendar:NSObject {
     
     var listCalandar:NSMutableArray?
     
-    init() {
-        
+    override init() {
+        super.init()
         listCalandar = NSMutableArray()
         
     }
     
+    deinit {
+        listCalandar = nil
+    }
+    
     
      init (eventInfos:[[String:AnyObject]]) {
+        super.init()
         
         listCalandar = NSMutableArray()
-        
-        print(eventInfos)
-        
+       
         for eventInfo in eventInfos {
             
-            let event:Event = Event()
-            
-            event.initWithDic(eventInfo)
-            
+            let event:Event = Event(eventInfo: eventInfo)
             listCalandar?.addObject(event)
+            
         }
-        print("----\(listCalandar?.count)")
+        
     }
     
 }

@@ -20,23 +20,25 @@ class RdvTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        //        self.tableView.estimatedRowHeight = 89
         calender = Calendar()
         
         loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
-        
-        ApiManager.checkValue({_ in
+        self.navigationItem.title = "Choisissez votre rendez-vous"
+        self.navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Arial", size: 14)!];
+
+
+        ApiManager.checkValue(UserSingleton.sharedInstance.user.calendarId!,begin: {_ in
+            
             self.view.addSubview(self.loadingView)
-            self.view.multipleTouchEnabled = false
-            },success: {_ in })
-        
+            self.loadingView.showLoadingIndicator()
+            self.view.userInteractionEnabled = false
+            
+            },success: {_ in
+                
+        })
+
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationmailpasswordok, object: nil)
+        
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationmailpassworderror, object: nil)
         
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventupdateokreload, object: nil)
@@ -66,9 +68,15 @@ class RdvTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         let cell  = tableView.dequeueReusableCellWithIdentifier("cellinfoclient") as! ClientCell
-        cell.clientName.text = "Mourad Aissou"
-        cell.clientAdress.text = "3B Rue Taylor 75010, Paris"
+        
+        if let user:User = UserSingleton.sharedInstance.user {
+            
+            cell.clientName.text = user.nameUser
+            cell.clientAdress.text = user.adress
+            
+        }
         
         return cell
     }
@@ -77,61 +85,23 @@ class RdvTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("celldate", forIndexPath: indexPath) as! RdvCell
         
-        cell.dateDebut.text = "\((calender?.listCalandar![indexPath.row] as! Event).start!.asDateString)"
+        let datestring = "\((calender?.listCalandar![indexPath.row] as? Event)!.start!.asDateString)"
+       
+        cell.dateDebut.text = datestring
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        CalendarSingleton.sharedInstance.index = indexPath
         
-        CalendarSingleton.sharedInstance.event.setValue(self.calender?.listCalandar![indexPath.row] as! Event)
+        CalendarSingleton.sharedInstance.index = indexPath
+        CalendarSingleton.sharedInstance.event = self.calender?.listCalandar![indexPath.row] as! Event
+        
+        let priseRendezVousViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("priseRdvController") as! PriseRdvController
+        
+        self.navigationController?.pushViewController(priseRendezVousViewController as UIViewController, animated: true)
         
     }
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     // MARK - handle notification
     
@@ -139,17 +109,29 @@ class RdvTableViewController: UITableViewController {
         if notification.name == Constants.notificationmailpasswordok {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
                 
-                if let infos = notification.userInfo!["data"]   {
+                if let infos = notification.userInfo?["data"]   {
                     
                     self.calender = Calendar(eventInfos: infos as! [[String : AnyObject]] )
+                    
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    self.tableView.reloadData()
+                    self.loadingView.hideLoadingIndicator()
+                    self.view.userInteractionEnabled = true
                     
+                    if self.calender?.listCalandar?.count == 0 {
+                        
+                        let alerview = UIAlertView(title: "Rendez-vous",message: "pas de rendez-vous disponible", delegate: self, cancelButtonTitle: "ok")
+                        alerview.show()
+                        
+                    }else{
+                        
+                        self.tableView.reloadData()
+                        
+                    }
                 })
             })
         }
@@ -157,9 +139,10 @@ class RdvTableViewController: UITableViewController {
         if notification.name == Constants.notificationmailpassworderror {
             
             dispatch_async(dispatch_get_main_queue(), {
-               
+                
                 let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
+                
             })
         }
         
@@ -171,8 +154,7 @@ class RdvTableViewController: UITableViewController {
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    self.loadingView.hideLoadingIndicator()
-                    self.view.multipleTouchEnabled = true
+                    
                     self.tableView.reloadData()
                     
                 })
@@ -186,7 +168,8 @@ class RdvTableViewController: UITableViewController {
                 self.loadingView.hideLoadingIndicator()
                 let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
-            
+                
+                
             })
             
         }
@@ -195,6 +178,8 @@ class RdvTableViewController: UITableViewController {
         
     }
     
-    
+    func newUpdate(){
+        
+    }
     
 }

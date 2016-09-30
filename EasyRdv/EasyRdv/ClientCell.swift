@@ -22,7 +22,7 @@ class ClientCell: UITableViewCell {
     }
     override func layoutSubviews() {
         clientView.layer.cornerRadius = 5
-        clientImage.layer.cornerRadius = 5
+       // clientImage.layer.cornerRadius = 5
 
     }
 
