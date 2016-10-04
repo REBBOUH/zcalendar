@@ -18,7 +18,7 @@ struct Constants {
     
    // static let urlServer:String = "http://192.168.15.247:8080"
     
-    static let urlServer:String = "http://localhost:8080"
+    static let urlServer:String = "http://localhost:8080/api"
     
     static let urlServercheck:String = "\(Constants.urlServer)/check/"
     

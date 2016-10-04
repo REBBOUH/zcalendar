@@ -5,6 +5,7 @@ var mongo = require('mongodb');
 var bodyParser = require('body-parser');
 
 var express = require('express');
+var prototype = require('./prototype')
 
 var app = express();
 var Server = mongo.Server;
@@ -12,54 +13,74 @@ var Db = mongo.Db;
 var BSON = mongo.BSONPure;
 
 
+// connect with db 
+  function connexionDataBase(callback){
 
+ var server = new Server('localhost', 27017, {auto_reconnect: true}); 
+    db = new Db('easyRdv', server);
+  db.open(function(err, db) {
 
+      if(!err) {
+      
+        console.log("Connected to 'easyRdv' database");
 
+        callback(err,db);
+      
+      }
+      else{
+
+        console.log("not Connected to 'easyRdv' database");
+         callback(err,db);
+      
+      }
+    });
+}
+
+module.exports = connexionDataBase
 // connect with db 
 module.exports.DataBaseModule  = function(){
 	var self = this
 	console.log('database module created');
 
-	this.connexion  = {
-		connexionDataBase : function(callback){
+	// this.connexion  = {
+	// 	connexionDataBase : function(callback){
 
-			var server = new Server('localhost', 27017, {auto_reconnect: true}); 
-			var  db = new Db('easyRdv', server);
+	// 		var server = new Server('localhost', 27017, {auto_reconnect: true}); 
+	// 		var  db = new Db('easyRdv', server);
 
-			db.open(function(err, db) {
+	// 		db.open(function(err, db) {
 
-				if(!err) {
+	// 			if(!err) {
 
-					console.log("Connected to 'easyRdv' database");
-					callback(err,db);
+	// 				console.log("Connected to 'easyRdv' database");
+	// 				callback(err,db);
 
-				}
-				else{
+	// 			}
+	// 			else{
 
-					console.log("not Connected to 'easyRdv' database");
+	// 				console.log("not Connected to 'easyRdv' database");
 
-					callback(err,null);
-				}
+	// 				callback(err,null);
+	// 			}
 				
-			});
-		}
-	};
+	// 		});
+	// 	}
+	// };
 
 	this.user = {
 
 		addUserAccess : function(userInfo,callback){
 			
 			console.log('user add function');
-			
-			self.connexion.connexionDataBase(function(err,db){
-				if (err) {
+			 connexionDataBase(function(err,db){
+			//self.connexion.connexionDataBase(function(err,db){
+				if (!db) {
 
-					console.log('error to open database '+err);
-					callback(err,null);
+					console.log('error to open database ');
+					//callback(err,null);
 					return;
 
 				}
-
 
 				db.collection('userAccess',function(err,collection){
 
@@ -70,7 +91,7 @@ module.exports.DataBaseModule  = function(){
 						return;
 					}
 
-					self.user.getUserInfo(userInfo.mail,function(err,user){
+					self.user.getUserFromInfo(userInfo,db,function(err,user){
 						
 						if (err) {
 
@@ -80,7 +101,7 @@ module.exports.DataBaseModule  = function(){
 
 						if (!user) {
 
-							collection.insertOne({'login':userInfo.mail,'password':userInfo.password},{safe:true},function(err,result){
+							collection.insertOne({"mail":userInfo.mail,"password":userInfo.password},{safe:true},function(err,result){
 
 								if(err) {
 
@@ -89,7 +110,8 @@ module.exports.DataBaseModule  = function(){
 
 								}
 
-								self.user.addUserInfo(result.insertedId,userInfo,function(errAdd,resultAdd){
+								self.user.addUserInfo(result.insertedId,userInfo,db,function(errAdd,resultAdd){
+								
 									callback(errAdd,resultAdd);
 
 								});
@@ -97,14 +119,46 @@ module.exports.DataBaseModule  = function(){
 						}else{
 							
 							console.log('user alredy exist');
-							callback(null,null);
+							var userError = {"mail":"error"}
+							callback(null,userError);
 						}
 					});
 				});
 			});
 },
 
-addUserInfo: function(id,userInfo,callback){
+addUserInfo: function(id,userInfo,db,callback){
+	console.log('user add info function');
+	// //self.connexion.connexionDataBase(function(err,db){
+	// 	if (err) {
+	// 		console.log('error to open database addUserInfo'+err);
+	// 		callback(err,null);
+	// 		return;
+	// 	}
+
+		db.collection('userInfo',function(err,collection){
+
+			if(err) {
+
+				console.log('error to open userInfo collection addUserInfo ' +err);
+				callback(err,null);
+				return;
+			}
+            var user = prototype.userInfo(userInfo);
+			
+			collection.insertOne({"_id":id,"mail":user.mail,"number":user.number,"isClient":user.isClient},{safe:true},function(err,result){
+
+				if(err) {
+
+					console.log('error to add user addUserInfo'+err);
+					return 
+				}
+				callback(err,result);
+			})
+		})
+	//})
+},
+addUserSpeciality: function(userSpecialty,callback){
 	console.log('user add info function');
 	self.connexion.connexionDataBase(function(err,db){
 		if (err) {
@@ -113,32 +167,30 @@ addUserInfo: function(id,userInfo,callback){
 			return;
 		}
 
-		db.collection('userInfo',function(err,collection){
+		db.collection('userSpecialty',function(err,collection){
 
 			if(err) {
 
-				console.log('error to open userInfo collection addUserInfo');
+				console.log('error to open userSpecialty collection addUserInfo');
 				callback(err,null);
 				return;
 			}
 
-			collection.insertOne({'_id':id,'mail':userInfo.login,'name':userInfo.name,"number":userInfo.number,"isClient":userInfo.isClient},{safe:true},function(err,result){
+			collection.insertOne(userSpecialty,{safe:true},function(err,result){
 
 				if(err) {
 
-					console.log('error to add user addUserInfo'+err);
+					console.log('error to add user addUserSpeciality'+err);
 					return 
 				}
 				callback(err,result);
-				db.close();
 			})
 		})
 	})
 },
-
-getUserInfo:function(mail,callback){
+getUserFromAccess:function(user,callback){
 	
-	console.log('getUserInfo');
+	console.log('getUser');
 
 	self.connexion.connexionDataBase(function(err,db){
 		if (err) {
@@ -148,30 +200,105 @@ getUserInfo:function(mail,callback){
 		}
 		db.collection('userAccess',function(err,collection){
 
-			collection.findOne({'login':mail},{safe:true}, function (err, user) {
+			collection.findOne({'mail':user.mail,'password':user.password},{safe:true}, function (err, user) {
 
 				if (err) { 
 
 					console.log('error from database module getUserInfo '+err);
-					db.close();
+					
 					return callback(err,null);
 
 				}
 
 				if (!user) { 
 
-					db.close();
+					
 					return callback(null, null);
 
 				}; 
 
-				db.close();
+				
 				return callback(err, user);
 
 			})
 		})
 	})
 },
+getUserFromInfo:function(user,db,callback){
+	
+	console.log('getUserFromInfo');
+
+	// self.connexion.connexionDataBase(function(err,db){
+	// 	if (err) {
+	// 		console.log('error to open database addUserInfo'+err);
+	// 		callback(err,null);
+	// 		return;
+	// 	}
+
+		db.collection('userAccess',function(err,collection){
+if (err ){
+	console.log('error to open database addUserInfo'+err);
+	callback(err,null);
+}
+			collection.findOne({'mail':user.mail},{safe:true}, function (err, user) {
+
+				if (err) { 
+
+					console.log('error from database module getUserFromInfo '+err);
+					
+					return callback(err,null);
+
+				}
+
+				if (!user) { 
+
+					return callback(null, null);
+
+				}; 
+
+				
+				return callback(err, user);
+
+			})
+		})
+	//})
+},
+getUserFromSpeciality:function(user,callback){
+	
+	console.log('getUserFromSpeciality');
+
+	self.connexion.connexionDataBase(function(err,db){
+		if (err) {
+			console.log('error to open database getUserFromSpeciality'+err);
+			callback(err,null);
+			return;
+		}
+		db.collection('userSpecialty',function(err,collection){
+
+			collection.findOne({'mail':user.mail},{safe:true}, function (err, user) {
+
+				if (err) { 
+
+					console.log('error from database module getUserFromSpeciality '+err);
+			
+					return callback(err,null);
+
+				}
+
+				if (!user) { 
+
+				
+					return callback(null, null);
+
+				}; 
+
+				
+				return callback(err, user);
+
+			})
+		})
+	})
+}
 
 };
 
@@ -190,19 +317,19 @@ this.eventCalendar = {
 					if (err) { 
 
 						console.log('error from database module getEventForUser '+err);
-						db.close();
+						
 						return callback(err,null);
 
 					}
 
 					if (!user) { 
 
-						db.close();
+				
 						return callback(null, null);
 
 					}; 
 
-					db.close();
+			
 					return callback(err, eventUser);
 
 				})
@@ -223,19 +350,19 @@ this.eventCalendar = {
 					if (err) { 
 
 						console.log('error from database module addEventForUser '+err);
-						db.close();
+						
 						return callback(err,null);
 
 					}
 
 					if (!user) { 
 
-						db.close();
+					
 						return callback(null, null);
 
 					}; 
 
-					db.close();
+				
 					return callback(err, eventUser);
 
 				})

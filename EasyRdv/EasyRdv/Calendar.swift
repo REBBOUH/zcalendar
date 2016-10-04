@@ -19,6 +19,7 @@ class Calendar:NSObject {
     }
     
     deinit {
+        
         listCalandar = nil
     }
     

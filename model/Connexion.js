@@ -1,128 +1,143 @@
 var fs = require('fs');
+
 var readline = require('readline');
-var google = require('googleapis');
-var googleAuth = require('google-auth-library');
+
 var express = require('express');
-var mongo = require('mongodb');
+
+var google = require('googleapis');
+
+var googleAuth = require('google-auth-library');
+
+var passport = require('passport');
+
+var TokenStrategy = require('passport-accesstoken').Strategy;
+
+var jwt  = require('jsonwebtoken');
+
+var DataBase = require('./dataBase');
+
 var bodyParser = require('body-parser');
-var app = express();
-var Server = mongo.Server;
-var Db = mongo.Db;
-var BSON = mongo.BSONPure;
 
-// If modifying these scopes, delete your previously saved credentials
-// at ~/.credentials/calendar-nodejs-quickstart.json
-var ownAuth ;
-
-var SCOPES = ['https://www.googleapis.com/auth/calendar'];
-
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-  process.env.USERPROFILE) + '/.credentials/';
-
-var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
+var eventCalendar = require("./calendar");
 
 
+module.exports = (function() {
+  'use strict';
+  var apiRoutes = express.Router();
 
+  apiRoutes.use(bodyParser.json());
 
+  apiRoutes.use(bodyParser.urlencoded({ extended: false }));
 
+  var dataBase =  new DataBase.DataBaseModule;
+// token strategy
+var strategyOptions = {
+  tokenHeader:    'x-custom-token',        
+  tokenField:     'custom-token'
+};
 
-/**
- * Create an OAuth2 client with the given credentials, and then execute the
- * given callback function.
- *
- * @param {Object} credentials The authorization client credentials.
- * @param {function} callback The callback to call with the authorized client.
- */
+passport.use(new TokenStrategy(strategyOptions,
+  function (token, done) { 
+console.log("token is "+token);
+    jwt.verify(token, 'shhhhh', function(err, decoded) {
 
- function authorize(credentials,callback) {
-  var clientSecret = credentials.installed.client_secret;
-  var clientId = credentials.installed.client_id;
-  var redirectUrl = credentials.installed.redirect_uris[0];
-  var auth = new googleAuth();
-  var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
-
-  // Check if we have previously stored a token.
-  fs.readFile(TOKEN_PATH, function(err, token) {
-    if (err) {
-      getNewToken(oauth2Client, function(oauth){
-        callback(oauth);
-      });
-    } else {
-      oauth2Client.credentials = JSON.parse(token);
-      callback(oauth2Client);
-    }
-  });
-}
-
-/**
- * Get and store new token after prompting for user authorization, and then
- * execute the given callback with the authorized OAuth2 client.
- *
- * @param {google.auth.OAuth2} oauth2Client The OAuth2 client to get token for.
- * @param {getEventsCallback} callback The callback to call with the authorized
- *     client.
- */
- function getNewToken(oauth2Client, callback) {
-  var authUrl = oauth2Client.generateAuthUrl({
-    access_type: 'offline',
-    scope: SCOPES
-  });
-  console.log('Authorize this app by visiting this url: ', authUrl);
-  var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-  rl.question('Enter the code from that page here: ', function(code) {
-    rl.close();
-    oauth2Client.getToken(code, function(err, token) {
       if (err) {
-        console.log('Error while trying to retrieve access token', err);
-        return;
+
+        return res.json({ success: false, message: 'Failed to authenticate token.' });    
+
+      } else {
+        // if everything is good, save to request for use in other routes
+        console.log("info decocd "+decoded.mail);
+        dataBase.user.getUserFromAccess(decoded,function(err,user){
+
+         if (err) { 
+
+          console.log('error');
+
+          return done(err);
+
+        }
+
+        if (!user) { 
+
+         console.log('passport user dont exist')
+
+         return done(null, null);
+
+       }; 
+
+       return done(err, user);
+
+     })
       }
-      oauth2Client.credentials = token;
-      storeToken(token);
-      callback(oauth2Client);
-    });
-  });
+    })
+  }));
+
+
+
+//function authenticate();
+
+apiRoutes.post('/authenticate',createUser);
+
+
+
+function createUser(request,response){
+
+console.log('/api/authenticate');
+
+  var user = request.body;
+
+  console.log('user connexion ***** '+user);
+  
+  dataBase.user.addUserAccess(user,function(err,user){
+
+    if(err){
+
+      console.log('error created user Connexion '+err);
+      response.status(401).send();
+    }else{
+
+      if (user.mail == 'error') {
+
+        response.status(403).send();
+
+      }else{
+
+        var token = jwt.sign({ "mail": user.mail,"password":user.password }, 'shhhhh');
+
+        response.status(200).json({
+          success: true,
+          message: 'Enjoy your token!',
+          token: token
+        }).send();
+      }
+    }
+  })
 }
 
+apiRoutes.use(passport.authenticate('token',{ session: false }),checkUserAuthenticate);
 
-// Load client secrets from a local file.
-module.exports.connexionCalendar = function ConnexionCalendar(callback) {
-fs.readFile('./model/client_secret.json', function processClientSecrets(err, content) {
-  if (err) {
-    console.log('Error loading client secret file: ' + err);
-    return;
+function checkUserAuthenticate(request,response,next){
+
+  console.log('checkUserAuthenticate function');
+
+  
+
+  console.log('passport.authenticate');
+
+  if (!request.user) {
+    return response.status(403).send({ 
+      success: false, 
+      message: 'No token provided.'
+    });
   }
-  // Authorize a client with the loaded credentials, then call the
-  // Google Calendar API.
-  authorize(JSON.parse(content),function(oauth2Client){
-    callback(oauth2Client);  
-  });
-});
-}
 
+  next();
 
-// connect with db 
-module.exports.connexionDataBase = function connexionDataBase(){
+};
 
- var server = new Server('localhost', 27017, {auto_reconnect: true}); 
-    db = new Db('easyRdv', server);
-  db.open(function(err, db) {
+apiRoutes.use('/calendar',eventCalendar);
 
-      if(!err) {
-      
-        console.log("Connected to 'easyRdv' database");
-        return db;
-      
-      }
-      else{
-
-        console.log("not Connected to 'easyRdv' database");
-        db.close();
-      
-      }
-    });
-}
-
+return apiRoutes;
+})();
 

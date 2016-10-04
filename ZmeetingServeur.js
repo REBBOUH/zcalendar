@@ -1,21 +1,22 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var app = express();
+
+var connexion = require('./model/connexion');
 var eventCalendar = require("./model/calendar"); 
 
 
-
+var app = express();
 
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/check/:calendarId',eventCalendar.list);
 
-app.get('/update/:eventId&:calendarId',eventCalendar.update);
 
-app.get('/checklist',eventCalendar.calendarsList)
+app.use('/api',connexion);
+//app.use('/api/calendar',eventCalendar);
+
 
 app.listen(8080);
 
