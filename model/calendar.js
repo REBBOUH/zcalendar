@@ -130,7 +130,8 @@ var bodyParser = require('body-parser');
       })
     })
   }
-  apiRoutes.get('/list',listCalendars);
-
+  apiRoutes.get('/check/:calendarId',listEvents);
+  apiRoutes.get('/update/:eventId&:calendarId',updateEvent);
+  apiRoutes.get('/checklist',listCalendars)
   return apiRoutes;
 })();

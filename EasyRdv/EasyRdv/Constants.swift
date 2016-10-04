@@ -16,15 +16,17 @@ struct Constants {
     
     static let password:String = "aberni"
     
-   // static let urlServer:String = "http://192.168.15.247:8080"
+    //static let urlServer:String = "192.168.12.44:8080"
     
-    static let urlServer:String = "http://localhost:8080/api"
+   static let urlServer:String = "http://localhost:8080"
     
-    static let urlServercheck:String = "\(Constants.urlServer)/check/"
+    static let urlServercheck:String = "\(Constants.urlServer)/api/calendar/check/"
     
-    static let urlServerUpdateEvent:String = "\(Constants.urlServer)/update/"
+    static let urlServerUpdateEvent:String = "\(Constants.urlServer)/api/calendar/update/"
     
-    static let urlServerchecklist:String = "\(Constants.urlServer)/checklist"
+    static let urlServerchecklist:String = "\(Constants.urlServer)/api/calendar/checklist"
+    
+    static let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoieWFzc2lyYWJlcm5pQGFiZXJuaXpzb2Z0LmZyIiwicGFzc3dvcmQiOiJ0ZXN0MSIsImlhdCI6MTQ3NTU5NzE1NX0.dCPq1MTzjeql6mn46-_I9Rj8dwrcMf5fQuoKo7HimEM"
     
     
 //    static let urlServercheck:String = "http://192.168.15.247:8080/check/"

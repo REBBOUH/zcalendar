@@ -18,6 +18,7 @@ class RdvCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+    
         
         
        

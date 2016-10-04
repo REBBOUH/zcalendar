@@ -25,10 +25,6 @@ module.exports = (function() {
   'use strict';
   var apiRoutes = express.Router();
 
-  apiRoutes.use(bodyParser.json());
-
-  apiRoutes.use(bodyParser.urlencoded({ extended: false }));
-
   var dataBase =  new DataBase.DataBaseModule;
 // token strategy
 var strategyOptions = {
@@ -47,7 +43,7 @@ console.log("token is "+token);
 
       } else {
         // if everything is good, save to request for use in other routes
-        console.log("info decocd "+decoded.mail);
+        console.log("info decocd "+JSON.stringify(decoded, null, 4));
         dataBase.user.getUserFromAccess(decoded,function(err,user){
 
          if (err) { 
@@ -65,7 +61,7 @@ console.log("token is "+token);
          return done(null, null);
 
        }; 
-
+console.log("passport ok");
        return done(err, user);
 
      })
@@ -79,17 +75,19 @@ console.log("token is "+token);
 
 apiRoutes.post('/authenticate',createUser);
 
-
-
 function createUser(request,response){
 
 console.log('/api/authenticate');
 
+
+console.log('/api/authenticate'+request.body.mail);
+
+  console.log(" here is the body " + JSON.stringify(request.body, null, 4));
   var user = request.body;
 
   console.log('user connexion ***** '+user);
   
-  dataBase.user.addUserAccess(user,function(err,user){
+  dataBase.user.addUserAccess(user,function(err,userResult){
 
     if(err){
 
@@ -102,8 +100,9 @@ console.log('/api/authenticate');
         response.status(403).send();
 
       }else{
-
-        var token = jwt.sign({ "mail": user.mail,"password":user.password }, 'shhhhh');
+        console.log('user connexion ***** '+JSON.stringify(userResult, null, 4));
+//console.log("user mail : "+userResult.mail+"  user password "+user.userResult);
+        var token = jwt.sign({ "mail": user.mail,"password":user.password}, 'shhhhh');
 
         response.status(200).json({
           success: true,

@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var connexion = require('./model/connexion');
-var eventCalendar = require("./model/calendar"); 
+ 
 
 
 var app = express();

@@ -23,7 +23,9 @@ class ApiManager {
         
         let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         
-        let request:NSURLRequest = NSMutableURLRequest(URL: url)
+        let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        
+        request.addValue(Constants.token, forHTTPHeaderField: "x-custom-token")
         
         let task =   session.dataTaskWithRequest(request, completionHandler: { (data,response,error) -> () in
             
@@ -70,7 +72,10 @@ class ApiManager {
         
         let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         
-        let request:NSURLRequest = NSMutableURLRequest(URL: url)
+        let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        
+        request.addValue(Constants.token, forHTTPHeaderField: "x-custom-token")
+        
         begin()
         
         let task =   session.dataTaskWithRequest(request, completionHandler: { (data,response,error) -> () in
@@ -125,7 +130,10 @@ class ApiManager {
         
         let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         
-        let request:NSURLRequest = NSMutableURLRequest(URL: url)
+        let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        
+        request.addValue(Constants.token, forHTTPHeaderField: "x-custom-token")
+        
         begin()
         
         let task =   session.dataTaskWithRequest(request, completionHandler: { (data,response,error) -> () in

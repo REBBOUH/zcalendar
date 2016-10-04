@@ -160,7 +160,7 @@ addUserInfo: function(id,userInfo,db,callback){
 },
 addUserSpeciality: function(userSpecialty,callback){
 	console.log('user add info function');
-	self.connexion.connexionDataBase(function(err,db){
+	//self.connexion.connexionDataBase(function(err,db){
 		if (err) {
 			console.log('error to open database addUserInfo'+err);
 			callback(err,null);
@@ -186,13 +186,15 @@ addUserSpeciality: function(userSpecialty,callback){
 				callback(err,result);
 			})
 		})
-	})
+	//})
 },
 getUserFromAccess:function(user,callback){
 	
 	console.log('getUser');
 
-	self.connexion.connexionDataBase(function(err,db){
+	//self.connexion.connexionDataBase(function(err,db){
+	 connexionDataBase(function(err,db){
+			
 		if (err) {
 			console.log('error to open database addUserInfo'+err);
 			callback(err,null);
@@ -267,7 +269,7 @@ getUserFromSpeciality:function(user,callback){
 	
 	console.log('getUserFromSpeciality');
 
-	self.connexion.connexionDataBase(function(err,db){
+	//self.connexion.connexionDataBase(function(err,db){
 		if (err) {
 			console.log('error to open database getUserFromSpeciality'+err);
 			callback(err,null);
@@ -297,7 +299,7 @@ getUserFromSpeciality:function(user,callback){
 
 			})
 		})
-	})
+	//})
 }
 
 };
@@ -337,7 +339,7 @@ this.eventCalendar = {
 		})
 	},
 	addEventForUser:function(EventInfo,callback){
-		self.connexion.connexionDataBase(function(err,db){
+	//	self.connexion.connexionDataBase(function(err,db){
 			if (err) {
 				console.log('error to open database addEventForUser'+err);
 				callback(err,null);
@@ -367,7 +369,7 @@ this.eventCalendar = {
 
 				})
 			})
-		})
+	//	})
 	}
 };
 }

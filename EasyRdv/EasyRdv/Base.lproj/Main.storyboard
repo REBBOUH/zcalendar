@@ -12,7 +12,7 @@
         <!--User Table View Controller-->
         <scene sceneID="Il2-Rp-Te5">
             <objects>
-                <tableViewController id="EVJ-xF-dyq" customClass="UserTableViewController" customModule="EasyRdv" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="belkacem" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EVJ-xF-dyq" customClass="UserTableViewController" customModule="EasyRdv" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="89" sectionHeaderHeight="28" sectionFooterHeight="28" id="Sqe-B4-3iK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,7 +80,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pa3-yR-ToE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47" y="82"/>
+            <point key="canvasLocation" x="-54" y="-287"/>
         </scene>
         <!--Rdv Table View Controller-->
         <scene sceneID="eIo-1P-5OP">
@@ -195,7 +195,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gvN-l6-f8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1087" y="83"/>
+            <point key="canvasLocation" x="1081" y="51"/>
         </scene>
         <!--Prise Rdv Controller-->
         <scene sceneID="PlU-mG-ZLU">
@@ -321,7 +321,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyB-DU-CxN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1198" y="84"/>
+            <point key="canvasLocation" x="-1508" y="-149"/>
         </scene>
     </scenes>
     <resources>
