@@ -26,6 +26,8 @@ struct Constants {
     
     static let urlServerchecklist:String = "\(Constants.urlServer)/api/calendar/checklist"
     
+    static let urlServerAuthenticate:String = "\(Constants.urlServer)/api/authenticate"
+    
     static let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoieWFzc2lyYWJlcm5pQGFiZXJuaXpzb2Z0LmZyIiwicGFzc3dvcmQiOiJ0ZXN0MSIsImlhdCI6MTQ3NTU5NzE1NX0.dCPq1MTzjeql6mn46-_I9Rj8dwrcMf5fQuoKo7HimEM"
     
     
@@ -48,7 +50,8 @@ struct Constants {
     static let notificationconxerror:String = "notificationconxerror"
     static let notificationeventconxerror:String = "notificationeventconxerror"
     
-    
+    static let notificationuseraddok:String = "notificationuseraddok"
+    static let notificationuseradderror:String = "notificationuseradderror"
 }
 
 extension NSNotificationCenter {
@@ -87,6 +90,39 @@ extension NSDate {
     }
 }
 extension String {
+    var isBlank: Bool {
+        get {
+            let trimmed = stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            return trimmed.isEmpty
+        }
+    }
+    
+    //Validate Email
+    var isEmail: Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .CaseInsensitive)
+            return regex.firstMatchInString(self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
+        } catch {
+            return false
+        }
+    }
+    
+    //validate PhoneNumber
+    var isPhoneNumber: Bool {
+        
+        let charcter  = NSCharacterSet(charactersInString: "+0123456789").invertedSet
+        
+        var filtered:NSString!
+        
+        let inputString:NSArray = self.componentsSeparatedByCharactersInSet(charcter)
+        
+        filtered = inputString.componentsJoinedByString("") as NSString!
+        
+        return  self == filtered
+        
+        
+    }
+    
     var asDate: NSDate? {
        let custom = NSDateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
         return custom.dateFromString(self)
@@ -95,5 +131,7 @@ extension String {
     func asDateFormatted(with dateFormat: String) -> NSDate? {
         return NSDateFormatter(dateFormat: dateFormat).dateFromString(self)
     }
+
+
 }
 

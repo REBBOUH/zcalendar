@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		473B0B7725A2627616DFEDE0 /* Pods_EasyRdv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CABB0CC5945866FB1323CC5B /* Pods_EasyRdv.framework */; };
+		E5032A5A1DA5121B00FCAF4F /* ConnexionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5032A591DA5121B00FCAF4F /* ConnexionViewController.swift */; };
 		E53F9E641D92B2CF00393343 /* GoogleAPIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E57881F91D91707600B3656E /* GoogleAPIClient.framework */; };
 		E53F9E651D92B2CF00393343 /* GTMOAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E57881FA1D91707600B3656E /* GTMOAuth2.framework */; };
 		E53F9E661D92B2CF00393343 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E57881FB1D91707600B3656E /* GTMSessionFetcher.framework */; };
@@ -23,6 +24,7 @@
 		E56E31161D95310D00359EF9 /* ClientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E31151D95310D00359EF9 /* ClientCell.swift */; };
 		E56E31181D95365F00359EF9 /* mourad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56E31171D95365F00359EF9 /* mourad.jpg */; };
 		E56E311A1D955E9B00359EF9 /* PriseRdvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E31191D955E9B00359EF9 /* PriseRdvController.swift */; };
+		E572F6031DA6633100BCACF3 /* CreerCompteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E572F6021DA6633100BCACF3 /* CreerCompteViewController.swift */; };
 		E57881CB1D91412600B3656E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57881CA1D91412600B3656E /* AppDelegate.swift */; };
 		E57881D01D91412600B3656E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57881CE1D91412600B3656E /* Main.storyboard */; };
 		E57881D31D91412600B3656E /* EasyRdv.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E57881D11D91412600B3656E /* EasyRdv.xcdatamodeld */; };
@@ -33,6 +35,8 @@
 		E57C581D1D93E85A00E57BCB /* RdvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57C581C1D93E85A00E57BCB /* RdvCell.swift */; };
 		E586EF2D1D93CE9E009E8672 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586EF2C1D93CE9E009E8672 /* Calendar.swift */; };
 		E586EF2F1D93CEE6009E8672 /* CalendarSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586EF2E1D93CEE6009E8672 /* CalendarSingleton.swift */; };
+		E5FD40241DA6A39F00FF24A5 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FD40231DA6A39F00FF24A5 /* DataManager.swift */; };
+		E5FDD1DC1DA66E6F00FEE008 /* customLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FDD1DB1DA66E6F00FEE008 /* customLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +54,7 @@
 		647C29F76D20AC9105729055 /* libPods-EasyRdvTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyRdvTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0B1761CAB9FC9066B826DFA /* Pods-EasyRdv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyRdv.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyRdv/Pods-EasyRdv.release.xcconfig"; sourceTree = "<group>"; };
 		CABB0CC5945866FB1323CC5B /* Pods_EasyRdv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyRdv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5032A591DA5121B00FCAF4F /* ConnexionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnexionViewController.swift; sourceTree = "<group>"; };
 		E53F9E671D92BEFD00393343 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		E53F9E691D92BF4100393343 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E53F9E6B1D92D31B00393343 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -62,6 +67,7 @@
 		E56E31151D95310D00359EF9 /* ClientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientCell.swift; sourceTree = "<group>"; };
 		E56E31171D95365F00359EF9 /* mourad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mourad.jpg; sourceTree = "<group>"; };
 		E56E31191D955E9B00359EF9 /* PriseRdvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriseRdvController.swift; sourceTree = "<group>"; };
+		E572F6021DA6633100BCACF3 /* CreerCompteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreerCompteViewController.swift; sourceTree = "<group>"; };
 		E57881C71D91412600B3656E /* EasyRdv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyRdv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57881CA1D91412600B3656E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E57881CF1D91412600B3656E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -83,6 +89,8 @@
 		E57C581C1D93E85A00E57BCB /* RdvCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RdvCell.swift; sourceTree = "<group>"; };
 		E586EF2C1D93CE9E009E8672 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		E586EF2E1D93CEE6009E8672 /* CalendarSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSingleton.swift; sourceTree = "<group>"; };
+		E5FD40231DA6A39F00FF24A5 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		E5FDD1DB1DA66E6F00FEE008 /* customLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +138,32 @@
 				A0B1761CAB9FC9066B826DFA /* Pods-EasyRdv.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E5032A561DA511AA00FCAF4F /* Compte */ = {
+			isa = PBXGroup;
+			children = (
+				E5032A591DA5121B00FCAF4F /* ConnexionViewController.swift */,
+				E572F6021DA6633100BCACF3 /* CreerCompteViewController.swift */,
+			);
+			name = Compte;
+			sourceTree = "<group>";
+		};
+		E5032A571DA511C500FCAF4F /* calendrier */ = {
+			isa = PBXGroup;
+			children = (
+				E569ED851D9C1F090034FF82 /* UserTableViewController.swift */,
+			);
+			name = calendrier;
+			sourceTree = "<group>";
+		};
+		E5032A581DA511D300FCAF4F /* event */ = {
+			isa = PBXGroup;
+			children = (
+				E57C58191D93D54E00E57BCB /* RdvTableViewController.swift */,
+				E56E31191D955E9B00359EF9 /* PriseRdvController.swift */,
+			);
+			name = event;
 			sourceTree = "<group>";
 		};
 		E57881BE1D91412600B3656E = {
@@ -185,6 +219,7 @@
 				E56C536E1D9ABAFA00EA7053 /* LoadingViewCustome.xib */,
 				E57C581C1D93E85A00E57BCB /* RdvCell.swift */,
 				E56E31151D95310D00359EF9 /* ClientCell.swift */,
+				E5FDD1DB1DA66E6F00FEE008 /* customLabel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -192,6 +227,7 @@
 		E586EF2A1D93CC1B009E8672 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				E5FD40231DA6A39F00FF24A5 /* DataManager.swift */,
 				E569ED811D9C0A750034FF82 /* User.swift */,
 				E569ED821D9C0A750034FF82 /* UserSingleton.swift */,
 				E53F9E691D92BF4100393343 /* Constants.swift */,
@@ -207,9 +243,9 @@
 		E586EF2B1D93CC31009E8672 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E569ED851D9C1F090034FF82 /* UserTableViewController.swift */,
-				E57C58191D93D54E00E57BCB /* RdvTableViewController.swift */,
-				E56E31191D955E9B00359EF9 /* PriseRdvController.swift */,
+				E5032A571DA511C500FCAF4F /* calendrier */,
+				E5032A581DA511D300FCAF4F /* event */,
+				E5032A561DA511AA00FCAF4F /* Compte */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -419,9 +455,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5032A5A1DA5121B00FCAF4F /* ConnexionViewController.swift in Sources */,
+				E5FD40241DA6A39F00FF24A5 /* DataManager.swift in Sources */,
 				E53F9E6A1D92BF4100393343 /* Constants.swift in Sources */,
 				E53F9E681D92BEFD00393343 /* ApiManager.swift in Sources */,
 				E586EF2F1D93CEE6009E8672 /* CalendarSingleton.swift in Sources */,
+				E572F6031DA6633100BCACF3 /* CreerCompteViewController.swift in Sources */,
 				E57881D31D91412600B3656E /* EasyRdv.xcdatamodeld in Sources */,
 				E586EF2D1D93CE9E009E8672 /* Calendar.swift in Sources */,
 				E53F9E6C1D92D31B00393343 /* Tools.swift in Sources */,
@@ -431,6 +470,7 @@
 				E57C581D1D93E85A00E57BCB /* RdvCell.swift in Sources */,
 				E57C581A1D93D54E00E57BCB /* RdvTableViewController.swift in Sources */,
 				E53F9E6E1D92F18900393343 /* Event.swift in Sources */,
+				E5FDD1DC1DA66E6F00FEE008 /* customLabel.swift in Sources */,
 				E56E311A1D955E9B00359EF9 /* PriseRdvController.swift in Sources */,
 				E56C536F1D9ABAFA00EA7053 /* LoadingViewCustome.swift in Sources */,
 				E569ED861D9C1F090034FF82 /* UserTableViewController.swift in Sources */,
@@ -515,7 +555,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -556,7 +596,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -569,6 +609,7 @@
 			baseConfigurationReference = 28F6BAC51ED2833B4FC46B22 /* Pods-EasyRdv.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = AFB34M8P48;
 				INFOPLIST_FILE = EasyRdv/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -583,6 +624,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zsoft.EasyRdv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -591,6 +633,7 @@
 			baseConfigurationReference = A0B1761CAB9FC9066B826DFA /* Pods-EasyRdv.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = AFB34M8P48;
 				INFOPLIST_FILE = EasyRdv/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -605,6 +648,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zsoft.EasyRdv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

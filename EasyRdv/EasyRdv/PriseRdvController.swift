@@ -38,8 +38,6 @@ class PriseRdvController: UIViewController {
         
     }
     override func viewDidLayoutSubviews() {
-        self.view.viewWithTag(2)?.layer.cornerRadius = 10
-        self.view.viewWithTag(1)?.layer.cornerRadius = 10
         self.view.viewWithTag(2)?.layer.borderWidth = 3.0
         self.view.viewWithTag(2)?.layer.borderColor = UIColor.brownColor().CGColor
         self.view.viewWithTag(1)?.layer.borderWidth = 3.0
