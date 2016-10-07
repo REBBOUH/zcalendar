@@ -42,31 +42,6 @@ module.exports.DataBaseModule  = function(){
 	var self = this
 	console.log('database module created');
 
-	// this.connexion  = {
-	// 	connexionDataBase : function(callback){
-
-	// 		var server = new Server('localhost', 27017, {auto_reconnect: true}); 
-	// 		var  db = new Db('easyRdv', server);
-
-	// 		db.open(function(err, db) {
-
-	// 			if(!err) {
-
-	// 				console.log("Connected to 'easyRdv' database");
-	// 				callback(err,db);
-
-	// 			}
-	// 			else{
-
-	// 				console.log("not Connected to 'easyRdv' database");
-
-	// 				callback(err,null);
-	// 			}
-				
-	// 		});
-	// 	}
-	// };
-
 	this.user = {
 
 		addUserAccess : function(userInfo,callback){
@@ -202,7 +177,7 @@ getUserFromAccess:function(user,callback){
 		}
 		db.collection('userAccess',function(err,collection){
 
-			collection.findOne({'mail':user.mail,'password':user.password},{safe:true}, function (err, user) {
+			collection.findOne({'mail':user.mail,'password':user.password}, function (err, userResult) {
 
 				if (err) { 
 
@@ -219,8 +194,8 @@ getUserFromAccess:function(user,callback){
 
 				}; 
 
-				
-				return callback(err, user);
+				 console.log('user database found ***** '+JSON.stringify(userResult, null, 4));
+				return callback(err, userResult);
 
 			})
 		})

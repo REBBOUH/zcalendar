@@ -61,7 +61,7 @@ class PriseRdvController: UIViewController {
         self.view.addSubview(self.loadingView)
         self.loadingView.showLoadingIndicator()
         self.view.multipleTouchEnabled = false
-        ApiManager.UpdateCalendar(UserSingleton.sharedInstance.user.calendarId!,eventId: CalendarSingleton.sharedInstance.event.id!)
+        EventApi.ADD(UserSingleton.sharedInstance.user.calendarId!,eventId: CalendarSingleton.sharedInstance.event.id!)
         
     }
     

@@ -161,18 +161,15 @@ class UserTableViewController: UITableViewController {
                 viewAlert.addAction(defaultAction)
                 self.presentViewController(viewAlert, animated: true, completion: {})
 
-                
-                
             })
         }
-        
-        
+    
         NSNotificationCenter.defaultCenter().removeObserver(notification.name)
         
     }
     
     func newUpdate(){
-        ApiManager.checkValueUser({_ in
+        UserApi.GETALL({_ in
             self.view.addSubview(self.loadingView)
             self.loadingView.showLoadingIndicator()
             self.view.userInteractionEnabled = false

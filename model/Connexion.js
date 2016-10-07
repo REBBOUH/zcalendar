@@ -78,15 +78,15 @@
   // bassic strategy 
   passport.use(new BasicStrategy(
 
-    function(usermail, password, done) {
+    function(mail, password, done) {
 
-var user = {
-  "mail":usermail,
+var userInfo = {
+  "mail":mail,
   "password":password
 }
-       dataBase.user.getUserFromAccess(user,function(err,user){
-
-
+console.log('user basic to verify ***** '+JSON.stringify(userInfo, null, 4));
+      
+       dataBase.user.getUserFromAccess(userInfo,function(err,user){
 
         if (err) { 
 
@@ -106,7 +106,9 @@ var user = {
 
        }; 
 
-       return done(null, user);
+       console.log('user basic ***** '+JSON.stringify(userInfo, null, 4));
+
+       return done(err, user);
 
      })
      }
@@ -125,7 +127,7 @@ var user = {
     console.log('/api/authenticate'+request.body.mail);
 
     console.log(" here is the body " + JSON.stringify(request.body, null, 4));
-    var user = request.body;
+    var user = request.body.user;
 
     console.log('user connexion ***** '+user);
     
@@ -137,7 +139,7 @@ var user = {
         response.status(401).send();
       }else{
 
-        if (user.mail == 'error') {
+        if (userResult.mail == 'error') {
 
           response.status(401).send();
 
@@ -171,11 +173,11 @@ var user = {
 
       if (request.user.mail == 'error') {
 console.log('password or login not correct '+request.err);
-        response.status(401).send();
+        response.status(403).send();
 
       }else{
     
-        console.log('user connexion ***** '+JSON.stringify(request.user, null, 4));
+        console.log('user connexion ***** '+JSON.stringify(request.user.mail, null, 4));
   //console.log("user mail : "+userResult.mail+"  user password "+user.userResult);
         var token = jwt.sign({ "mail": request.user.mail,"password":request.user.password}, 'shhhhh');
 
@@ -212,5 +214,6 @@ console.log('password or login not correct '+request.err);
   apiRoutes.use('/calendar',eventCalendar);
 
   return apiRoutes;
+
   })();
 

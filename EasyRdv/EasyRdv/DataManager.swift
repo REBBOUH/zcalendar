@@ -12,7 +12,7 @@ import Foundation
 class DataManager {
     
     
-    class func initData(_ token:String) {
+    class func initData(token:String) {
         
        NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token")
         
@@ -28,7 +28,11 @@ class DataManager {
             return ""
         }else{
             
+            
+            
             let token =  NSUserDefaults.standardUserDefaults().objectForKey("token") as! String
+            
+            print(token)
             
             return token
             

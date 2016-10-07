@@ -27,7 +27,7 @@ class RdvTableViewController: UITableViewController {
         self.navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Arial", size: 14)!];
 
 
-        ApiManager.checkValue(UserSingleton.sharedInstance.user.calendarId!,begin: {_ in
+        CalendarApi.GET(UserSingleton.sharedInstance.user.calendarId!,begin: {_ in
             
             self.view.addSubview(self.loadingView)
             self.loadingView.showLoadingIndicator()
@@ -37,9 +37,9 @@ class RdvTableViewController: UITableViewController {
                 
         })
 
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationmailpasswordok, object: nil)
+        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarok, object: nil)
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationmailpassworderror, object: nil)
+        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarerror, object: nil)
         
         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventupdateokreload, object: nil)
         
@@ -106,7 +106,7 @@ class RdvTableViewController: UITableViewController {
     // MARK - handle notification
     
     func  handleNotifications(notification:NSNotification) {
-        if notification.name == Constants.notificationmailpasswordok {
+        if notification.name == Constants.notificationcalendarok {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             
             dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
@@ -136,7 +136,7 @@ class RdvTableViewController: UITableViewController {
             })
         }
         
-        if notification.name == Constants.notificationmailpassworderror {
+        if notification.name == Constants.notificationcalendarerror {
             
             dispatch_async(dispatch_get_main_queue(), {
                 

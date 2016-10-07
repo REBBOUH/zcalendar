@@ -16,6 +16,9 @@
 		E53F9E6A1D92BF4100393343 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E691D92BF4100393343 /* Constants.swift */; };
 		E53F9E6C1D92D31B00393343 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E6B1D92D31B00393343 /* Tools.swift */; };
 		E53F9E6E1D92F18900393343 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E6D1D92F18900393343 /* Event.swift */; };
+		E567F7361DA78CAA00889684 /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567F7351DA78CAA00889684 /* UserApi.swift */; };
+		E567F7381DA78CC000889684 /* CalendarApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567F7371DA78CC000889684 /* CalendarApi.swift */; };
+		E567F73A1DA78CD300889684 /* EventApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567F7391DA78CD300889684 /* EventApi.swift */; };
 		E569ED831D9C0A750034FF82 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569ED811D9C0A750034FF82 /* User.swift */; };
 		E569ED841D9C0A750034FF82 /* UserSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569ED821D9C0A750034FF82 /* UserSingleton.swift */; };
 		E569ED861D9C1F090034FF82 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569ED851D9C1F090034FF82 /* UserTableViewController.swift */; };
@@ -59,6 +62,9 @@
 		E53F9E691D92BF4100393343 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E53F9E6B1D92D31B00393343 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		E53F9E6D1D92F18900393343 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		E567F7351DA78CAA00889684 /* UserApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
+		E567F7371DA78CC000889684 /* CalendarApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarApi.swift; sourceTree = "<group>"; };
+		E567F7391DA78CD300889684 /* EventApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventApi.swift; sourceTree = "<group>"; };
 		E569ED811D9C0A750034FF82 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E569ED821D9C0A750034FF82 /* UserSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSingleton.swift; sourceTree = "<group>"; };
 		E569ED851D9C1F090034FF82 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +172,35 @@
 			name = event;
 			sourceTree = "<group>";
 		};
+		E567F7321DA78C6D00889684 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				E569ED821D9C0A750034FF82 /* UserSingleton.swift */,
+				E569ED811D9C0A750034FF82 /* User.swift */,
+				E567F7351DA78CAA00889684 /* UserApi.swift */,
+			);
+			name = user;
+			sourceTree = "<group>";
+		};
+		E567F7331DA78C7400889684 /* event */ = {
+			isa = PBXGroup;
+			children = (
+				E53F9E6D1D92F18900393343 /* Event.swift */,
+				E567F7391DA78CD300889684 /* EventApi.swift */,
+			);
+			name = event;
+			sourceTree = "<group>";
+		};
+		E567F7341DA78C7900889684 /* calendar */ = {
+			isa = PBXGroup;
+			children = (
+				E586EF2C1D93CE9E009E8672 /* Calendar.swift */,
+				E586EF2E1D93CEE6009E8672 /* CalendarSingleton.swift */,
+				E567F7371DA78CC000889684 /* CalendarApi.swift */,
+			);
+			name = calendar;
+			sourceTree = "<group>";
+		};
 		E57881BE1D91412600B3656E = {
 			isa = PBXGroup;
 			children = (
@@ -227,15 +262,13 @@
 		E586EF2A1D93CC1B009E8672 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				E567F7341DA78C7900889684 /* calendar */,
+				E567F7331DA78C7400889684 /* event */,
+				E567F7321DA78C6D00889684 /* user */,
 				E5FD40231DA6A39F00FF24A5 /* DataManager.swift */,
-				E569ED811D9C0A750034FF82 /* User.swift */,
-				E569ED821D9C0A750034FF82 /* UserSingleton.swift */,
 				E53F9E691D92BF4100393343 /* Constants.swift */,
 				E53F9E671D92BEFD00393343 /* ApiManager.swift */,
 				E53F9E6B1D92D31B00393343 /* Tools.swift */,
-				E53F9E6D1D92F18900393343 /* Event.swift */,
-				E586EF2E1D93CEE6009E8672 /* CalendarSingleton.swift */,
-				E586EF2C1D93CE9E009E8672 /* Calendar.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -463,16 +496,19 @@
 				E572F6031DA6633100BCACF3 /* CreerCompteViewController.swift in Sources */,
 				E57881D31D91412600B3656E /* EasyRdv.xcdatamodeld in Sources */,
 				E586EF2D1D93CE9E009E8672 /* Calendar.swift in Sources */,
+				E567F7381DA78CC000889684 /* CalendarApi.swift in Sources */,
 				E53F9E6C1D92D31B00393343 /* Tools.swift in Sources */,
 				E569ED831D9C0A750034FF82 /* User.swift in Sources */,
 				E56E31161D95310D00359EF9 /* ClientCell.swift in Sources */,
 				E569ED841D9C0A750034FF82 /* UserSingleton.swift in Sources */,
+				E567F7361DA78CAA00889684 /* UserApi.swift in Sources */,
 				E57C581D1D93E85A00E57BCB /* RdvCell.swift in Sources */,
 				E57C581A1D93D54E00E57BCB /* RdvTableViewController.swift in Sources */,
 				E53F9E6E1D92F18900393343 /* Event.swift in Sources */,
 				E5FDD1DC1DA66E6F00FEE008 /* customLabel.swift in Sources */,
 				E56E311A1D955E9B00359EF9 /* PriseRdvController.swift in Sources */,
 				E56C536F1D9ABAFA00EA7053 /* LoadingViewCustome.swift in Sources */,
+				E567F73A1DA78CD300889684 /* EventApi.swift in Sources */,
 				E569ED861D9C1F090034FF82 /* UserTableViewController.swift in Sources */,
 				E57881CB1D91412600B3656E /* AppDelegate.swift in Sources */,
 			);
@@ -609,7 +645,6 @@
 			baseConfigurationReference = 28F6BAC51ED2833B4FC46B22 /* Pods-EasyRdv.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = AFB34M8P48;
 				INFOPLIST_FILE = EasyRdv/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -633,7 +668,6 @@
 			baseConfigurationReference = A0B1761CAB9FC9066B826DFA /* Pods-EasyRdv.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = AFB34M8P48;
 				INFOPLIST_FILE = EasyRdv/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
