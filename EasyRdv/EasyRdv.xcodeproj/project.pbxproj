@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		473B0B7725A2627616DFEDE0 /* Pods_EasyRdv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CABB0CC5945866FB1323CC5B /* Pods_EasyRdv.framework */; };
 		E5032A5A1DA5121B00FCAF4F /* ConnexionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5032A591DA5121B00FCAF4F /* ConnexionViewController.swift */; };
-		E53F9E641D92B2CF00393343 /* GoogleAPIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E57881F91D91707600B3656E /* GoogleAPIClient.framework */; };
-		E53F9E651D92B2CF00393343 /* GTMOAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E57881FA1D91707600B3656E /* GTMOAuth2.framework */; };
-		E53F9E661D92B2CF00393343 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E57881FB1D91707600B3656E /* GTMSessionFetcher.framework */; };
 		E53F9E681D92BEFD00393343 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E671D92BEFD00393343 /* ApiManager.swift */; };
 		E53F9E6A1D92BF4100393343 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E691D92BF4100393343 /* Constants.swift */; };
 		E53F9E6C1D92D31B00393343 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53F9E6B1D92D31B00393343 /* Tools.swift */; };
@@ -43,7 +39,6 @@
 		E57881D31D91412600B3656E /* EasyRdv.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E57881D11D91412600B3656E /* EasyRdv.xcdatamodeld */; };
 		E57881D51D91412600B3656E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57881D41D91412600B3656E /* Assets.xcassets */; };
 		E57881D81D91412600B3656E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57881D61D91412600B3656E /* LaunchScreen.storyboard */; };
-		E57881E31D91412600B3656E /* EasyRdvTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57881E21D91412600B3656E /* EasyRdvTests.swift */; };
 		E57C581A1D93D54E00E57BCB /* RdvTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57C58191D93D54E00E57BCB /* RdvTableViewController.swift */; };
 		E57C581D1D93E85A00E57BCB /* RdvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57C581C1D93E85A00E57BCB /* RdvCell.swift */; };
 		E586EF2D1D93CE9E009E8672 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586EF2C1D93CE9E009E8672 /* Calendar.swift */; };
@@ -52,21 +47,7 @@
 		E5FDD1DC1DA66E6F00FEE008 /* customLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FDD1DB1DA66E6F00FEE008 /* customLabel.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E57881DF1D91412600B3656E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E57881BF1D91412600B3656E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E57881C61D91412600B3656E;
-			remoteInfo = EasyRdv;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		28F6BAC51ED2833B4FC46B22 /* Pods-EasyRdv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyRdv.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyRdv/Pods-EasyRdv.debug.xcconfig"; sourceTree = "<group>"; };
-		647C29F76D20AC9105729055 /* libPods-EasyRdvTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyRdvTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0B1761CAB9FC9066B826DFA /* Pods-EasyRdv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyRdv.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyRdv/Pods-EasyRdv.release.xcconfig"; sourceTree = "<group>"; };
-		CABB0CC5945866FB1323CC5B /* Pods_EasyRdv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyRdv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5032A591DA5121B00FCAF4F /* ConnexionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnexionViewController.swift; sourceTree = "<group>"; };
 		E53F9E671D92BEFD00393343 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		E53F9E691D92BF4100393343 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -101,16 +82,8 @@
 		E57881D41D91412600B3656E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E57881D71D91412600B3656E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E57881D91D91412600B3656E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E57881DE1D91412600B3656E /* EasyRdvTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyRdvTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57881E21D91412600B3656E /* EasyRdvTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyRdvTests.swift; sourceTree = "<group>"; };
 		E57881E41D91412600B3656E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E57881ED1D91542800B3656E /* libGoogleAPIClient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAPIClient.a; path = "Pods/../build/Debug-iphoneos/GoogleAPIClient/libGoogleAPIClient.a"; sourceTree = "<group>"; };
-		E57881EE1D91542800B3656E /* libGTMOAuth2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGTMOAuth2.a; path = "Pods/../build/Debug-iphoneos/GTMOAuth2/libGTMOAuth2.a"; sourceTree = "<group>"; };
-		E57881EF1D91542800B3656E /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGTMSessionFetcher.a; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher/libGTMSessionFetcher.a"; sourceTree = "<group>"; };
-		E57881F01D91542800B3656E /* libPods-EasyRdvTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-EasyRdvTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-EasyRdvTests.a"; sourceTree = "<group>"; };
-		E57881F91D91707600B3656E /* GoogleAPIClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAPIClient.framework; path = "../../../../Library/Developer/Xcode/DerivedData/EasyRdv-gweklbkdftzuzrdfvovyunhvirsu/Build/Products/Debug-iphonesimulator/GoogleAPIClient/GoogleAPIClient.framework"; sourceTree = "<group>"; };
-		E57881FA1D91707600B3656E /* GTMOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMOAuth2.framework; path = "../../../../Library/Developer/Xcode/DerivedData/EasyRdv-gweklbkdftzuzrdfvovyunhvirsu/Build/Products/Debug-iphonesimulator/GTMOAuth2/GTMOAuth2.framework"; sourceTree = "<group>"; };
-		E57881FB1D91707600B3656E /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "../../../../Library/Developer/Xcode/DerivedData/EasyRdv-gweklbkdftzuzrdfvovyunhvirsu/Build/Products/Debug-iphonesimulator/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
 		E57C58191D93D54E00E57BCB /* RdvTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RdvTableViewController.swift; sourceTree = "<group>"; };
 		E57C581C1D93E85A00E57BCB /* RdvCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RdvCell.swift; sourceTree = "<group>"; };
 		E586EF2C1D93CE9E009E8672 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -124,17 +97,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E53F9E641D92B2CF00393343 /* GoogleAPIClient.framework in Frameworks */,
-				E53F9E651D92B2CF00393343 /* GTMOAuth2.framework in Frameworks */,
-				E53F9E661D92B2CF00393343 /* GTMSessionFetcher.framework in Frameworks */,
-				473B0B7725A2627616DFEDE0 /* Pods_EasyRdv.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E57881DB1D91412600B3656E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,26 +106,8 @@
 		04C2492BB1A192DF2EE0731F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E57881F91D91707600B3656E /* GoogleAPIClient.framework */,
-				E57881FA1D91707600B3656E /* GTMOAuth2.framework */,
-				E57881FB1D91707600B3656E /* GTMSessionFetcher.framework */,
-				E57881ED1D91542800B3656E /* libGoogleAPIClient.a */,
-				E57881EE1D91542800B3656E /* libGTMOAuth2.a */,
-				E57881EF1D91542800B3656E /* libGTMSessionFetcher.a */,
-				E57881F01D91542800B3656E /* libPods-EasyRdvTests.a */,
-				647C29F76D20AC9105729055 /* libPods-EasyRdvTests.a */,
-				CABB0CC5945866FB1323CC5B /* Pods_EasyRdv.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A3DCD91173A23F316A7825D1 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				28F6BAC51ED2833B4FC46B22 /* Pods-EasyRdv.debug.xcconfig */,
-				A0B1761CAB9FC9066B826DFA /* Pods-EasyRdv.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		E5032A561DA511AA00FCAF4F /* Compte */ = {
@@ -253,7 +197,6 @@
 				E57881E11D91412600B3656E /* EasyRdvTests */,
 				E57881C81D91412600B3656E /* Products */,
 				04C2492BB1A192DF2EE0731F /* Frameworks */,
-				A3DCD91173A23F316A7825D1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -261,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				E57881C71D91412600B3656E /* EasyRdv.app */,
-				E57881DE1D91412600B3656E /* EasyRdvTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -352,27 +294,6 @@
 			productReference = E57881C71D91412600B3656E /* EasyRdv.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E57881DD1D91412600B3656E /* EasyRdvTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E57881EA1D91412600B3656E /* Build configuration list for PBXNativeTarget "EasyRdvTests" */;
-			buildPhases = (
-				AAF74BC959B0B06CE2BD75CD /* 📦 Check Pods Manifest.lock */,
-				E57881DA1D91412600B3656E /* Sources */,
-				E57881DB1D91412600B3656E /* Frameworks */,
-				E57881DC1D91412600B3656E /* Resources */,
-				CCC612700E1AA6149CB026C9 /* 📦 Embed Pods Frameworks */,
-				9B9406779EEED0CFCC5BABE4 /* 📦 Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E57881E01D91412600B3656E /* PBXTargetDependency */,
-			);
-			name = EasyRdvTests;
-			productName = EasyRdvTests;
-			productReference = E57881DE1D91412600B3656E /* EasyRdvTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -387,11 +308,6 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = AFB34M8P48;
 						LastSwiftMigration = 0800;
-					};
-					E57881DD1D91412600B3656E = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
-						TestTargetID = E57881C61D91412600B3656E;
 					};
 				};
 			};
@@ -409,7 +325,6 @@
 			projectRoot = "";
 			targets = (
 				E57881C61D91412600B3656E /* EasyRdv */,
-				E57881DD1D91412600B3656E /* EasyRdvTests */,
 			);
 		};
 /* End PBXProject section */
@@ -424,13 +339,6 @@
 				E57881D81D91412600B3656E /* LaunchScreen.storyboard in Resources */,
 				E57881D51D91412600B3656E /* Assets.xcassets in Resources */,
 				E57881D01D91412600B3656E /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E57881DC1D91412600B3656E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +357,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyRdv/Pods-EasyRdv-resources.sh\"\n";
+			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
 		74AE65254FE6698DCEC3FA5D /* 📦 Check Pods Manifest.lock */ = {
@@ -464,37 +372,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9B9406779EEED0CFCC5BABE4 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyRdvTests/Pods-EasyRdvTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AAF74BC959B0B06CE2BD75CD /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
 		B99ED99D74B8A9C83F7541D4 /* 📦 Embed Pods Frameworks */ = {
@@ -509,22 +387,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyRdv/Pods-EasyRdv-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CCC612700E1AA6149CB026C9 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyRdvTests/Pods-EasyRdvTests-frameworks.sh\"\n";
+			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -570,23 +433,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E57881DA1D91412600B3656E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E57881E31D91412600B3656E /* EasyRdvTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E57881E01D91412600B3656E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E57881C61D91412600B3656E /* EasyRdv */;
-			targetProxy = E57881DF1D91412600B3656E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E57881CE1D91412600B3656E /* Main.storyboard */ = {
@@ -698,12 +545,11 @@
 		};
 		E57881E81D91412600B3656E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 28F6BAC51ED2833B4FC46B22 /* Pods-EasyRdv.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AFB34M8P48;
 				INFOPLIST_FILE = EasyRdv/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -721,12 +567,11 @@
 		};
 		E57881E91D91412600B3656E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0B1761CAB9FC9066B826DFA /* Pods-EasyRdv.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AFB34M8P48;
 				INFOPLIST_FILE = EasyRdv/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -739,32 +584,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		E57881EB1D91412600B3656E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = EasyRdvTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zsoft.EasyRdvTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EasyRdv.app/EasyRdv";
-			};
-			name = Debug;
-		};
-		E57881EC1D91412600B3656E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = EasyRdvTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zsoft.EasyRdvTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EasyRdv.app/EasyRdv";
 			};
 			name = Release;
 		};
@@ -785,15 +604,6 @@
 			buildConfigurations = (
 				E57881E81D91412600B3656E /* Debug */,
 				E57881E91D91412600B3656E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E57881EA1D91412600B3656E /* Build configuration list for PBXNativeTarget "EasyRdvTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E57881EB1D91412600B3656E /* Debug */,
-				E57881EC1D91412600B3656E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

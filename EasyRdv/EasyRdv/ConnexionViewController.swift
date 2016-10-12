@@ -81,15 +81,12 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         
         let data = NSString(string: "\(mail):\(password)")
         print(data)
-        UserApi.CONNECT(data, begin: {
-            
-            self.view.addSubview(self.loadingView)
+        
+        UserApi.CONNECT(value: data, begin: { self.view.addSubview(self.loadingView)
             self.loadingView.showLoadingIndicator()
             self.view.isUserInteractionEnabled = false
             
-            }, success: {
-                
-        })
+            }, success: {})
         
     }
     
@@ -111,7 +108,7 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        if textField.text?.characters.count > 0 {
+        if (textField.text?.characters.count)! > 0 {
             if textField.tag == self.login.tag {
                 if !(login.text?.isEmail)! {
                     
@@ -123,7 +120,7 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
             }
             
             if textField.tag == self.password.tag {
-                if textField.text?.characters.count < 5 {
+                if (textField.text?.characters.count)! < 5 {
                     
                     password.text = ""
                     password.layer.borderColor = UIColor.red.cgColor

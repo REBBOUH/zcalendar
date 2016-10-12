@@ -32,7 +32,8 @@ class Calendar:NSObject {
         for eventInfo in eventInfos {
             
             let event:Event = Event(eventInfo: eventInfo)
-            listCalandar?.add
+            
+            listCalandar?.add(event)
             
         }
         

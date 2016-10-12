@@ -19,7 +19,7 @@ class RdvTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHiHidden = false
+        self.navigationController?.navigationBar.isHidden = false
         calender = Calendar()
         
         loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
@@ -29,23 +29,23 @@ class RdvTableViewController: UITableViewController {
         self.navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Arial", size: 14)!];
 
 
-        CalendarApi.GET(UserSingleton.sharedInstance.user.calendarId!,begin: {_ in
+        CalendarApi.GET(calendarId: UserSingleton.sharedInstance.user.calendarId!,begin: {_ in
             
             self.view.addSubview(self.loadingView)
             self.loadingView.showLoadingIndicator()
-            self.vieisUsisUserInteractionEnabled = false
+            self.view.isUserInteractionEnabled = false
             
             },success: {_ in
                 
         })
 
-    N NotificationCenter.defatserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarok, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarok, object: nil)
         
-        NotifiNionCenter.default.setObstf, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarerror, object: nil)
         
-        NotificationCentNdefault.setObserver(selftr: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventupdateokreload, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventupdateokreload, object: nil)
         
-        NotificationCenter.defaultNtObserver(self, selectortor(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,24 +55,24 @@ class RdvTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in taoverride bleView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
     }
     
-    override func tableView(_ tableView: UITableView, n_ umberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return (calender?.listCalandar?.count)!
     }
-    override func tableView(_ tableView: UITableView,_  heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return self.view.bounds.height / 4
         
     }
     
-    override func tableView(_ tableView: UITableVie_ _: w, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let cell  = tableView.dequeueReusableCell(withIdentifier: "cel(winfoclient") : s! ClientCell
+        let cell  = tableView.dequeueReusableCell(withIdentifier: "cellinfoclient") as! ClientCell
         
         if UserSingleton.sharedInstance.user.checkAllValues() {
             
@@ -83,46 +83,49 @@ class RdvTableViewController: UITableViewController {
         }
         
         return cell
-_     }
+    }
     
-    override func tableVteView-> UITa View, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = (wtableView.deq: eueReusableCelrtifier: "celldate", for: indexPath) as! RdvCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "celldate", for: indexPath) as! RdvCell
         
-        let datestring = "\((c(alender?. as NSIndexPath)listCalandar![(indexPath as NSIndexPath).row] as? Event)!.start!.asDateString)"
+        let datestring = "\((calender?.listCalandar![(indexPath as NSIndexPath).row] as? Event)!.start!.asDateString)"
        
         cell.dateDebut.text = datestring
         
-        return cell_ 
+        return cell
     }
     
-    override func tableVitView-> UITab iew, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         CalendarSingleton.sharedInstance.index = indexPath
-        CalendarSingleton.sharedInstance.event (= self.ca as NSIndexPath)lender?.listCalandar![(indexPath as NSIndexPath).row] as! Event
+        CalendarSingleton.sharedInstance.event = self.calender?.listCalandar![(indexPath as NSIndexPath).row] as! Event
         
-        let priseRendezVousViewController = UIStoryboard(name(w "Main", bund: e: nil).instantiateViewController(withIdentifier: "priseRdvController") as! PriseRdvController
+        let priseRendezVousViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "priseRdvController") as! PriseRdvController
         
         self.navigationController?.pushViewController(priseRendezVousViewController as UIViewController, animated: true)
         
     }
     
-    // MARK - handl_ e notificatioN   
+    // MARK - handle notification
+    
     func  handleNotifications(_ notification:Notification) {
-        if notification.name == .notificationcale.isN      UIApplication.shared.isNetworkActivityIndicatorVisible = Drue
-   Queue.global(priority: Di 
-    Queue.G DispQchQuPriority.high).sync(execute:cute: {
+        if notification.name == .notificationcalendarok {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            
+           DispatchQueue.global(qos: .default).sync(execute: {
                 
-                if let inf(os = (notifi as NSNotification)cation as NSNotification).userInfo?["data"]   {
+                if let infos = (notification as NSNotification).userInfo?["data"]   {
                     
                     self.calender = Calendar(eventInfos: infos as! [[String : AnyObject]] )
                     
                 }
-        D       Queue.main.a     execute:in.async(execute: {
+                
+                DispatchQueue.main.async(execute: {
                     
                     self.loadingView.hideLoadingIndicator()
                     
-             isUs     self.view.isUserInteractionEnabled = true
+                    self.view.isUserInteractionEnabled = true
                     
                     if self.calender?.listCalandar?.count == 0 {
                         
@@ -140,10 +143,10 @@ _     }
         
         if notification.name == .notificationcalendarerror {
             
-  D       Queue.main.aDispaexecute:e: {
+            DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 
-                self.vieisUsisUserInteractionEnabled = true
+                self.view.isUserInteractionEnabled = true
                 let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
                 
@@ -152,9 +155,13 @@ _     }
         
         if notification.name == .notificationeventupdateokreload {
             
-           DispatDhQueue.Queue.global(priority: Dis: .deQueue.G.asynQexecPriority.default).async(execute:   self.calender?.listCalandar?.removeObject(at: (CalendarSingleton.sharedIns(at: ndex as NSIndexPath).row)
-              as NSIndexPath)   
-                DispatchQueue.main.Dsync(exQueue.main.aute: execute:                 
+           DispatchQueue.global(qos: .default).async(execute: {
+                
+                self.calender?.listCalandar?.removeObject(at: (CalendarSingleton.sharedInstance.index as NSIndexPath).row)
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    
                     self.tableView.reloadData()
                     
                 })
@@ -164,7 +171,8 @@ _     }
         if notification.name == .notificationconxerror {
             
             DispatchQueue.main.async(execute: {
-D       Queue.main.a     execute:dingView.hideLoadingIndicator()
+                
+                self.loadingView.hideLoadingIndicator()
                 let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
                 
@@ -173,9 +181,10 @@ D       Queue.main.a     execute:dingView.hideLoadingIndicator()
             
         }
         
-        NotificationCenter.default.removeObserver(noNication.name)
+        NotificationCenter.default.removeObserver(notification.name)
         
- t
+    }
+    
     func newUpdate(){
         
     }

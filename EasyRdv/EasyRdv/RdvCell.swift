@@ -26,10 +26,6 @@ class RdvCell: UITableViewCell {
     override func layoutSubviews() {
         dateView.layer.cornerRadius = 5
     }
-    override func setSelected(_ _ _selected: Bool, animated: Bool) {
-        super.setSelecteisS(isSelected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
+    
 }

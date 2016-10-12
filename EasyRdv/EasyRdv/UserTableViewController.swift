@@ -141,7 +141,7 @@ class UserTableViewController: UITableViewController {
                     let list = (infos["data"] as! [String:Any])["item"] as! [[String : AnyObject]]
                     for userInfo in list {
                         let  user = User()
-                        user.initWithDic(userInfo)
+                        user.initWithDic(userInfo: userInfo)
                         self.listUser?.add(user)
                         
                     }
@@ -182,7 +182,7 @@ class UserTableViewController: UITableViewController {
     }
     
     func newUpdate(){
-        UserApi.GETALL({_ in
+        UserApi.GETALL(begin: {_ in
             self.view.addSubview(self.loadingView)
             self.loadingView.showLoadingIndicator()
             self.view.isUserInteractionEnabled = false

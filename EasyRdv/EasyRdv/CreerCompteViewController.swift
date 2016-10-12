@@ -85,7 +85,7 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        if textField.text?.characters.count > 0 {
+        if (textField.text?.characters.count)! > 0 {
             if textField.tag == self.mailField.tag {
                 if !(mailField.text?.isEmail)! {
                     
@@ -96,7 +96,7 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
             }
             
             if textField.tag == self.passwordField.tag {
-                if textField.text?.characters.count < 5 {
+                if (textField.text?.characters.count)! < 5 {
                     
                     passwordField.text = ""
                     passwordField.layer.borderColor = UIColor.red.cgColor
@@ -155,7 +155,7 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
     
     @IBAction func creerCompte(_ sender: AnyObject) {
         
-        UserApi.ADD(createUserJson(), begin: {
+        UserApi.ADD(userInfo: createUserJson() as [String : AnyObject], begin: {
             
             self.view.addSubview(self.loadingView)
             self.loadingView.showLoadingIndicator()

@@ -11,7 +11,7 @@ import Foundation
 class CalendarApi {
     
     
-    class func GET(calendarId:String,begin:()->(),success:(calendarDic:Calendar)->()){
+    class func GET(calendarId:String,begin:()->(),success:@escaping (_ calendarDic:Calendar)->()){
         
         let urlString = "\(Constants.urlServercheck)\(calendarId)"
         
