@@ -10,6 +10,8 @@ import UIKit
 
 class UserTableViewController: UITableViewController {
     
+    var transitionDelegate:TransitionManager = TransitionManager()
+    
     
     var listUser:NSMutableArray?
     
@@ -17,25 +19,35 @@ class UserTableViewController: UITableViewController {
     
     var loadingView:LoadingViewCustome!
     
+    fileprivate let swipeInteractionController = ObjectInteraction()
+    
+    fileprivate let swipeInteractionControllerDismiss = ObjectInteractionDismiss()
+    
+    fileprivate let flipPresentAnimationController = ObjectAnimation()
+    
+    fileprivate let flipPresentAnimationControllerDismiss = ObjectAnimationDismiss()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-               listUser = NSMutableArray()
+        listUser = NSMutableArray()
         
         UserSingleton.sharedInstance.user.initData()
         
         self.navigationItem.title = "EasyRdv"
         
+        // swipeInteractionController.wireToViewController(self,segue:"fromconnexion")
         
+        transitionDelegate.sourceViewController = self
         
         self.navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Arial", size: 14)!];
         loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
         
         newUpdate()
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(UserTableViewController.handleNotifications(_:)), name: Constants.notificationusergetok, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(UserTableViewController.handleNotifications(notification:)), name: Constants.notificationusergetok, object: nil)
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(UserTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(UserTableViewController.handleNotifications(notification:)), name: Constants.notificationconxerror, object: nil)
         
         
     }
@@ -47,28 +59,28 @@ class UserTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return (listUser?.count)!
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cellinfoclient", forIndexPath: indexPath) as! ClientCell
-        cell.clientAdress.text = (listUser?.objectAtIndex(indexPath.row) as! User).adress
-        cell.clientName.text = (listUser?.objectAtIndex(indexPath.row) as! User).nameUser
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellinfoclient", for: indexPath) as! ClientCell
+        cell.clientAdress.text = (listUser?.object(at: (indexPath as NSIndexPath).row) as! User).adress
+        cell.clientName.text = (listUser?.object(at: (indexPath as NSIndexPath).row) as! User).nameUser
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        UserSingleton.sharedInstance.user = self.listUser?.objectAtIndex(indexPath.row) as! User
+        UserSingleton.sharedInstance.user = self.listUser?.object(at: (indexPath as NSIndexPath).row) as! User
         
     }
     /*
@@ -119,52 +131,53 @@ class UserTableViewController: UITableViewController {
     // MARK - handle notification
     
     func  handleNotifications(notification:NSNotification) {
-        if notification.name == Constants.notificationusergetok {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
+        if notification.name == .notificationusergetok {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                if let infos = notification.userInfo!["data"]!["items"]   {
+            DispatchQueue.global(qos: .default).async(execute: {
+                if let infos:[String:Any]  = notification.userInfo as? [String:Any]   {
                     
-                    let list = infos as! [[String : AnyObject]]
+                    let list = (infos["data"] as! [String:Any])["item"] as! [[String : AnyObject]]
                     for userInfo in list {
-                        if let  user:User = User() {
-                            user.initWithDic(userInfo)
-                            self.listUser?.addObject(user)
-                        }
+                        let  user = User()
+                        user.initWithDic(userInfo)
+                        self.listUser?.add(user)
+                        
                     }
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.loadingView.hideLoadingIndicator()
-                    self.view.userInteractionEnabled = true
+                    self.view.isUserInteractionEnabled = true
                     self.tableView.reloadData()
-                
+                    
                 })
             })
         }
         
-        if notification.name == Constants.notificationconxerror {
+        if notification.name == .notificationconxerror {
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 self.loadingView.hideLoadingIndicator()
-               
-                self.view.userInteractionEnabled = true
-              
-                let viewAlert = UIAlertController(title: "errorr", message: "erreur de connexion ", preferredStyle: .Alert)
                 
-                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: { _ in
- 
-                    var timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(UserTableViewController.newUpdate), userInfo: nil, repeats: false)
+                self.view.isUserInteractionEnabled = true
+                
+                let viewAlert = UIAlertController(title: "errorr", message: "erreur de connexion ", preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    
+                    _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(UserTableViewController.newUpdate), userInfo: nil, repeats: false)
                 })
                 
                 viewAlert.addAction(defaultAction)
-                self.presentViewController(viewAlert, animated: true, completion: {})
-
+                self.present(viewAlert, animated: true, completion: {})
+                
             })
         }
-    
-        NSNotificationCenter.defaultCenter().removeObserver(notification.name)
+        
+        NotificationCenter.default.removeObserver(notification.name)
         
     }
     
@@ -172,11 +185,53 @@ class UserTableViewController: UITableViewController {
         UserApi.GETALL({_ in
             self.view.addSubview(self.loadingView)
             self.loadingView.showLoadingIndicator()
-            self.view.userInteractionEnabled = false
+            self.view.isUserInteractionEnabled = false
             },success: {_ in })
-   
-    
+        
+        
     }
-
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if  segue.identifier == "afficheMenu" , let destinationViewController = segue.destination as? MenuViewController  {
+            
+            transitionDelegate.menuViewController = destinationViewController
+            
+            //swipeInteractionControllerDismiss.wireToViewController(destinationViewController)
+            
+        }
+    }
     
 }
+//extension UserTableViewController:UIViewControllerTransitioningDelegate {
+//
+//    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning?
+//    {
+//
+//        flipPresentAnimationController.originFrame = self.view.frame
+//        return flipPresentAnimationController
+//
+//    }
+//
+//    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//
+//        flipPresentAnimationControllerDismiss.originFrame = self.view.frame
+//        return flipPresentAnimationController
+//
+//    }
+//
+//    func interactionControllerForPresentation(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+//
+//        return swipeInteractionController.interactionInProgress ? swipeInteractionController : nil
+//
+//    }
+//
+//    func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+//
+//        return swipeInteractionControllerDismiss.interactionInProgress ? swipeInteractionControllerDismiss : nil
+//        
+//    }
+//    
+//}
+//

@@ -13,8 +13,8 @@ class Event:NSObject {
     
     var id:String?
     var nom:String?
-    var start:NSDate?
-    var end:NSDate?
+    var start:Date?
+    var end:Date?
     var iCalUID:String?
     var descriptionEvent:String?
     var location:String?
@@ -33,8 +33,8 @@ class Event:NSObject {
         initData()
         id = eventInfo["id"] as? String
         nom = eventInfo["summary"] as? String
-        end = (eventInfo["end"]!["dateTime"] as? String)!.asDate
-        start = (eventInfo["start"]!["dateTime"] as? String)!.asDate
+        end = (eventInfo["end"]!["dateTime"] as? String)!.asDate as Date?
+        start = (eventInfo["start"]!["dateTime"] as? String)!.asDate as Date?
         descriptionEvent = eventInfo["description"] as? String
         location = eventInfo["location"] as? String
         organisateur = eventInfo["creator"]!["email"] as? String
@@ -64,7 +64,7 @@ class Event:NSObject {
     }
     
     
-    func setValue(event:Event){
+    func setValue(_ event:Event){
         
         self.id = event.id
         nom = event.nom

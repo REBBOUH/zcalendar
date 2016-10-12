@@ -8,7 +8,13 @@
 
 import UIKit
 
+
+
 class CreerCompteViewController: UIViewController,UITextFieldDelegate {
+    
+   
+    
+    @IBOutlet weak var nameField: UITextField!
     
     @IBOutlet weak var imageLogo: UIImageView!
     
@@ -45,15 +51,14 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
         
         self.view.addGestureRecognizer(TapGestureRecognizer)
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide.rawValue, object: nil)
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications(_:)), name: Constants.notificationuseraddok, object: nil)
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications(_:)), name: Constants.notificationuseraddok, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications(_:)), name: Constants.notificationuseradderror, object: nil)
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications(_:)), name: Constants.notificationuseradderror, object: nil)
-        
-         NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
         // Do any additional setup after loading the view.
     }
     
@@ -63,28 +68,28 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
     }
     
     override func viewDidLayoutSubviews() {
-   
+        
         self.view.viewWithTag(1)?.layer.cornerRadius =  20
         
     }
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
         return true
     }
     
-    func  textFieldShouldEndEditing(textField: UITextField) -> Bool {
+    func  textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-       
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
         if textField.text?.characters.count > 0 {
             if textField.tag == self.mailField.tag {
                 if !(mailField.text?.isEmail)! {
                     
-                    mailField.layer.borderColor = UIColor.redColor().CGColor
+                    mailField.layer.borderColor = UIColor.red.cgColor
                     mailField.layer.borderWidth = 2
                     return
                 }
@@ -94,12 +99,12 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
                 if textField.text?.characters.count < 5 {
                     
                     passwordField.text = ""
-                    passwordField.layer.borderColor = UIColor.redColor().CGColor
+                    passwordField.layer.borderColor = UIColor.red.cgColor
                     passwordField.layer.borderWidth = 2
                     passwordField.placeholder = "Mot de passe inférieur à 5 charactere"
-              
+                    
                     return
-                
+                    
                 }
             }
             
@@ -107,24 +112,35 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
                 if !(numeroField.text?.isPhoneNumber)! {
                     
                     numeroField.layer.borderWidth = 2
-                    numeroField.layer.borderColor = UIColor.redColor().CGColor
+                    numeroField.layer.borderColor = UIColor.red.cgColor
                     return
                 }
             }
+            
+            if textField.tag == self.nameField.tag {
+                if !(nameField.text?.isEmpty)! {
+                    
+                    numeroField.layer.borderWidth = 2
+                    numeroField.layer.borderColor = UIColor.red.cgColor
+                    passwordField.placeholder = "ce champ est obligatoir"
+                    return
+                }
+            }
+            
             textField.layer.borderWidth = 0
-       
+            
             
         }
         if (checkTextField()){
-            (self.view.viewWithTag(1) as! UIButton).enabled = true
+            (self.view.viewWithTag(1) as! UIButton).isEnabled = true
         }else{
-            (self.view.viewWithTag(1) as! UIButton).enabled = false
+            (self.view.viewWithTag(1) as! UIButton).isEnabled = false
         }
         
     }
     
     func checkTextField() -> Bool{
-        if ((mailField.text!.lowercaseString == passwordFieldConf.text!.lowercaseString) && (mailField.text?.isEmail)! && ((passwordField.text?.characters.count)! >= 5) && (numeroField.text?.isPhoneNumber)! ) {
+        if ((mailField.text!.lowercased() == passwordFieldConf.text!.lowercased()) && (mailField.text?.isEmail)! && ((passwordField.text?.characters.count)! >= 5) && (numeroField.text?.isPhoneNumber)! && (!(nameField.text?.isEmpty)!) ) {
             return true
         }
         return false
@@ -137,25 +153,31 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
     
     
     
-    @IBAction func creerCompte(sender: AnyObject) {
+    @IBAction func creerCompte(_ sender: AnyObject) {
         
         UserApi.ADD(createUserJson(), begin: {
             
-            }, success: {})
-    
+            self.view.addSubview(self.loadingView)
+            self.loadingView.showLoadingIndicator()
+            self.view.isUserInteractionEnabled = false
+            
+            }, success: {
+                DataManager.initUserInfo(self.createUserJson())
+        })
+        
     }
     
-    func createUserJson() -> [String:AnyObject]{
-        let user:[String:AnyObject] =  ["user" : ["mail":mailField.text!,"password":passwordField.text!,"number":numeroField.text!,"isClient":false]]
+    func createUserJson() -> [String:Any]{
+        let user:[String:Any] =  ["user" : ["mail":mailField.text!,"password":passwordField.text!,"name":nameField.text!,"number":numeroField.text!,"isClient":false]]
         return user;
     }
     
     
-    func keyboardWillShow(sender: NSNotification) {
-        let dict:NSDictionary = sender.userInfo! as NSDictionary
+    func keyboardWillShow(_ sender: Notification) {
+        let dict:NSDictionary = (sender as NSNotification).userInfo! as NSDictionary
         if !beginEdit {
-            let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue;
-            let rect :CGRect = s.CGRectValue();
+            let s:NSValue = dict.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue;
+            let rect :CGRect = s.cgRectValue;
             var frame = self.viewConx.frame;
             if frame.origin.y < 0 {
                 
@@ -168,63 +190,64 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
             self.viewConx.frame = frame;
             self.viewConx.layoutIfNeeded()
             
-            NSNotificationCenter.defaultCenter().removeObserver(sender.name)
+            NotificationCenter.default.removeObserver(sender.name)
         }
         
     }
     
-    func keyboardWillHide(sender: NSNotification) {
-        let dict:NSDictionary = sender.userInfo! as NSDictionary
-        let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue;
-        let rect :CGRect = s.CGRectValue();
+    func keyboardWillHide(_ sender: Notification) {
+        let dict:NSDictionary = (sender as NSNotification).userInfo! as NSDictionary
+        let s:NSValue = dict.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue;
+        let rect :CGRect = s.cgRectValue;
         var frame = self.viewConx.frame;
         frame.origin.y = frame.origin.y + rect.height/2;
         topConstraintView.constant = topConstraintView.constant + 100
         self.viewConx.frame = frame;
         beginEdit = false
         self.viewConx.layoutIfNeeded()
-        NSNotificationCenter.defaultCenter().removeObserver(sender.name)
+        NotificationCenter.default.removeObserver(sender.name)
     }
     
     // MARK - handle notification
     
-    func  handleNotifications(notification:NSNotification) {
-        if notification.name == Constants.notificationuseraddok {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func  handleNotifications(_ notification:Notification) {
+        if notification.name == .notificationuseraddok {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            DispatchQueue.global(qos: .default).async(execute: {
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.loadingView.hideLoadingIndicator()
-                    self.view.multipleTouchEnabled = true
-                    let viewAlert = UIAlertController(title: "Compte", message: "votre compte a été bien crée ", preferredStyle: .Alert)
+                    self.view.isMultipleTouchEnabled = true
+                    let viewAlert = UIAlertController(title: "Compte", message: "votre compte a été bien crée ", preferredStyle: .alert)
                     
-                    let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: { _ in
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
                         
+                        self.dismiss(animated: true, completion: {})
                         
                     })
                     
                     viewAlert.addAction(defaultAction)
-                    self.presentViewController(viewAlert, animated: true, completion: {})
+                    self.present(viewAlert, animated: true, completion: {})
                 })
             })
             
         }
         
-        if notification.name == Constants.notificationuseradderror {
+        if notification.name == .notificationuseradderror {
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
-                self.view.multipleTouchEnabled = true
+                self.view.isMultipleTouchEnabled = true
                 let alerview = UIAlertView(title: "errorr",message: "cet utilisateur existe deja  ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
             })
         }
-        if notification.name == Constants.notificationconxerror {
+        if notification.name == .notificationconxerror {
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
-                self.view.multipleTouchEnabled = true
+                self.view.isMultipleTouchEnabled = true
                 let alerview = UIAlertView(title: "errorr",message: "erreur de connexion  ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
             })
@@ -232,7 +255,7 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
         
         
         
-        NSNotificationCenter.defaultCenter().removeObserver(notification.name)
+        NotificationCenter.default.removeObserver(notification.name)
         
     }
     

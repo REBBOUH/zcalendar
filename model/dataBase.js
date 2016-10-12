@@ -14,26 +14,26 @@ var BSON = mongo.BSONPure;
 
 
 // connect with db 
-  function connexionDataBase(callback){
+function connexionDataBase(callback){
 
- var server = new Server('localhost', 27017, {auto_reconnect: true}); 
-    db = new Db('easyRdv', server);
-  db.open(function(err, db) {
+	var server = new Server('localhost', 27017, {auto_reconnect: true}); 
+	db = new Db('easyRdv', server);
+	db.open(function(err, db) {
 
-      if(!err) {
-      
-        console.log("Connected to 'easyRdv' database");
+		if(!err) {
 
-        callback(err,db);
-      
-      }
-      else{
+			console.log("Connected to 'easyRdv' database");
 
-        console.log("not Connected to 'easyRdv' database");
-         callback(err,db);
-      
-      }
-    });
+			callback(err,db);
+
+		}
+		else{
+
+			console.log("not Connected to 'easyRdv' database");
+			callback(err,db);
+
+		}
+	});
 }
 
 module.exports = connexionDataBase
@@ -47,7 +47,7 @@ module.exports.DataBaseModule  = function(){
 		addUserAccess : function(userInfo,callback){
 			
 			console.log('user add function');
-			 connexionDataBase(function(err,db){
+			connexionDataBase(function(err,db){
 			//self.connexion.connexionDataBase(function(err,db){
 				if (!db) {
 
@@ -66,7 +66,7 @@ module.exports.DataBaseModule  = function(){
 						return;
 					}
 
-					self.user.getUserFromInfo(userInfo,db,function(err,user){
+					self.user.getUserFromInfo(userInfo,function(err,user){
 						
 						if (err) {
 
@@ -76,7 +76,7 @@ module.exports.DataBaseModule  = function(){
 
 						if (!user) {
 
-							collection.insertOne({"mail":userInfo.mail,"password":userInfo.password},{safe:true},function(err,result){
+							collection.insertOne({"mail":userInfo.mail,"password":userInfo.password},{isolated:1 },function(err,result){
 
 								if(err) {
 
@@ -85,8 +85,8 @@ module.exports.DataBaseModule  = function(){
 
 								}
 
-								self.user.addUserInfo(result.insertedId,userInfo,db,function(errAdd,resultAdd){
-								
+								self.user.addUserInfo(result.insertedId,userInfo,function(errAdd,resultAdd){
+
 									callback(errAdd,resultAdd);
 
 								});
@@ -102,14 +102,14 @@ module.exports.DataBaseModule  = function(){
 			});
 },
 
-addUserInfo: function(id,userInfo,db,callback){
+addUserInfo: function(id,userInfo,callback){
 	console.log('user add info function');
-	// //self.connexion.connexionDataBase(function(err,db){
-	// 	if (err) {
-	// 		console.log('error to open database addUserInfo'+err);
-	// 		callback(err,null);
-	// 		return;
-	// 	}
+	connexionDataBase(function(err,db){
+		if (err) {
+			console.log('error to open database addUserInfo'+err);
+			callback(err,null);
+			return;
+		}
 
 		db.collection('userInfo',function(err,collection){
 
@@ -119,9 +119,9 @@ addUserInfo: function(id,userInfo,db,callback){
 				callback(err,null);
 				return;
 			}
-            var user = prototype.userInfo(userInfo);
+			var user = prototype.userInfo(userInfo);
 			
-			collection.insertOne({"_id":id,"mail":user.mail,"number":user.number,"isClient":user.isClient},{safe:true},function(err,result){
+			collection.insertOne({"_id":id,"mail":user.mail,"name":user.name,"number":user.number,"isClient":user.isClient},{isolated:1},function(err,result){
 
 				if(err) {
 
@@ -131,7 +131,7 @@ addUserInfo: function(id,userInfo,db,callback){
 				callback(err,result);
 			})
 		})
-	//})
+	})
 },
 addUserSpeciality: function(userSpecialty,callback){
 	console.log('user add info function');
@@ -151,7 +151,7 @@ addUserSpeciality: function(userSpecialty,callback){
 				return;
 			}
 
-			collection.insertOne(userSpecialty,{safe:true},function(err,result){
+			collection.insertOne(userSpecialty,{isolated:1},function(err,result){
 
 				if(err) {
 
@@ -168,81 +168,82 @@ getUserFromAccess:function(user,callback){
 	console.log('getUser');
 
 	//self.connexion.connexionDataBase(function(err,db){
-	 connexionDataBase(function(err,db){
+		connexionDataBase(function(err,db){
 			
-		if (err) {
-			console.log('error to open database addUserInfo'+err);
-			callback(err,null);
-			return;
-		}
-		db.collection('userAccess',function(err,collection){
+			if (err) {
+				console.log('error to open database addUserInfo'+err);
+				callback(err,null);
+				return;
+			}
+			db.collection('userAccess',function(err,collection){
 
-			collection.findOne({'mail':user.mail,'password':user.password}, function (err, userResult) {
+				collection.findOne({'mail':user.mail,'password':user.password}, function (err, userResult) {
 
-				if (err) { 
+					if (err) { 
 
-					console.log('error from database module getUserInfo '+err);
-					
-					return callback(err,null);
+						console.log('error from database module getUserInfo '+err);
 
-				}
+						return callback(err,null);
 
-				if (!user) { 
+					}
 
-					
-					return callback(null, null);
+					if (!user) { 
 
-				}; 
 
-				 console.log('user database found ***** '+JSON.stringify(userResult, null, 4));
-				return callback(err, userResult);
+						return callback(null, null);
 
+					}; 
+
+					console.log('user database found ***** '+JSON.stringify(userResult, null, 4));
+					return callback(err, userResult);
+
+				})
 			})
 		})
-	})
-},
-getUserFromInfo:function(user,db,callback){
-	
-	console.log('getUserFromInfo');
+	},
 
-	// self.connexion.connexionDataBase(function(err,db){
-	// 	if (err) {
-	// 		console.log('error to open database addUserInfo'+err);
-	// 		callback(err,null);
-	// 		return;
-	// 	}
+	getUserFromInfo:function(user,callback){
 
-		db.collection('userAccess',function(err,collection){
-if (err ){
-	console.log('error to open database addUserInfo'+err);
-	callback(err,null);
-}
-			collection.findOne({'mail':user.mail},{safe:true}, function (err, user) {
+		console.log('getUserFromInfo');
 
-				if (err) { 
+		connexionDataBase(function(err,db){
+			
+			if (err) {
+				console.log('error to open database addUserInfo'+err);
+				callback(err,null);
+				return;
+			}
 
-					console.log('error from database module getUserFromInfo '+err);
-					
-					return callback(err,null);
-
+			db.collection('userInfo',function(err,collection){
+				if (err ){
+					console.log('error to open database addUserInfo'+err);
+					callback(err,null);
 				}
+				collection.findOne({'mail':user.mail}, function (err, userResult) {
 
-				if (!user) { 
+					if (err) { 
 
-					return callback(null, null);
+						console.log('error from database module getUserFromInfo '+err);
 
-				}; 
+						return callback(err,null);
 
-				
-				return callback(err, user);
+					}
 
+					if (!userResult) { 
+
+						return callback(null, null);
+
+					}
+
+					return callback(err,userResult);
+
+				})
 			})
 		})
-	//})
-},
-getUserFromSpeciality:function(user,callback){
-	
-	console.log('getUserFromSpeciality');
+	},
+	getUserFromSpeciality:function(user,callback){
+
+		console.log('getUserFromSpeciality');
 
 	//self.connexion.connexionDataBase(function(err,db){
 		if (err) {
@@ -257,14 +258,14 @@ getUserFromSpeciality:function(user,callback){
 				if (err) { 
 
 					console.log('error from database module getUserFromSpeciality '+err);
-			
+
 					return callback(err,null);
 
 				}
 
 				if (!user) { 
 
-				
+
 					return callback(null, null);
 
 				}; 
@@ -301,12 +302,12 @@ this.eventCalendar = {
 
 					if (!user) { 
 
-				
+
 						return callback(null, null);
 
 					}; 
 
-			
+
 					return callback(err, eventUser);
 
 				})
@@ -315,37 +316,37 @@ this.eventCalendar = {
 	},
 	addEventForUser:function(EventInfo,callback){
 	//	self.connexion.connexionDataBase(function(err,db){
-			if (err) {
-				console.log('error to open database addEventForUser'+err);
-				callback(err,null);
-				return;
-			}
-			db.collection('event',function(err,collection){
+		if (err) {
+			console.log('error to open database addEventForUser'+err);
+			callback(err,null);
+			return;
+		}
+		db.collection('event',function(err,collection){
 
-				collection.insertOne(EventInfo,{safe:true}, function (err, eventUser) {
+			collection.insertOne(EventInfo,{isolated:1}, function (err, eventUser) {
 
-					if (err) { 
+				if (err) { 
 
-						console.log('error from database module addEventForUser '+err);
-						
-						return callback(err,null);
+					console.log('error from database module addEventForUser '+err);
 
-					}
+					return callback(err,null);
 
-					if (!user) { 
+				}
+
+				if (!user) { 
 
 					
-						return callback(null, null);
+					return callback(null, null);
 
-					}; 
+				}; 
 
 				
-					return callback(err, eventUser);
+				return callback(err, eventUser);
 
-				})
 			})
+		})
 	//	})
-	}
+}
 };
 }
 

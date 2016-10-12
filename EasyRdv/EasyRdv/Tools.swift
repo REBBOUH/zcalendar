@@ -11,7 +11,7 @@ import Foundation
 
 class Tools {
     
-    class func parseDate(dateString:String){
+    class func parseDate(_ dateString:String){
         
     }
 }

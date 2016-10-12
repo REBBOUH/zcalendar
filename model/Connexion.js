@@ -80,13 +80,13 @@
 
     function(mail, password, done) {
 
-var userInfo = {
-  "mail":mail,
-  "password":password
-}
-console.log('user basic to verify ***** '+JSON.stringify(userInfo, null, 4));
+      var userInfo = {
+        "mail":mail,
+        "password":password
+      }
+      console.log('user basic to verify ***** '+JSON.stringify(userInfo, null, 4));
       
-       dataBase.user.getUserFromAccess(userInfo,function(err,user){
+      dataBase.user.getUserFromAccess(userInfo,function(err,user){
 
         if (err) { 
 
@@ -106,12 +106,12 @@ console.log('user basic to verify ***** '+JSON.stringify(userInfo, null, 4));
 
        }; 
 
-       console.log('user basic ***** '+JSON.stringify(userInfo, null, 4));
+       console.log('user basic ***** '+JSON.stringify(user, null, 4));
 
        return done(err, user);
 
      })
-     }
+    }
     ));
 
 
@@ -122,9 +122,6 @@ console.log('user basic to verify ***** '+JSON.stringify(userInfo, null, 4));
   function createUser(request,response){
 
     console.log('/api/authenticate');
-
-
-    console.log('/api/authenticate'+request.body.mail);
 
     console.log(" here is the body " + JSON.stringify(request.body, null, 4));
     var user = request.body.user;
@@ -153,9 +150,9 @@ console.log('user basic to verify ***** '+JSON.stringify(userInfo, null, 4));
     message: 'Enjoy your token!',
     token: token
   }).send();
-  }
-  }
-  })
+}
+}
+})
   }
 
   apiRoutes.get('/connect',passport.authenticate('basic', { session: false }),connectUser);
@@ -168,52 +165,62 @@ console.log('user basic to verify ***** '+JSON.stringify(userInfo, null, 4));
 
       console.log('error created user Connexion '+err);
       response.status(401).send();
-    
+
     }else{
 
       if (request.user.mail == 'error') {
-console.log('password or login not correct '+request.err);
+        console.log('password or login not correct '+request.err);
         response.status(403).send();
 
       }else{
-    
-        console.log('user connexion ***** '+JSON.stringify(request.user.mail, null, 4));
+
+        console.log('user connexion ***** '+JSON.stringify(request.user, null, 4));
   //console.log("user mail : "+userResult.mail+"  user password "+user.userResult);
-        var token = jwt.sign({ "mail": request.user.mail,"password":request.user.password}, 'shhhhh');
+  var token = jwt.sign({ "mail": request.user.mail,"password":request.user.password}, 'shhhhh');
+var id  = request.user._id;
+var user;
+dataBase.user.getUserFromInfo(request.user,function(err,userinfo){
 
-       response.status(200).json({
-      success: true,
-       message: 'Enjoy your token!',
-     token: token
-   }).send();
+  if (userinfo){
+response.status(200).json({
+    success: true,
+    message: 'token for connect',
+    user:userinfo,
+    token: token
+  }).send();
+}
+});
+
+  
+
+}
+}
+}
+
+apiRoutes.use(passport.authenticate('token',{ session: false }),checkUserAuthenticate);
+
+function checkUserAuthenticate(request,response,next){
+
+  console.log('checkUserAuthenticate function');
+
+
+
+  console.log('passport.authenticate');
+
+  if (!request.user) {
+    return response.status(401).send({ 
+      success: false, 
+      message: 'No token provided.'
+    });
   }
-  }
-  }
 
-  apiRoutes.use(passport.authenticate('token',{ session: false }),checkUserAuthenticate);
+  next();
 
-  function checkUserAuthenticate(request,response,next){
+};
 
-    console.log('checkUserAuthenticate function');
+apiRoutes.use('/calendar',eventCalendar);
 
-    
+return apiRoutes;
 
-    console.log('passport.authenticate');
-
-    if (!request.user) {
-      return response.status(401).send({ 
-        success: false, 
-        message: 'No token provided.'
-      });
-    }
-
-    next();
-
-  };
-
-  apiRoutes.use('/calendar',eventCalendar);
-
-  return apiRoutes;
-
-  })();
+})();
 

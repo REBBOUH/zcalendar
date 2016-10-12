@@ -13,7 +13,7 @@ class CalendarSingleton {
     
     var event:Event = Event()
     
-    var index:NSIndexPath = NSIndexPath()
+    
     
     class var sharedInstance : CalendarSingleton {
         

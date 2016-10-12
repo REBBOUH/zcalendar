@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConnexionViewController: UIViewController,UITextFieldDelegate {
+class ConnexionViewController: UIViewController,UITextFieldDelegate{
     @IBOutlet weak var login: UITextField!
     
     @IBOutlet weak var password: UITextField!
@@ -20,14 +20,16 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
-   
+    
     var loadingView:LoadingViewCustome!
     
     var beginEdit = false
     
     var imageframe:CGPoint?
     
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         let TapGestureRecognizer:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ConnexionViewController.tapView))
@@ -38,22 +40,24 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate {
         
         self.password.delegate = self
         
-        loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
+        //self.transitioningDelegate = self
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(ConnexionViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+       
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(ConnexionViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+                loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(_:)), name:Constants.notificationusergetok, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationusergetok, object: nil);
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(_:)), name:Constants.notificationconxerror, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationconxerror, object: nil);
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(_:)), name:Constants.notificationusergeterror, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationusergeterror, object: nil);
         
         // Do any additional setup after loading the view.
     }
-    override func viewDidAppear(animated: Bool) {
-        animationLogo()
+    override func viewDidAppear(_ animated: Bool) {
+        //  animationLogo()
         
     }
     override func didReceiveMemoryWarning() {
@@ -69,9 +73,9 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate {
         
     }
     
-    @IBAction func connexion(sender: UIButton) {
+    @IBAction func connexion(_ sender: UIButton) {
         
-        let mail:String = (self.view.viewWithTag(3) as! UITextField).text!.lowercaseString
+        let mail:String = (self.view.viewWithTag(3) as! UITextField).text!.lowercased()
         
         let password:String = (self.view.viewWithTag(4) as! UITextField).text!
         
@@ -81,35 +85,37 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate {
             
             self.view.addSubview(self.loadingView)
             self.loadingView.showLoadingIndicator()
-            self.view.userInteractionEnabled = false
+            self.view.isUserInteractionEnabled = false
             
-            }, success: {})
+            }, success: {
+                
+        })
         
     }
     
     
-    @IBAction func creerCompte(sender: UIButton) {
+    @IBAction func creerCompte(_ sender: UIButton) {
         
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
         return true
     }
     
-    func  textFieldShouldEndEditing(textField: UITextField) -> Bool {
+    func  textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField.text?.characters.count > 0 {
             if textField.tag == self.login.tag {
                 if !(login.text?.isEmail)! {
                     
-                    login.layer.borderColor = UIColor.redColor().CGColor
+                    login.layer.borderColor = UIColor.red.cgColor
                     login.layer.borderWidth = 2
                     
                     return
@@ -120,7 +126,7 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate {
                 if textField.text?.characters.count < 5 {
                     
                     password.text = ""
-                    password.layer.borderColor = UIColor.redColor().CGColor
+                    password.layer.borderColor = UIColor.red.cgColor
                     password.layer.borderWidth = 2
                     password.placeholder = "Mot de passe inférieur à 5 charactere"
                     
@@ -135,12 +141,12 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate {
         
         if (checkTextField()){
             
-            (self.view.viewWithTag(2) as! UIButton).enabled = true
-       
+            (self.view.viewWithTag(2) as! UIButton).isEnabled = true
+            
         }else{
-         
-            (self.view.viewWithTag(2) as! UIButton).enabled = false
-        
+            
+            (self.view.viewWithTag(2) as! UIButton).isEnabled = false
+            
         }
         
         
@@ -169,7 +175,7 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate {
         self.logoImageView.center = CGPoint(x: self.imageframe!.x * 3, y: self.imageframe!.y)
         
         
-        UIView.animateWithDuration(2, animations: {
+        UIView.animate(withDuration: 2, animations: {
             
             self.logoImageView.center = CGPoint(x: self.imageframe!.x, y: self.imageframe!.y)
             
@@ -182,63 +188,66 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate {
         } )
     }
     
-    func  handleNotifications(notification:NSNotification) {
-        if notification.name == Constants.notificationusergetok {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func  handleNotifications(notification:Notification) {
+        if notification.name == .notificationusergetok {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+           DispatchQueue.global(qos: .default).async(execute: {
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.loadingView.hideLoadingIndicator()
-                    self.view.userInteractionEnabled = true
-                    let viewAlert = UIAlertController(title: "Compte", message: "bienvenue ", preferredStyle: .Alert)
+                    self.view.isUserInteractionEnabled = true
+                    let viewAlert = UIAlertController(title: "Compte", message: "bienvenue ", preferredStyle: .alert)
                     
-                    let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: { _ in
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
                         
+                        let userView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "calendarlist")
+                        
+                        self.present(userView, animated: false, completion: {})
                         
                     })
                     
                     viewAlert.addAction(defaultAction)
-                    self.presentViewController(viewAlert, animated: true, completion: {})
+                    self.present(viewAlert, animated: true, completion: {})
                 })
             })
             
         }
         
-        if notification.name == Constants.notificationconxerror {
+        if notification.name == .notificationconxerror {
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
-                self.view.userInteractionEnabled = true
+                self.view.isUserInteractionEnabled = true
                 let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
             })
         }
         
-        if notification.name == Constants.notificationusergeterror {
+        if notification.name == .notificationusergeterror {
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
-                self.view.userInteractionEnabled = true
+                self.view.isUserInteractionEnabled = true
                 let alerview = UIAlertView(title: "erreur de compte",message: "ce compte n'existe pas  ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
             })
         }
-
         
-        NSNotificationCenter.defaultCenter().removeObserver(notification.name)
+        
+        NotificationCenter.default.removeObserver(notification.name)
         
     }
-
     
-    func keyboardWillShow(sender: NSNotification) {
-        let dict:NSDictionary = sender.userInfo! as NSDictionary
+    
+    func keyboardWillShow(_ sender: Notification) {
+        
+        let dict:NSDictionary = (sender as NSNotification).userInfo! as NSDictionary
         if !beginEdit {
-            let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue;
-            let rect :CGRect = s.CGRectValue();
+            let s:NSValue = dict.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue;
+            let rect :CGRect = s.cgRectValue;
             var frame = self.viewConx.frame;
             if frame.origin.y < 0 {
-                
                 frame.origin.y = 0
             }else{
                 frame.origin.y = frame.origin.y - rect.height;
@@ -248,22 +257,23 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate {
             self.viewConx.frame = frame;
             self.viewConx.layoutIfNeeded()
             
-            NSNotificationCenter.defaultCenter().removeObserver(sender.name)
+            NotificationCenter.default.removeObserver(sender.name)
         }
         
     }
     
-    func keyboardWillHide(sender: NSNotification) {
-        let dict:NSDictionary = sender.userInfo! as NSDictionary
-        let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue;
-        let rect :CGRect = s.CGRectValue();
+    func keyboardWillHide(_ sender: Notification) {
+        
+        let dict:NSDictionary = (sender as NSNotification).userInfo! as NSDictionary
+        let s:NSValue = dict.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue;
+        let rect :CGRect = s.cgRectValue;
         var frame = self.viewConx.frame;
         frame.origin.y = frame.origin.y + rect.height/2;
         self.topConstraint.constant = self.topConstraint.constant + 100
         self.viewConx.frame = frame;
         beginEdit = false
         self.viewConx.layoutIfNeeded()
-        NSNotificationCenter.defaultCenter().removeObserver(sender.name)
+        NotificationCenter.default.removeObserver(sender.name)
     }
     
     /*
@@ -275,5 +285,6 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate {
      // Pass the selected object to the new view controller.
      }
      */
-    
-}
+    }
+
+

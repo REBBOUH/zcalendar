@@ -22,33 +22,33 @@ class PriseRdvController: UIViewController {
         
         
 
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateok, object: nil)
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateerror, object: nil)
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateok, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
         
-        NSNotificationCenter.defaultCenter().setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventconxerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventconxerror, object: nil)
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.dateField.text = CalendarSingleton.sharedInstance.event.start?.asDateString
         })
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
     }
     override func viewDidLayoutSubviews() {
         self.view.viewWithTag(2)?.layer.borderWidth = 3.0
-        self.view.viewWithTag(2)?.layer.borderColor = UIColor.brownColor().CGColor
+        self.view.viewWithTag(2)?.layer.borderColor = UIColor.brown.cgColor
         self.view.viewWithTag(1)?.layer.borderWidth = 3.0
-        self.view.viewWithTag(1)?.layer.borderColor = UIColor.brownColor().CGColor
+        self.view.viewWithTag(1)?.layer.borderColor = UIColor.brown.cgColor
         
         let imageProfil = self.view.viewWithTag(3) as! UIImageView
         imageProfil.layer.cornerRadius = imageProfil.frame.size.width/2
         imageProfil.clipsToBounds = true
         imageProfil.layer.borderWidth = 3.0
-        imageProfil.layer.borderColor = UIColor.cyanColor().CGColor
-        imageProfil.layer.backgroundColor = UIColor.brownColor().CGColor
+        imageProfil.layer.borderColor = UIColor.cyan.cgColor
+        imageProfil.layer.backgroundColor = UIColor.brown.cgColor
         
     }
     
@@ -57,10 +57,10 @@ class PriseRdvController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func valider(sender: UIButton) {
+    @IBAction func valider(_ sender: UIButton) {
         self.view.addSubview(self.loadingView)
         self.loadingView.showLoadingIndicator()
-        self.view.multipleTouchEnabled = false
+        self.view.isMultipleTouchEnabled = false
         EventApi.ADD(UserSingleton.sharedInstance.user.calendarId!,eventId: CalendarSingleton.sharedInstance.event.id!)
         
     }
@@ -68,9 +68,9 @@ class PriseRdvController: UIViewController {
     
     
     
-    @IBAction func annuler(sender: UIButton) {
+    @IBAction func annuler(_ sender: UIButton) {
         
-        self.navigationController?.popViewControllerAnimated(true);
+        self.navigationController!.popViewController(animated: true);
     }
     /*
      // MARK: - Navigation
@@ -83,51 +83,51 @@ class PriseRdvController: UIViewController {
      */
     // MARK - handle notification
     
-    func  handleNotifications(notification:NSNotification) {
-        if notification.name == Constants.notificationeventupdateok {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func  handleNotifications(_ notification:Notification) {
+        if notification.name == .notificationeventupdateok {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+             DispatchQueue.global(qos: .default).async(execute: {
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.loadingView.hideLoadingIndicator()
-                    self.view.multipleTouchEnabled = true
-                    let viewAlert = UIAlertController(title: "réservation", message: "votre réservartion a été bien éffectuée ", preferredStyle: .Alert)
+                    self.view.isMultipleTouchEnabled = true
+                    let viewAlert = UIAlertController(title: "réservation", message: "votre réservartion a été bien éffectuée ", preferredStyle: .alert)
                     
-                    let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: { _ in
-                        self.navigationController?.popViewControllerAnimated(true)
-                        NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationeventupdateokreload, object: nil)
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        self.navigationController!.popViewController(animated: true)
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationeventupdateokreload), object: nil)
                     })
                     
                     viewAlert.addAction(defaultAction)
-                    self.presentViewController(viewAlert, animated: true, completion: {})
+                    self.present(viewAlert, animated: true, completion: {})
                 })
             })
             
         }
         
-        if notification.name == Constants.notificationeventupdateerror {
+        if notification.name == .notificationeventupdateerror {
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
-                self.view.multipleTouchEnabled = true
+                self.view.isMultipleTouchEnabled = true
                 let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
             })
         }
         
-        if notification.name == Constants.notificationeventconxerror {
+        if notification.name == .notificationeventconxerror {
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
-                self.view.multipleTouchEnabled = true
+                self.view.isMultipleTouchEnabled = true
                 let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
                 alerview.show()
             })
         }
         
         
-        NSNotificationCenter.defaultCenter().removeObserver(notification.name)
+        NotificationCenter.default.removeObserver(notification.name)
         
     }
     

@@ -24,10 +24,20 @@
 		E569ED861D9C1F090034FF82 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569ED851D9C1F090034FF82 /* UserTableViewController.swift */; };
 		E56C536F1D9ABAFA00EA7053 /* LoadingViewCustome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C536D1D9ABAFA00EA7053 /* LoadingViewCustome.swift */; };
 		E56C53701D9ABAFA00EA7053 /* LoadingViewCustome.xib in Resources */ = {isa = PBXBuildFile; fileRef = E56C536E1D9ABAFA00EA7053 /* LoadingViewCustome.xib */; };
+		E56D0C761DAD2093005B080A /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56D0C751DAD2092005B080A /* ContainerViewController.swift */; };
+		E56D0C781DAD4558005B080A /* ObjectAnimaionDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56D0C771DAD4558005B080A /* ObjectAnimaionDismiss.swift */; };
 		E56E31161D95310D00359EF9 /* ClientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E31151D95310D00359EF9 /* ClientCell.swift */; };
 		E56E31181D95365F00359EF9 /* mourad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56E31171D95365F00359EF9 /* mourad.jpg */; };
 		E56E311A1D955E9B00359EF9 /* PriseRdvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E31191D955E9B00359EF9 /* PriseRdvController.swift */; };
+		E5707FC21DAE27570030C3C9 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5707FC11DAE27570030C3C9 /* TransitionManager.swift */; };
 		E572F6031DA6633100BCACF3 /* CreerCompteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E572F6021DA6633100BCACF3 /* CreerCompteViewController.swift */; };
+		E576F9BF1DAB880A0007CCF4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576F9BE1DAB880A0007CCF4 /* MenuViewController.swift */; };
+		E576F9C11DAB8B310007CCF4 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576F9C01DAB8B310007CCF4 /* MenuCell.swift */; };
+		E576F9C41DABA1DB0007CCF4 /* UserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576F9C31DABA1DB0007CCF4 /* UserApp.swift */; };
+		E576F9C71DABD6310007CCF4 /* ObjectInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576F9C51DABD6310007CCF4 /* ObjectInteraction.swift */; };
+		E576F9C81DABD6310007CCF4 /* ObjectInteractionDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576F9C61DABD6310007CCF4 /* ObjectInteractionDismiss.swift */; };
+		E576F9CA1DABD6BE0007CCF4 /* ObjectAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576F9C91DABD6BE0007CCF4 /* ObjectAnimation.swift */; };
+		E576F9CC1DABD6D30007CCF4 /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576F9CB1DABD6D30007CCF4 /* AnimationHelper.swift */; };
 		E57881CB1D91412600B3656E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57881CA1D91412600B3656E /* AppDelegate.swift */; };
 		E57881D01D91412600B3656E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57881CE1D91412600B3656E /* Main.storyboard */; };
 		E57881D31D91412600B3656E /* EasyRdv.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E57881D11D91412600B3656E /* EasyRdv.xcdatamodeld */; };
@@ -70,10 +80,20 @@
 		E569ED851D9C1F090034FF82 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		E56C536D1D9ABAFA00EA7053 /* LoadingViewCustome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewCustome.swift; sourceTree = "<group>"; };
 		E56C536E1D9ABAFA00EA7053 /* LoadingViewCustome.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingViewCustome.xib; sourceTree = "<group>"; };
+		E56D0C751DAD2092005B080A /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		E56D0C771DAD4558005B080A /* ObjectAnimaionDismiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectAnimaionDismiss.swift; sourceTree = "<group>"; };
 		E56E31151D95310D00359EF9 /* ClientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientCell.swift; sourceTree = "<group>"; };
 		E56E31171D95365F00359EF9 /* mourad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mourad.jpg; sourceTree = "<group>"; };
 		E56E31191D955E9B00359EF9 /* PriseRdvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriseRdvController.swift; sourceTree = "<group>"; };
+		E5707FC11DAE27570030C3C9 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		E572F6021DA6633100BCACF3 /* CreerCompteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreerCompteViewController.swift; sourceTree = "<group>"; };
+		E576F9BE1DAB880A0007CCF4 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		E576F9C01DAB8B310007CCF4 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		E576F9C31DABA1DB0007CCF4 /* UserApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserApp.swift; sourceTree = "<group>"; };
+		E576F9C51DABD6310007CCF4 /* ObjectInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectInteraction.swift; sourceTree = "<group>"; };
+		E576F9C61DABD6310007CCF4 /* ObjectInteractionDismiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectInteractionDismiss.swift; sourceTree = "<group>"; };
+		E576F9C91DABD6BE0007CCF4 /* ObjectAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectAnimation.swift; sourceTree = "<group>"; };
+		E576F9CB1DABD6D30007CCF4 /* AnimationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
 		E57881C71D91412600B3656E /* EasyRdv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyRdv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57881CA1D91412600B3656E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E57881CF1D91412600B3656E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -178,6 +198,7 @@
 				E569ED821D9C0A750034FF82 /* UserSingleton.swift */,
 				E569ED811D9C0A750034FF82 /* User.swift */,
 				E567F7351DA78CAA00889684 /* UserApi.swift */,
+				E576F9C31DABA1DB0007CCF4 /* UserApp.swift */,
 			);
 			name = user;
 			sourceTree = "<group>";
@@ -199,6 +220,30 @@
 				E567F7371DA78CC000889684 /* CalendarApi.swift */,
 			);
 			name = calendar;
+			sourceTree = "<group>";
+		};
+		E5707FC01DAE272D0030C3C9 /* transition */ = {
+			isa = PBXGroup;
+			children = (
+				E576F9C61DABD6310007CCF4 /* ObjectInteractionDismiss.swift */,
+				E56D0C771DAD4558005B080A /* ObjectAnimaionDismiss.swift */,
+				E56D0C751DAD2092005B080A /* ContainerViewController.swift */,
+				E576F9CB1DABD6D30007CCF4 /* AnimationHelper.swift */,
+				E576F9C91DABD6BE0007CCF4 /* ObjectAnimation.swift */,
+				E576F9C51DABD6310007CCF4 /* ObjectInteraction.swift */,
+				E5707FC11DAE27570030C3C9 /* TransitionManager.swift */,
+			);
+			name = transition;
+			sourceTree = "<group>";
+		};
+		E576F9C21DAB8B3C0007CCF4 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E576F9C01DAB8B310007CCF4 /* MenuCell.swift */,
+				E57C581C1D93E85A00E57BCB /* RdvCell.swift */,
+				E56E31151D95310D00359EF9 /* ClientCell.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		E57881BE1D91412600B3656E = {
@@ -250,10 +295,10 @@
 		E57C581B1D93E83F00E57BCB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E5707FC01DAE272D0030C3C9 /* transition */,
+				E576F9C21DAB8B3C0007CCF4 /* Cell */,
 				E56C536D1D9ABAFA00EA7053 /* LoadingViewCustome.swift */,
 				E56C536E1D9ABAFA00EA7053 /* LoadingViewCustome.xib */,
-				E57C581C1D93E85A00E57BCB /* RdvCell.swift */,
-				E56E31151D95310D00359EF9 /* ClientCell.swift */,
 				E5FDD1DB1DA66E6F00FEE008 /* customLabel.swift */,
 			);
 			name = Views;
@@ -276,6 +321,7 @@
 		E586EF2B1D93CC31009E8672 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E576F9BE1DAB880A0007CCF4 /* MenuViewController.swift */,
 				E5032A571DA511C500FCAF4F /* calendrier */,
 				E5032A581DA511D300FCAF4F /* event */,
 				E5032A561DA511AA00FCAF4F /* Compte */,
@@ -490,24 +536,34 @@
 			files = (
 				E5032A5A1DA5121B00FCAF4F /* ConnexionViewController.swift in Sources */,
 				E5FD40241DA6A39F00FF24A5 /* DataManager.swift in Sources */,
+				E576F9CC1DABD6D30007CCF4 /* AnimationHelper.swift in Sources */,
 				E53F9E6A1D92BF4100393343 /* Constants.swift in Sources */,
 				E53F9E681D92BEFD00393343 /* ApiManager.swift in Sources */,
 				E586EF2F1D93CEE6009E8672 /* CalendarSingleton.swift in Sources */,
 				E572F6031DA6633100BCACF3 /* CreerCompteViewController.swift in Sources */,
+				E576F9CA1DABD6BE0007CCF4 /* ObjectAnimation.swift in Sources */,
 				E57881D31D91412600B3656E /* EasyRdv.xcdatamodeld in Sources */,
+				E576F9BF1DAB880A0007CCF4 /* MenuViewController.swift in Sources */,
+				E576F9C41DABA1DB0007CCF4 /* UserApp.swift in Sources */,
+				E576F9C71DABD6310007CCF4 /* ObjectInteraction.swift in Sources */,
+				E56D0C761DAD2093005B080A /* ContainerViewController.swift in Sources */,
 				E586EF2D1D93CE9E009E8672 /* Calendar.swift in Sources */,
 				E567F7381DA78CC000889684 /* CalendarApi.swift in Sources */,
+				E576F9C81DABD6310007CCF4 /* ObjectInteractionDismiss.swift in Sources */,
 				E53F9E6C1D92D31B00393343 /* Tools.swift in Sources */,
 				E569ED831D9C0A750034FF82 /* User.swift in Sources */,
 				E56E31161D95310D00359EF9 /* ClientCell.swift in Sources */,
 				E569ED841D9C0A750034FF82 /* UserSingleton.swift in Sources */,
 				E567F7361DA78CAA00889684 /* UserApi.swift in Sources */,
+				E5707FC21DAE27570030C3C9 /* TransitionManager.swift in Sources */,
+				E56D0C781DAD4558005B080A /* ObjectAnimaionDismiss.swift in Sources */,
 				E57C581D1D93E85A00E57BCB /* RdvCell.swift in Sources */,
 				E57C581A1D93D54E00E57BCB /* RdvTableViewController.swift in Sources */,
 				E53F9E6E1D92F18900393343 /* Event.swift in Sources */,
 				E5FDD1DC1DA66E6F00FEE008 /* customLabel.swift in Sources */,
 				E56E311A1D955E9B00359EF9 /* PriseRdvController.swift in Sources */,
 				E56C536F1D9ABAFA00EA7053 /* LoadingViewCustome.swift in Sources */,
+				E576F9C11DAB8B310007CCF4 /* MenuCell.swift in Sources */,
 				E567F73A1DA78CD300889684 /* EventApi.swift in Sources */,
 				E569ED861D9C1F090034FF82 /* UserTableViewController.swift in Sources */,
 				E57881CB1D91412600B3656E /* AppDelegate.swift in Sources */,
@@ -658,7 +714,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zsoft.EasyRdv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -681,7 +737,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zsoft.EasyRdv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -694,7 +750,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zsoft.EasyRdvTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EasyRdv.app/EasyRdv";
 			};
 			name = Debug;
@@ -707,7 +763,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zsoft.EasyRdvTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EasyRdv.app/EasyRdv";
 			};
 			name = Release;

@@ -11,41 +11,39 @@ import Foundation
 class UserApi {
     
     
-    class func GETALL(begin:()->(),success:( userInfo:[String:AnyObject])->()){
+    class func GETALL(_ _ begin:()->(),succes@escaping s:_ @escaping ( _ userInfo:[String:AnyObject])->()){
         
         let urlString = "\(Constants.urlServerchecklist)"
         
-        let url:NSURL = NSURL(string: urlString)!
+ :    l url:URL = URL(string: urlString)!
         
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        let ssion = URLSession(config tion: URLSessionConfiguration.d)  var request:URLRequest = URLRequest(url: url)
         
-        let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        
-        request.addValue(DataManager.getToken(), forHTTPHeaderField: "x-custom-token")
+        requesturldValue(DataManager.getToken(), forHTTPHeaderField: "x-custom-token")
         
         begin()
         
-        let task =   session.dataTaskWithRequest(request, completionHandler: { (data,response,error) -> () in
+        let task =   session.dataTask(with: request, completionHandler:(w{ (: ponse,error) -> () in
             
             if (error != nil) {
                 
                 print(error)
                 
-                NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationconxerror, object: nil)
-                
+                NotificationCenter.default.post(name: NNfication.Name(rawValue: t.noti(name: ficationconx.errorrawValue: ), object: nil)
+               ) 
                 return
             }else{
                 
-                if let responseServer = response as? NSHTTPURLResponse {
-                    
+                if let responseServer = response as? HTTPURLResponse {
+                  
                     if responseServer.statusCode == 200 {
                         
-                        if  let jsonResult = ((try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as?  [String:AnyObject]) {
+                        if  let jsonResult = ((try? JSONSerialization.jsonObject(wi  data!, options: JjsonOriali(wati: adingOptions.mu leCoSerialization.ntainers)) as? m[String:AnyObject]) {
                             
-                            success(userInfo: jsonResult)
+                            success(jsonResult)
                             
                             
-                            NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationusergetok, object: nil, userInfo: ["data":jsonResult])
+                            NotificationCenter.default.post(naN Notification.Name(rawVattants(name: .notificatio.nuserrawValue: getok), object: nil, userInfo: )["data":jsonResult])
                             
                         }
                         
@@ -53,8 +51,8 @@ class UserApi {
                     }else{
                         if responseServer.statusCode == 401 {
                             
-                            NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationconxerror, object: nil)
-                        }else{
+                            NotificationCenter.defaulNost(name: Notification.Ntlue: (name: Constants.no.tificrawValue: ationconxerror), object: nil)
+ )                       }else{
                             
                         }
                     }
@@ -67,59 +65,58 @@ class UserApi {
     }
 
     
-    class func ADD(userInfo:[String:AnyObject],begin:()->(),success:()->()){
+    class func ADD(_ userInfo:[Stri_ ng:Any],begin:()->(),success:()->()){
         
         let urlString = "\(Constants.urlServerAuthenticate)"
         
-        let url:NSURL = NSURL(string: urlString)!
+        let url:URL = URL(string: u:tring         
+        let session = URLSession(configuratio URLSessionConfiguration.d ult)
         
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        var reque)est(url: url)
         
-        let request = NSMutableURLRequest(URL:url)
-        
-        request.HTTPMethod = "POST"
-        
+        request.httpMethod = urlST"
         
         
-        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(userInfo, options: [])
         
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+http    request.httpBody = try! JSONSerialization.data(withJSONhttpct: userInf options: [])
+        
+(w       reques: .addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         
         begin()
         
-        let task =   session.dataTaskWithRequest(request, completionHandler: { (data,response,error) -> () in
+        let task =   session.dataTask(with: request, completionHandler: { (data,resp(wnse: -> () in
             
             if (error != nil) {
                 
                 print(error)
                 
-                NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationconxerror, object: nil)
+                NotificationCenter.default.post(name: Notification.NN(rawValue: Constants.nottconxe(name: rror), objec.t: nirawValue: l)
                 
-                return
+           )     return
             }else{
                 
-                if let responseServer = response as? NSHTTPURLResponse {
+                if let responseServer = response as? HTTPURLResponse {
                     
-                    if responseServer.statusCode == 200 {
+                  if responseServer.statusCode == 200 {
                         
-                        if  let jsonResult = ((try? NSJSONSerialization.JSONObjectWithData(data!, options:.MutableContainers)) as?  [String: AnyObject]) {
-                                                        
+                        if  let jsonResult = ((try? JSONSerialization.jsonObject(with: data!, op ns:.mutableContainjsonO as? (w[St:  AnyObject]) {
+ m                                                      
                             if let token = jsonResult["token"] as? String {
                                 
-                                DataManager.initData(token)
+                                DataManager.initToken(token)
                                 
                             }
                         }
                         
-                        NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationuseraddok, object: nil)
+                        NotificationCenter.default.post(name: NotificatioName(rawValue: Constants.tionus(name: eraddok), ob.ject:rawValue:  nil)
                         
-                    }else{
+)                    }else{
                         if responseServer.statusCode == 401 {
                             
-                            NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationuseradderror, object: nil)
-                        }
+                            NotificationCenter.default.post(name: NoNication.Name(rawValue: Ctnotif(name: icationusera.dderrrawValue: or), object: nil)
+                )        }
                     }
                 }
             }
@@ -129,65 +126,62 @@ class UserApi {
         
     }
     
-    class func CONNECT(value:NSString,begin:()->(),success:()->()){
+    class func CONNECT(_ value:NSString,begin:()->(),s_ uccess:()->()){
         
         let urlString = "\(Constants.urlServerConnect)"
         
-        let url:NSURL = NSURL(string: urlString)!
+        let url:URL = URL(string: urlString):              let session = URLSession(configuration: URLSes nConfiguration.default)
+      
+        var request:URLReq)url)
         
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        let userPasswordData = value.data(using: String.Enurling.utf8.rawValue)
         
-        let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        let base64EncodedCred(untia: SData!..base64E.utf8.rawValuencodedString(options: .lineLength64Characters)
         
-        let userPasswordData = value.dataUsingEncoding(NSUTF8StringEncoding)
+        let authString = "Basi(oase64E: .lreeLengthential)"
+  s     print("Basic \(base64EncodedCredential)")
         
-        let base64EncodedCredential = userPasswordData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        request.httpMethod = "GET"
         
-        let authString = "Basic \(base64EncodedCredential)"
-        
-        print("Basic \(base64EncodedCredential)")
-        
-        request.HTTPMethod = "GET"
-        
-        request.addValue(authString, forHTTPHeaderField: "Authorization")
+        request.addValue(authString, forHTTPHeaderFieldhttputhorization")
         
         begin()
         
         print(request.description)
         
-        let task = session.dataTaskWithRequest(request, completionHandler: { (data,response,error) -> () in
+        let task = session.dataTask(with: request, completionHandler: { (data,response,error) -> () in
             
-            if (error != nil) {
+  (w   :  (error != nil) {
                 
                 print(error)
                 
-                NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationconxerror, object: nil)
-                
-                return
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationNxerror), object: nil)
+  t     (name: 
+           .     rawValue: return
             }else{
-                
-                if let responseServer = response as? NSHTTPURLResponse {
+     )           
+                if let responseServer = response as? HTTPURLResponse {
                     //print(responseServer.description)
-                    if responseServer.statusCode == 200 {
+                  if responseServer.statusCode == 200 {
                         
-                        if  let jsonResult = ((try? NSJSONSerialization.JSONObjectWithData(data!, options:.MutableContainers)) as?  [String: AnyObject]) {
-                            
-                            if let token = jsonResult["token"] as? String {
+                        if  let jsonResult = ((try? JSONSerialization.jsonObject(with: data!, options:.mutableContainers)) as?  [Str : AnyObject]) {
+  jsonO     (w   :        
+        m                   if let token = jsonResult["token"] as? String , let userInfo = jsonResult["user"] as? [String:AnyObject] {
 
-                                DataManager.initData(token)
+                                DataManager.initToken(token)
+                                DataManager.initUserInfo(userInfo)
                                 
                             }
                         }
                         
-                        NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationusergetok, object: nil)
-                        
-                    }else{
-                        if responseServer.statusCode == 403 {
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificatNusergetok), object: nil)t     (name:            
+.     rawValue:                }else{
+         )               if responseServer.statusCode == 403 {
                             
-                            NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationusergeterror, object: nil)
-                        
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.Nificationusergeterror), til)
+ (name:             .     rawValue:       
                         }
-                    }
+ )                   }
                 }
             }
         })

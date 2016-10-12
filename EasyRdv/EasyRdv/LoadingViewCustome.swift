@@ -29,10 +29,10 @@ class LoadingViewCustome: UIView {
     }
 
     func setup(){
-        NSBundle.mainBundle().loadNibNamed("LoadingViewCustome", owner: self, options: nil)
+        ndle.main.nmed("LoadingViewCustome", owner: self, options: nil)
         loadingImageView = UIImageView(image: loadingImage)
         self.view.frame = self.bounds
-        self.view.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+        self.view.autoresizingMask = [.flexibleWifth,.flexibleHefght]
         self.view.layer.cornerRadius = 10
         self.addSubview(view)
         addSubview(loadingImageView)
@@ -40,14 +40,14 @@ class LoadingViewCustome: UIView {
     }
     
     func showLoadingIndicator() {
-        loadingImageView.hidden = false
-        self.bringSubviewToFront(loadingImageView)
+        loadingImageView.isHidden = isHialse
+        self.bringSubview(toFront(t loadi: gImageView)
         
         startRefreshing()
     }
     
     func hideLoadingIndicator() {
-        loadingImageView.hidden = true
+        loadingImageView.isHiddisHi = true
         
         stopRefreshing()
         self.removeFromSuperview()
@@ -60,25 +60,25 @@ class LoadingViewCustome: UIView {
         adjustSizeOfLoadingIndicator()
     }
     
-    private func adjustSizeOfLoadingIndicator() {
+    filefileprivate func adjustSizeOfLoadingIndicator() {
         let loadingImageSize = loadingImage?.size
-        loadingImageView.frame = CGRectMake(CGRectGetWidth(frame)/2 - loadingImageSize!.width/2, CGRectGetHeight(frame)/2-loadingImageSize!.height/2, loadingImageSize!.width, loadingImageSize!.height)
+        loadingImageView.frame = CGRect(x: frame.w/2 hgImageSize!.width/2, y: frame.hey: frame.heingte!.height/2, width: loadingImagwidth: eSize!.width, height: loaheight: dingImageSize!.height)
         
     }
     
     // Start the rotating animation
-    private func startRefreshing() {
+    filfileeprivate func startRefreshing() {
         let animation = CABasicAnimation(keyPath: "transform.rotation.z")
-        animation.removedOnCompletion = false
+        animationisRisRemovedOnCompletion = false
         animation.toValue = M_PI * 2.0
         animation.duration = 0.8
-        animation.cumulative = true
+        animatiisCn.isCumulative = true
         animation.repeatCount = Float.infinity
-        loadingImageView.layer.addAnimation(animation, forKey: "rotationAnimation")
+        loadingImageView.laydmation, forKey: "rotationAnimation")
     }
     
     // Stop the rotating animation
-    private func stopRefreshing() {
+    filefileprivate func stopRefreshing() {
         loadingImageView.layer.removeAllAnimations()
     }
 }

@@ -11,40 +11,42 @@ import Foundation
 
 class EventApi {
     
-    class func ADD(calendarId:String,eventId:String){
+    class func ADD(_ calendarId:String,eventId:String){
         
         let urlString = "\(Constants.urlServerUpdateEvent)\(eventId)&\(calendarId)"
      
-        let url:NSURL = NSURL(string: "\(urlString)")!
+        let url:URL = URL(string: "\(urlString)")!
         
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        let session = URLSession(configuration: URLSessionConfiguration.default)
         
-        let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        var request:URLRequest = URLRequest(url: url)
         
-        request.addValue(Constants.token, forHTTPHeaderField: "x-custom-token")
+        request.addValue(DataManager.getToken(), forHTTPHeaderField: "x-custom-token")
         
-        let task =   session.dataTaskWithRequest(request, completionHandler: { (data,response,error) -> () in
+        let task =   session.dataTask(with: request, completionHandler: { (data,response,error) -> () in
             
             if (error != nil) {
                 
                 print(error)
                 
-                NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationeventconxerror, object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationeventconxerror), object: nil)
                 
                 return
+                
             }else{
                 
-                if let responseServer = response as? NSHTTPURLResponse {
+                if let responseServer = response as? HTTPURLResponse {
                     
                     if responseServer.statusCode == 200 {
                         
-                        NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationeventupdateok, object: nil)
-                        
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationeventupdateok), object: nil)
                         
                     }else{
+                        
                         if responseServer.statusCode == 401 {
                             
-                            NSNotificationCenter.defaultCenter().postNotificationName(Constants.notificationeventupdateerror, object: nil)
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationeventupdateerror), object: nil)
+                        
                         }else{
                             
                         }

@@ -13,6 +13,8 @@ class UserSingleton {
     
     var user = User()
     
+    var userApp = UserApp()
+    
     class var sharedInstance : UserSingleton {
         
         struct Singleton {

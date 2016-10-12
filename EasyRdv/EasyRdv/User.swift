@@ -26,7 +26,7 @@ class User {
        self.adress = nil
     }
     
-    func initWithDic(userInfo:[String:AnyObject]){
+    func initWithDic(_ _ userInfo:[String:AnyObject]){
       
         self.nameUser = userInfo["summary"] as? String
         self.calendarId = userInfo["id"] as? String

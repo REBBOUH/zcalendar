@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 
 struct Constants {
@@ -16,9 +16,9 @@ struct Constants {
     
     static let password:String = "aberni"
     
-    static let urlServer:String = "http://192.168.12.44:8080"
+   // static let urlServer:String = "http://192.168.12.44:8080"
     
-  // static let urlServer:String = "http://localhost:8080"
+   static let urlServer:String = "http://localhost:8080"
     
     static let urlServercheck:String = "\(Constants.urlServer)/api/calendar/check/"
     
@@ -30,7 +30,7 @@ struct Constants {
     
     static let urlServerConnect:String = "\(Constants.urlServer)/api/connect"
     
-    static let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoieWFzc2lyYWJlcm5pQGFiZXJuaXpzb2Z0LmZyIiwicGFzc3dvcmQiOiJ0ZXN0MSIsImlhdCI6MTQ3NTU5NzE1NX0.dCPq1MTzjeql6mn46-_I9Rj8dwrcMf5fQuoKo7HimEM"
+//    static let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoieWFzc2lyYWJlcm5pQGFiZXJuaXpzb2Z0LmZyIiwicGFzc3dvcmQiOiJ0ZXN0MSIsImlhdCI6MTQ3NTU5NzE1NX0.dCPq1MTzjeql6mn46-_I9Rj8dwrcMf5fQuoKo7HimEM"
     
     
 //    static let urlServercheck:String = "http://192.168.15.247:8080/check/"
@@ -54,47 +54,51 @@ struct Constants {
     
     static let notificationuseraddok:String = "notificationuseraddok"
     static let notificationuseradderror:String = "notificationuseradderror"
+    
+    static let titleCell:[[String]] = [[UserSingleton.sharedInstance.userApp.name!,"Mes rendez-vous"],["Nous contacter"]]
+    static let SectionCell:[String] = ["MON ESPACE","A PROPOS"]
+    static let imageCell:[[String]] = [["user","calendar"],["phone"]]
 }
 
-extension NSNotificationCenter {
+extension NotificationCenter {
     
-    func setObserver(observer: AnyObject, selector: Selector, name: String?, object: AnyObject?) {
-        NSNotificationCenter.defaultCenter().removeObserver(observer, name: name, object: object)
-        NSNotificationCenter.defaultCenter().addObserver(observer, selector: selector, name: name, object: object)
+    func setObserver(_ observer: AnyObject, selector: Selector, name: String?, object: AnyObject?) {
+        NotificationCenter.default.removeObserver(observer, name: Notification.Name(name!), object: object)
+        NotificationCenter.default.addObserver(observer, selector: selector, name: Notification.Name(name!), object: object)
     }
 }
 
-extension NSDateFormatter {
+extension DateFormatter {
     convenience init(dateFormat: String) {
         self.init()
         self.dateFormat =  dateFormat
-        self.timeZone = NSTimeZone.localTimeZone()
+        self.timeZone = TimeZone.autoupdatingCurrent
     }
 }
 
-extension NSDate {
+extension Date {
     
     var customFormatted: String {
-        let custom = NSDateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
-        custom.timeZone = NSTimeZone.localTimeZone()
-        return custom.stringFromDate(self)
+        let custom = DateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
+        custom.timeZone = TimeZone.autoupdatingCurrent
+        return custom.string(from: self)
     }
     
     var asDateString :String {
-        let custom = NSDateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
-        custom.timeZone = NSTimeZone.localTimeZone()
-         custom.locale = NSLocale(localeIdentifier: "fr_FR")
-        custom.dateStyle = NSDateFormatterStyle.FullStyle
-        custom.timeStyle = NSDateFormatterStyle.ShortStyle
+        let custom = DateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
+        custom.timeZone = TimeZone.autoupdatingCurrent
+         custom.locale = Locale(identifier: "fr_FR")
+        custom.dateStyle = DateFormatter.Style.full
+        custom.timeStyle = DateFormatter.Style.short
        
         
-        return custom.stringFromDate(self)
+        return custom.string(from: self)
     }
 }
 extension String {
     var isBlank: Bool {
         get {
-            let trimmed = stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let trimmed = trimmingCharacters(in: CharacterSet.whitespaces)
             return trimmed.isEmpty
         }
     }
@@ -102,8 +106,8 @@ extension String {
     //Validate Email
     var isEmail: Bool {
         do {
-            let regex = try NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .CaseInsensitive)
-            return regex.firstMatchInString(self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
+            let regex = try NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
+            return regex.firstMatch(in: self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
         } catch {
             return false
         }
@@ -112,28 +116,45 @@ extension String {
     //validate PhoneNumber
     var isPhoneNumber: Bool {
         
-        let charcter  = NSCharacterSet(charactersInString: "+0123456789").invertedSet
+        let charcter  = CharacterSet(charactersIn: "+0123456789").inverted
         
         var filtered:NSString!
         
-        let inputString:NSArray = self.componentsSeparatedByCharactersInSet(charcter)
+        let inputString:NSArray = self.components(separatedBy: charcter) as NSArray
         
-        filtered = inputString.componentsJoinedByString("") as NSString!
+        filtered = inputString.componentsJoined(by: "")  as NSString!
         
-        return  self == filtered
+        return  self == "\(filtered)"
         
         
     }
     
-    var asDate: NSDate? {
-       let custom = NSDateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
-        return custom.dateFromString(self)
+    var asDate: Date {
+       let custom = DateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZZZZ")
+        return custom.date(from: self)!
     }
     
-    func asDateFormatted(with dateFormat: String) -> NSDate? {
-        return NSDateFormatter(dateFormat: dateFormat).dateFromString(self)
+    func asDateFormatted(with dateFormat: String) -> Date? {
+        return DateFormatter(dateFormat: dateFormat).date(from: self)
     }
 
 
 }
+extension Notification.Name {
+    static let notificationusergetok = NSNotification.Name("notificationusergetok")
+    static let notificationusergeterror =  NSNotification.Name("notificationusergeterror")
+    //event notifcation
+    static let notificationcalendarok =  NSNotification.Name("notificationcalendarok")
+    static let notificationcalendarerror =  NSNotification.Name("notificationcalendarerror")
+    static let notificationeventupdateok =  NSNotification.Name("notificationeventupdateok")
+    static let notificationeventupdateokreload =  NSNotification.Name("notificationeventupdateokreload")
+    static let notificationeventupdateerror =  NSNotification.Name("notificationeventupdateerror")
+    static let notificationconxerror =  NSNotification.Name("notificationconxerror")
+    static let notificationeventconxerror =  NSNotification.Name("notificationeventconxerror")
+    
+    static let notificationuseraddok =  NSNotification.Name("notificationuseraddok")
+    static let notificationuseradderror =  NSNotification.Name("notificationuseradderror")
+    
+}
+
 

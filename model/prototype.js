@@ -9,6 +9,7 @@ userInfo  = function(userJson){
   this.id = userJson.id;
   this.mail = userJson.mail;
   this.number = userJson.number;
+  this.name = userJson.name;
   this.isClient = userJson.isClient;
    return this;
    console.log("userInfo prototype : **** "+this);
