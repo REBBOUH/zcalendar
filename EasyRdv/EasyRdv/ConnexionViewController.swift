@@ -48,11 +48,11 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         
         NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow.rawValue, object: nil)
         NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide.rawValue, object: nil)
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationusergetok, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationusergetok.rawValue, object: nil);
         
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationconxerror, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationconxerror.rawValue, object: nil);
         
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationusergeterror, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationusergeterror.rawValue, object: nil);
         
         // Do any additional setup after loading the view.
     }
@@ -185,7 +185,7 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         } )
     }
     
-  @objc  func  handleNotifications(notification:Notification) {
+func handleNotifications(notification:NSNotification) {
         if notification.name == .notificationusergetok {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
@@ -216,8 +216,8 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isUserInteractionEnabled = true
-                let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
-                alerview.show()
+                let alerview = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
+               self.present(alerview, animated: true, completion: {})
             })
         }
         
@@ -226,8 +226,10 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isUserInteractionEnabled = true
-                let alerview = UIAlertView(title: "erreur de compte",message: "ce compte n'existe pas  ", delegate: self, cancelButtonTitle: "ok")
-                alerview.show()
+    
+                
+                let alerview = UIAlertController(title: "erreur de compte",message: "ce compte n'existe pas  ", preferredStyle: .alert)
+                self.present(alerview, animated: true, completion: {})
             })
         }
         
@@ -237,7 +239,7 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
     }
     
     
-    func keyboardWillShow(_ sender: Notification) {
+    func keyboardWillShow(_ sender: NSNotification) {
         
         let dict:NSDictionary = (sender as NSNotification).userInfo! as NSDictionary
         if !beginEdit {
@@ -259,7 +261,7 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         
     }
     
-    func keyboardWillHide(_ sender: Notification) {
+    func keyboardWillHide(_ sender: NSNotification) {
         
         let dict:NSDictionary = (sender as NSNotification).userInfo! as NSDictionary
         let s:NSValue = dict.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue;

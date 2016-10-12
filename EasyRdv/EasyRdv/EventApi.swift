@@ -29,7 +29,7 @@ class EventApi {
                 
                 print(error)
                 
-                NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationeventconxerror), object: nil)
+                NotificationCenter.default.post(name:.notificationeventconxerror, object: nil)
                 
                 return
                 
@@ -39,13 +39,13 @@ class EventApi {
                     
                     if responseServer.statusCode == 200 {
                         
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationeventupdateok), object: nil)
+                        NotificationCenter.default.post(name:.notificationeventupdateok, object: nil)
                         
                     }else{
                         
                         if responseServer.statusCode == 401 {
                             
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationeventupdateerror), object: nil)
+                            NotificationCenter.default.post(name:.notificationeventupdateerror, object: nil)
                         
                         }else{
                             

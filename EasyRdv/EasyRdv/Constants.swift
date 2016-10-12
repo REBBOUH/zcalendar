@@ -41,19 +41,19 @@ struct Constants {
     
     //MARK: - Notification String
     // user notification
-    static let notificationusergetok:String = "notificationusergetok"
-    static let notificationusergeterror:String = "notificationusergeterror"
+    static let notificationusergetok = NSNotification.Name("notificationusergetok")
+    static let notificationusergeterror =  NSNotification.Name("notificationusergeterror")
     //event notifcation
-    static let notificationcalendarok:String = "notificationcalendarok"
-    static let notificationcalendarerror:String = "notificationcalendarerror"
-    static let notificationeventupdateok:String = "notificationeventupdateok"
-    static let notificationeventupdateokreload:String = "notificationeventupdateokreload"
-    static let notificationeventupdateerror:String = "notificationeventupdateerror"
-    static let notificationconxerror:String = "notificationconxerror"
-    static let notificationeventconxerror:String = "notificationeventconxerror"
+    static let notificationcalendarok =  NSNotification.Name("notificationcalendarok")
+    static let notificationcalendarerror =  NSNotification.Name("notificationcalendarerror")
+    static let notificationeventupdateok =  NSNotification.Name("notificationeventupdateok")
+    static let notificationeventupdateokreload =  NSNotification.Name("notificationeventupdateokreload")
+    static let notificationeventupdateerror =  NSNotification.Name("notificationeventupdateerror")
+    static let notificationconxerror =  NSNotification.Name("notificationconxerror")
+    static let notificationeventconxerror =  NSNotification.Name("notificationeventconxerror")
     
-    static let notificationuseraddok:String = "notificationuseraddok"
-    static let notificationuseradderror:String = "notificationuseradderror"
+    static let notificationuseraddok =  NSNotification.Name("notificationuseraddok")
+    static let notificationuseradderror =  NSNotification.Name("notificationuseradderror")
     
     static let titleCell:[[String]] = [[UserSingleton.sharedInstance.userApp.name!,"Mes rendez-vous"],["Nous contacter"]]
     static let SectionCell:[String] = ["MON ESPACE","A PROPOS"]

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Foundation
 
 
 class CreerCompteViewController: UIViewController,UITextFieldDelegate {
@@ -51,14 +51,14 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
         
         self.view.addGestureRecognizer(TapGestureRecognizer)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow.rawValue, object: nil)
-        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillShow(sender:)), name: NSNotification.Name.UIKeyboardWillShow.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillHide(sender:)), name: NSNotification.Name.UIKeyboardWillHide.rawValue, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications(_:)), name: Constants.notificationuseraddok, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications), name: Constants.notificationuseraddok.rawValue, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications(_:)), name: Constants.notificationuseradderror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications), name: Constants.notificationuseradderror.rawValue, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications), name: Constants.notificationconxerror.rawValue, object: nil)
         // Do any additional setup after loading the view.
     }
     
@@ -173,7 +173,7 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
     }
     
     
-    func keyboardWillShow(_ sender: Notification) {
+    func keyboardWillShow(sender:Notification) {
         let dict:NSDictionary = (sender as NSNotification).userInfo! as NSDictionary
         if !beginEdit {
             let s:NSValue = dict.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue;
@@ -195,7 +195,7 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
         
     }
     
-    func keyboardWillHide(_ sender: Notification) {
+    func keyboardWillHide(sender: Notification) {
         let dict:NSDictionary = (sender as NSNotification).userInfo! as NSDictionary
         let s:NSValue = dict.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue;
         let rect :CGRect = s.cgRectValue;
@@ -239,9 +239,9 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isMultipleTouchEnabled = true
-                let viewAlert = UIAlertController(title: "errorr",message: "cet utilisateur existe deja  ", delegate: self, preferredStyle: .alert)
-                
-                 self.present(alerview, animated: true, completion: {})
+            
+                let viewAlert = UIAlertController(title: "errorr",message: "cet utilisateur existe deja  ", preferredStyle: .alert)
+                self.present(viewAlert, animated: true, completion: {})
             })
         }
         if notification.name == .notificationconxerror {
@@ -249,8 +249,8 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isMultipleTouchEnabled = true
-                let viewAlert = UIAlertController(title: "errorr",message: "erreur de connexion  ", delegate: self,preferredStyle: .alert)
-               self.present(alerview, animated: true, completion: {})
+                let viewAlert = UIAlertController(title: "errorr",message: "erreur de connexion  ",preferredStyle: .alert)
+               self.present(viewAlert, animated: true, completion: {})
             })
         }
         

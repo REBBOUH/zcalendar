@@ -22,11 +22,11 @@ class PriseRdvController: UIViewController {
         
         
 
-        NotificationCenter.default.setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateok, object: nil)
-        NotificationCenter.default.setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateerror, object: nil)
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateok.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateerror.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror.rawValue, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventconxerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventconxerror.rawValue, object: nil)
         
         DispatchQueue.main.async(execute: {
             self.dateField.text = CalendarSingleton.sharedInstance.event.start?.asDateString
@@ -96,7 +96,7 @@ class PriseRdvController: UIViewController {
                     
                     let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
                         self.navigationController!.popViewController(animated: true)
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationeventupdateokreload), object: nil)
+                        NotificationCenter.default.post(name:.notificationeventupdateokreload ,object: nil)
                     })
                     
                     viewAlert.addAction(defaultAction)
@@ -111,8 +111,8 @@ class PriseRdvController: UIViewController {
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isMultipleTouchEnabled = true
-                let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
-                alerview.show()
+                let viewAlert = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
+                self.present(viewAlert, animated: true, completion: {})
             })
         }
         
@@ -121,8 +121,9 @@ class PriseRdvController: UIViewController {
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isMultipleTouchEnabled = true
-                let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
-                alerview.show()
+                let alerview = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
+                self.present(alerview, animated: true, completion: {})
+
             })
         }
         

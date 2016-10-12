@@ -45,9 +45,9 @@ class UserTableViewController: UITableViewController {
         
         newUpdate()
         
-        NotificationCenter.default.setObserver(self, selector: #selector(UserTableViewController.handleNotifications(notification:)), name: Constants.notificationusergetok, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(UserTableViewController.handleNotifications(notification:)), name: Constants.notificationusergetok.rawValue, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(UserTableViewController.handleNotifications(notification:)), name: Constants.notificationconxerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(UserTableViewController.handleNotifications(notification:)), name: Constants.notificationconxerror.rawValue, object: nil)
         
         
     }

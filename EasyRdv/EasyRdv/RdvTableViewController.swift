@@ -39,13 +39,13 @@ class RdvTableViewController: UITableViewController {
                 
         })
 
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarok, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarok.rawValue, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarerror.rawValue, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventupdateokreload, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventupdateokreload.rawValue, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror.rawValue, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -129,9 +129,10 @@ class RdvTableViewController: UITableViewController {
                     
                     if self.calender?.listCalandar?.count == 0 {
                         
-                        let alerview = UIAlertView(title: "Rendez-vous",message: "pas de rendez-vous disponible", delegate: self, cancelButtonTitle: "ok")
-                        alerview.show()
                         
+                        let alerview = UIAlertController(title: "Rendez-vous",message: "pas de rendez-vous disponible", preferredStyle: .alert)
+                        self.present(alerview, animated: true, completion: {})
+
                     }else{
                         
                         self.tableView.reloadData()
@@ -147,9 +148,10 @@ class RdvTableViewController: UITableViewController {
                 self.loadingView.hideLoadingIndicator()
                 
                 self.view.isUserInteractionEnabled = true
-                let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
-                alerview.show()
-                
+               
+                let alerview = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
+                self.present(alerview, animated: true, completion: {})
+
             })
         }
         
@@ -173,10 +175,10 @@ class RdvTableViewController: UITableViewController {
             DispatchQueue.main.async(execute: {
                 
                 self.loadingView.hideLoadingIndicator()
-                let alerview = UIAlertView(title: "errorr",message: "erreur de connexion ", delegate: self, cancelButtonTitle: "ok")
-                alerview.show()
                 
-                
+                let alerview = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
+                self.present(alerview, animated: true, completion: {})
+
             })
             
         }

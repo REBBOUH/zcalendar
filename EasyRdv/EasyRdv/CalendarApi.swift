@@ -35,7 +35,7 @@ class CalendarApi {
                 
                 print(error)
             
-                NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationconxerror), object: nil)
+                NotificationCenter.default.post(name: .notificationconxerror, object: nil)
                 
                 return
             }else{
@@ -50,18 +50,18 @@ class CalendarApi {
                             
                             success(calendar)
                             
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationcalendarok), object: nil, userInfo: ["data":jsonResult])
+                            NotificationCenter.default.post(name:.notificationcalendarok, object: nil, userInfo: ["data":jsonResult])
                             
                         }else{
                             
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationcalendarok), object: nil)
+                            NotificationCenter.default.post(name:.notificationcalendarok, object: nil)
                             
                         }
                         
                     }else{
                         if responseServer.statusCode == 401 {
                             
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.notificationcalendarerror), object: nil)
+                            NotificationCenter.default.post(name:.notificationcalendarerror, object: nil)
                             
                         }else{
                             
