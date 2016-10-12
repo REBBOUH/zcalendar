@@ -83,7 +83,7 @@ class PriseRdvController: UIViewController {
      */
     // MARK - handle notification
     
-    func  handleNotifications(_ notification:Notification) {
+ @objc func  handleNotifications(_ notification:Notification) {
         if notification.name == .notificationeventupdateok {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             

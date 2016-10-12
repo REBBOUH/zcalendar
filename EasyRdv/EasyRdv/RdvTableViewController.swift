@@ -109,7 +109,7 @@ class RdvTableViewController: UITableViewController {
     
     // MARK - handle notification
     
-    func  handleNotifications(_ notification:Notification) {
+ @objc   func  handleNotifications(_ notification:Notification) {
         if notification.name == .notificationcalendarok {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             

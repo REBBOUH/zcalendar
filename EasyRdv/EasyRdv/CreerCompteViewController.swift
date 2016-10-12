@@ -239,8 +239,9 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isMultipleTouchEnabled = true
-                let alerview = UIAlertView(title: "errorr",message: "cet utilisateur existe deja  ", delegate: self, cancelButtonTitle: "ok")
-                alerview.show()
+                let viewAlert = UIAlertController(title: "errorr",message: "cet utilisateur existe deja  ", delegate: self, preferredStyle: .alert)
+                
+                 self.present(alerview, animated: true, completion: {})
             })
         }
         if notification.name == .notificationconxerror {
@@ -248,8 +249,8 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isMultipleTouchEnabled = true
-                let alerview = UIAlertView(title: "errorr",message: "erreur de connexion  ", delegate: self, cancelButtonTitle: "ok")
-                alerview.show()
+                let viewAlert = UIAlertController(title: "errorr",message: "erreur de connexion  ", delegate: self,preferredStyle: .alert)
+               self.present(alerview, animated: true, completion: {})
             })
         }
         

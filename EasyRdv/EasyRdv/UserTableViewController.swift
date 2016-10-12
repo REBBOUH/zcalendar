@@ -130,7 +130,7 @@ class UserTableViewController: UITableViewController {
     
     // MARK - handle notification
     
-    func  handleNotifications(notification:NSNotification) {
+ @objc   func  handleNotifications(notification:NSNotification) {
         
         if notification.name == .notificationusergetok {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true

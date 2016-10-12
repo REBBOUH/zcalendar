@@ -25,11 +25,10 @@ class ObjectAnimationDismiss:NSObject,UIViewControllerAnimatedTransitioning{
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning){
         // 1
         guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-            let containerView:UIView = transitionContext.containerView,
             let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
                 return
         }
-        
+        let container:UIView = transitionContext.containerView
         // 2
         let initialFrame = originFrame
         _ = transitionContext.finalFrame(for: toVC)        // 3
@@ -39,8 +38,8 @@ class ObjectAnimationDismiss:NSObject,UIViewControllerAnimatedTransitioning{
         snapshot?.layer.borderWidth = 1
         fromView = fromVC
         snapshot?.layer.masksToBounds = true
-        containerView.addSubview(toVC.view)
-        containerView.addSubview(fromVC.view)
+        container.addSubview(toVC.view)
+        container.addSubview(fromVC.view)
         //toVC.view.hidden = true
         
         let size = toVC.view.frame.size

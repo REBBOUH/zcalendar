@@ -185,7 +185,7 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         } )
     }
     
-    func  handleNotifications(notification:Notification) {
+  @objc  func  handleNotifications(notification:Notification) {
         if notification.name == .notificationusergetok {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             

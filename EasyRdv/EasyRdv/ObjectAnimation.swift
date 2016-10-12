@@ -23,11 +23,11 @@ class ObjectAnimation: NSObject,UIViewControllerAnimatedTransitioning{
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning){
         // 1
         guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-            let containerView:UIView = transitionContext.containerView,
+            
             let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
                 return
         }
-        
+        let containerView:UIView = transitionContext.containerView
         // 2
         let initialFrame = originFrame
         _ = transitionContext.finalFrame(for: toVC)        // 3
