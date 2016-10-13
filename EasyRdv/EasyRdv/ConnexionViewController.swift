@@ -42,17 +42,17 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         
         //self.transitioningDelegate = self
         
-       
         
-                loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
+        
+        loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
         
         NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow.rawValue, object: nil)
         NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide.rawValue, object: nil)
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationusergetok.rawValue, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handlerOfNotification), name:Constants.notificationusergetok.rawValue, object: nil);
         
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationconxerror.rawValue, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handlerOfNotification), name:Constants.notificationconxerror.rawValue, object: nil);
         
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handleNotifications(notification:)), name:Constants.notificationusergeterror.rawValue, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handlerOfNotification), name:Constants.notificationusergeterror.rawValue, object: nil);
         
         // Do any additional setup after loading the view.
     }
@@ -185,11 +185,12 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         } )
     }
     
-func handleNotifications(notification:NSNotification) {
+    //MARK : Notification handler
+    func handlerOfNotification(_ notification:NSNotification) {
         if notification.name == .notificationusergetok {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
-           DispatchQueue.global(qos: .default).async(execute: {
+            DispatchQueue.global(qos: .default).async(execute: {
                 
                 DispatchQueue.main.async(execute: {
                     self.loadingView.hideLoadingIndicator()
@@ -217,7 +218,7 @@ func handleNotifications(notification:NSNotification) {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isUserInteractionEnabled = true
                 let alerview = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
-               self.present(alerview, animated: true, completion: {})
+                self.present(alerview, animated: true, completion: {})
             })
         }
         
@@ -226,7 +227,7 @@ func handleNotifications(notification:NSNotification) {
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isUserInteractionEnabled = true
-    
+                
                 
                 let alerview = UIAlertController(title: "erreur de compte",message: "ce compte n'existe pas  ", preferredStyle: .alert)
                 self.present(alerview, animated: true, completion: {})
@@ -239,7 +240,7 @@ func handleNotifications(notification:NSNotification) {
     }
     
     
-    func keyboardWillShow(_ sender: NSNotification) {
+    func keyboardWillShow(_ sender:Notification) {
         
         let dict:NSDictionary = (sender as NSNotification).userInfo! as NSDictionary
         if !beginEdit {
@@ -284,6 +285,7 @@ func handleNotifications(notification:NSNotification) {
      // Pass the selected object to the new view controller.
      }
      */
-    }
+}
+
 
 
