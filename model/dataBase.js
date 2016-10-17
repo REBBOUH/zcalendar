@@ -76,7 +76,7 @@ module.exports.DataBaseModule  = function(){
 
 						if (!user) {
 
-							collection.insertOne({"mail":userInfo.mail,"password":userInfo.password},{isolated:1 },function(err,result){
+							collection.insertOne({"mail":userInfo.mail,"password":userInfo.password},{isolated:1,unique: true },function(err,result){
 
 								if(err) {
 

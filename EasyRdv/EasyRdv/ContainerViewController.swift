@@ -173,13 +173,15 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
     }
 }
 
-private extension UIStoryboard {
+ extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
     
     class func leftViewController() -> MenuViewController! {
         return mainStoryboard().instantiateViewController(withIdentifier: "menuview") as? MenuViewController
     }
-    
+    class func connexionViewController() -> ConnexionViewController! {
+        return mainStoryboard().instantiateViewController(withIdentifier: "connexionview") as? ConnexionViewController
+    }
     
     
     class func centerViewController() -> UINavigationController! {

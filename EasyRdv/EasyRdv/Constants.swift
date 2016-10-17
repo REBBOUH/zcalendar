@@ -16,9 +16,9 @@ struct Constants {
     
     static let password:String = "aberni"
     
-   // static let urlServer:String = "http://192.168.12.44:8080"
+    static let urlServer:String = "http://192.168.15.180:8080"
     
-   static let urlServer:String = "http://localhost:8080"
+   //static let urlServer:String = "http://localhost:8080"
     
     static let urlServercheck:String = "\(Constants.urlServer)/api/calendar/check/"
     
@@ -42,6 +42,7 @@ struct Constants {
     //MARK: - Notification String
     // user notification
     static let notificationusergetok = NSNotification.Name("notificationusergetok")
+    static let notificationusergetallok = NSNotification.Name("notificationusergetallok")
     static let notificationusergeterror =  NSNotification.Name("notificationusergeterror")
     //event notifcation
     static let notificationcalendarok =  NSNotification.Name("notificationcalendarok")
@@ -55,16 +56,18 @@ struct Constants {
     static let notificationuseraddok =  NSNotification.Name("notificationuseraddok")
     static let notificationuseradderror =  NSNotification.Name("notificationuseradderror")
     
-    static let titleCell:[[String]] = [[UserSingleton.sharedInstance.userApp.name!,"Mes rendez-vous"],["Nous contacter"]]
-    static let SectionCell:[String] = ["MON ESPACE","A PROPOS"]
-    static let imageCell:[[String]] = [["user","calendar"],["phone"]]
+    static let titleCell:[[String]] = [["Accueil"],[UserSingleton.sharedInstance.userApp.name!,"Mes rendez-vous"],["Nous contacter"],["Déconnexion"]]
+    static let SectionCell:[String] = ["","MON ESPACE","A PROPOS",""]
+    static let imageCell:[[String]] = [["accueil"],["user","calendar"],["phone"],["shutdown"]]
+    
+    
 }
 
 extension NotificationCenter {
     
-    func setObserver(_ observer: AnyObject, selector: Selector, name: String?, object: AnyObject?) {
-        NotificationCenter.default.removeObserver(observer, name: Notification.Name(name!), object: object)
-        NotificationCenter.default.addObserver(observer, selector: selector, name: Notification.Name(name!), object: object)
+    func setObserver(_ observer: AnyObject, selector: Selector, name: Notification.Name?, object: AnyObject?) {
+        NotificationCenter.default.removeObserver(observer, name: name, object: object)
+        NotificationCenter.default.addObserver(observer, selector: selector, name: name, object: object)
     }
 }
 
@@ -124,7 +127,8 @@ extension String {
         
         filtered = inputString.componentsJoined(by: "")  as NSString!
         
-        return  self == "\(filtered)"
+        
+        return  self == "\(filtered.description)"
         
         
     }
@@ -142,6 +146,7 @@ extension String {
 }
 extension Notification.Name {
     static let notificationusergetok = NSNotification.Name("notificationusergetok")
+     static let notificationusergetallok = NSNotification.Name("notificationusergetallok")
     static let notificationusergeterror =  NSNotification.Name("notificationusergeterror")
     //event notifcation
     static let notificationcalendarok =  NSNotification.Name("notificationcalendarok")
@@ -154,7 +159,9 @@ extension Notification.Name {
     
     static let notificationuseraddok =  NSNotification.Name("notificationuseraddok")
     static let notificationuseradderror =  NSNotification.Name("notificationuseradderror")
+    static let removefromUserCalendar =  NSNotification.Name("removefromUserCalendar")
     
 }
+
 
 

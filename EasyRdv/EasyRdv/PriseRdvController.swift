@@ -21,12 +21,12 @@ class PriseRdvController: UIViewController {
         loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
         
         
-
-        NotificationCenter.default.setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateok.rawValue, object: nil)
-        NotificationCenter.default.setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: Constants.notificationeventupdateerror.rawValue, object: nil)
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror.rawValue, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventconxerror.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: .notificationeventupdateok, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(PriseRdvController.handleNotifications(_:)), name: .notificationeventupdateerror, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: .notificationconxerror, object: nil)
+        
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: .notificationeventconxerror, object: nil)
         
         DispatchQueue.main.async(execute: {
             self.dateField.text = CalendarSingleton.sharedInstance.event.start?.asDateString
@@ -83,11 +83,11 @@ class PriseRdvController: UIViewController {
      */
     // MARK - handle notification
     
- @objc func  handleNotifications(_ notification:Notification) {
+    @objc func  handleNotifications(_ notification:Notification) {
         if notification.name == .notificationeventupdateok {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
-             DispatchQueue.global(qos: .default).async(execute: {
+            DispatchQueue.global(qos: .default).async(execute: {
                 
                 DispatchQueue.main.async(execute: {
                     self.loadingView.hideLoadingIndicator()
@@ -111,8 +111,9 @@ class PriseRdvController: UIViewController {
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isMultipleTouchEnabled = true
-                let viewAlert = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
-                self.present(viewAlert, animated: true, completion: {})
+                self.afficheAlert(title: "errorr",message: "erreur de connexion ", handleFunction: {
+                    
+                })
             })
         }
         
@@ -121,14 +122,16 @@ class PriseRdvController: UIViewController {
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isMultipleTouchEnabled = true
-                let alerview = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
-                self.present(alerview, animated: true, completion: {})
-
+                
+                self.afficheAlert(title: "errorr",message: "erreur de connexion ", handleFunction: {
+                    
+                })
+                
             })
         }
         
         
-        NotificationCenter.default.removeObserver(notification.name)
+        NotificationCenter.default.removeObserver(self, name: notification.name, object: nil)
         
     }
     

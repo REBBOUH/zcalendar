@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,9 +26,8 @@
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="ceT-Db-yQ6" secondAttribute="bottom" constant="224" id="CVd-J5-B1m"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ceT-Db-yQ6" secondAttribute="leading" id="DRU-yP-3Kk"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ceT-Db-yQ6" secondAttribute="leading" id="cxM-H6-Htg"/>
-                            <constraint firstItem="ceT-Db-yQ6" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="343:667" id="hJt-a4-FUd"/>
-                            <constraint firstItem="ceT-Db-yQ6" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="157" id="nhj-VU-yle"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ceT-Db-yQ6" secondAttribute="trailing" id="qRU-ft-5Ai"/>
+                            <constraint firstItem="ceT-Db-yQ6" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="qkt-K5-Mvz"/>
                         </constraints>
                     </view>
                 </viewController>

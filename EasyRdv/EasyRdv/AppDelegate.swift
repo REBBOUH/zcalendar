@@ -18,24 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let user = DataManager.getUserInfo() as UserApp
+       
         if ( DataManager.getToken() != "" && user.name != nil) {
             
             UserSingleton.sharedInstance.userApp = user
-
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let navigationController  = mainStoryboard.instantiateViewController(withIdentifier: "calendarlist") as! UINavigationController
             
-            self.window?.rootViewController = navigationController
-            
-            self.window?.makeKeyAndVisible()
-            
-//            window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//            
-//            let containerViewController = ContainerViewController()
-//            
-//            window!.rootViewController = containerViewController
-//            window!.makeKeyAndVisible()
+        switchViewControllerToUser()
         }
         return true
     }
@@ -126,6 +114,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
+    }
+    func switchViewControllerToUser() {
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let navigationController  = mainStoryboard.instantiateViewController(withIdentifier: "calendarlist")
+        
+        // let connexionController = UIStoryboard.connexionViewController()
+        
+        self.window?.rootViewController = navigationController
+        
+        self.window?.makeKeyAndVisible()
+        
+    }
+    
+    func switchBack() {
+        
+        // switch back to view controller 1
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let nav = storyboard.instantiateViewController(withIdentifier: "connexionview")
+        
+        self.window?.rootViewController = nav
+        self.window?.makeKeyAndVisible()
     }
     
 }

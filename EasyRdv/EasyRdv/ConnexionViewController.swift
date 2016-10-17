@@ -40,19 +40,16 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         
         self.password.delegate = self
         
-        //self.transitioningDelegate = self
-        
-        
         
         loadingView = LoadingViewCustome(frame: CGRect(origin: CGPoint(x:self.view.frame.midX - 100 ,y:self.view.frame.midY), size: CGSize(width: 200, height: 200)))
         
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow.rawValue, object: nil)
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide.rawValue, object: nil)
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handlerOfNotification), name:Constants.notificationusergetok.rawValue, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handlerOfNotification), name:.notificationusergetok, object: nil);
         
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handlerOfNotification), name:Constants.notificationconxerror.rawValue, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handlerOfNotification), name:.notificationconxerror, object: nil);
         
-        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handlerOfNotification), name:Constants.notificationusergeterror.rawValue, object: nil);
+        NotificationCenter.default.setObserver(self, selector: #selector(ConnexionViewController.handlerOfNotification), name:.notificationusergeterror, object: nil);
         
         // Do any additional setup after loading the view.
     }
@@ -80,8 +77,9 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         let password:String = (self.view.viewWithTag(4) as! UITextField).text!
         
         let data = NSString(string: "\(mail):\(password)")
+     
         print(data)
-        
+        checkTextField()
         UserApi.CONNECT(value: data, begin: { self.view.addSubview(self.loadingView)
             self.loadingView.showLoadingIndicator()
             self.view.isUserInteractionEnabled = false
@@ -136,25 +134,21 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
             
         }
         
-        if (checkTextField()){
-            
-            (self.view.viewWithTag(2) as! UIButton).isEnabled = true
-            
-        }else{
-            
-            (self.view.viewWithTag(2) as! UIButton).isEnabled = false
-            
-        }
-        
+        checkTextField()
         
     }
     
-    func checkTextField() -> Bool{
+    func checkTextField() {
         if ((login.text?.isEmail)! && ((password.text?.characters.count)! >= 5)) {
-            return true
-        }
-        return false
-    }
+                
+                (self.view.viewWithTag(2) as! UIButton).isEnabled = true
+                
+            }else{
+                
+                (self.view.viewWithTag(2) as! UIButton).isEnabled = false
+                
+            }
+}
     
     
     
@@ -185,9 +179,15 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         } )
     }
     
+    @IBAction func unwindToMainViewController (_ sender: UIStoryboardSegue){
+        // bug? exit segue doesn't dismiss so we do it manually...
+        
+               
+    }
+    
     //MARK : Notification handler
     func handlerOfNotification(_ notification:NSNotification) {
-        if notification.name == .notificationusergetok {
+        if notification.name == .notificationusergetok{
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
             DispatchQueue.global(qos: .default).async(execute: {
@@ -195,18 +195,18 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
                 DispatchQueue.main.async(execute: {
                     self.loadingView.hideLoadingIndicator()
                     self.view.isUserInteractionEnabled = true
-                    let viewAlert = UIAlertController(title: "Compte", message: "bienvenue ", preferredStyle: .alert)
                     
-                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        self.afficheAlert(title: "Compte", message: "bienvenue ", handleFunction: { _ in
                         
-                        let userView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "calendarlist")
                         
-                        self.present(userView, animated: false, completion: {})
-                        
+                            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            
+                            let navigationController  = mainStoryboard.instantiateViewController(withIdentifier: "calendarlist") as!  UINavigationController
+                            
+                            self.present(navigationController, animated: false, completion: {})
+
+
                     })
-                    
-                    viewAlert.addAction(defaultAction)
-                    self.present(viewAlert, animated: true, completion: {})
                 })
             })
             
@@ -217,8 +217,7 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isUserInteractionEnabled = true
-                let alerview = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
-                self.present(alerview, animated: true, completion: {})
+                self.afficheAlert(title: "errorr",message: "erreur de connexion ", handleFunction: {})
             })
         }
         
@@ -229,14 +228,12 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
                 self.view.isUserInteractionEnabled = true
                 
                 
-                let alerview = UIAlertController(title: "erreur de compte",message: "ce compte n'existe pas  ", preferredStyle: .alert)
-                self.present(alerview, animated: true, completion: {})
+                self.afficheAlert(title: "erreur de compte",message: "ce compte n'existe pas  ", handleFunction: {})
             })
         }
         
         
-        NotificationCenter.default.removeObserver(notification.name)
-        
+        NotificationCenter.default.removeObserver(self, name: notification.name, object: nil)
     }
     
     
@@ -257,7 +254,7 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
             self.viewConx.frame = frame;
             self.viewConx.layoutIfNeeded()
             
-            NotificationCenter.default.removeObserver(sender.name)
+            NotificationCenter.default.removeObserver(self, name: sender.name, object: nil)
         }
         
     }
@@ -273,7 +270,8 @@ class ConnexionViewController: UIViewController,UITextFieldDelegate{
         self.viewConx.frame = frame;
         beginEdit = false
         self.viewConx.layoutIfNeeded()
-        NotificationCenter.default.removeObserver(sender.name)
+        NotificationCenter.default.removeObserver(self, name: sender.name, object: nil)
+
     }
     
     /*

@@ -45,7 +45,7 @@ class UserApi {
                             success(jsonResult)
                             
                             
-                            NotificationCenter.default.post(name: .notificationusergetok, object: nil, userInfo: ["data":jsonResult])
+                            NotificationCenter.default.post(name: .notificationusergetallok, object: nil, userInfo: ["data":jsonResult])
                             
                         }
                         

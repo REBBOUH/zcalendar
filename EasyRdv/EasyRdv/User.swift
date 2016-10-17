@@ -35,7 +35,7 @@ class User {
     }
     
     func checkAllValues() -> Bool {
-        return self.nameUser != nil && self.calendarId != nil && self.descriptionUser != nil
+        return self.nameUser != nil &&  self.adress != nil
     }
 }
 

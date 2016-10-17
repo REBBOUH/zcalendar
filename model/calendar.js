@@ -78,7 +78,7 @@ var bodyParser = require('body-parser');
       if (err) {
 
         console.log('The API returned an error: ' + err);
-
+res.status(401).send(eventsToSend);
         return;
       }
       var events = response.items;
@@ -122,6 +122,7 @@ var bodyParser = require('body-parser');
       },function(err,response){
         if (err) {
           console.log('The API returned an error: ' + err);
+          res.status(401).send(); 
           return;
         }
 

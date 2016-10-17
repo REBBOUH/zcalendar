@@ -177,19 +177,19 @@
         console.log('user connexion ***** '+JSON.stringify(request.user, null, 4));
   //console.log("user mail : "+userResult.mail+"  user password "+user.userResult);
   var token = jwt.sign({ "mail": request.user.mail,"password":request.user.password}, 'shhhhh');
-var id  = request.user._id;
-var user;
-dataBase.user.getUserFromInfo(request.user,function(err,userinfo){
+  var id  = request.user._id;
+  var user;
+  dataBase.user.getUserFromInfo(request.user,function(err,userinfo){
 
-  if (userinfo){
-response.status(200).json({
-    success: true,
-    message: 'token for connect',
-    user:userinfo,
-    token: token
-  }).send();
-}
-});
+    if (userinfo){
+      response.status(200).json({
+        success: true,
+        message: 'token for connect',
+        user:userinfo,
+        token: token
+      }).send();
+    }
+  });
 
   
 

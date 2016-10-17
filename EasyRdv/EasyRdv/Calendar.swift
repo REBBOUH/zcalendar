@@ -19,20 +19,18 @@ class Calendar:NSObject {
     }
     
     deinit {
-        
         listCalandar = nil
     }
     
     
-     init (eventInfos:[[String:AnyObject]]) {
+    init (eventInfos:[[String:AnyObject]]) {
         super.init()
         
         listCalandar = NSMutableArray()
-       
+        
         for eventInfo in eventInfos {
             
             let event:Event = Event(eventInfo: eventInfo)
-            
             listCalandar?.add(event)
             
         }

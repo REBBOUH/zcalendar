@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ObjectAnimation: NSObject,UIViewControllerAnimatedTransitioning{
+class ObjectAnimation: NSObject,UIViewControllerAnimatedTransitioning,UIViewControllerTransitioningDelegate{
     
     var originFrame = CGRect.zero
     
@@ -65,4 +65,16 @@ class ObjectAnimation: NSObject,UIViewControllerAnimatedTransitioning{
        
         
     }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return self
+    }
+    
+    // return the animator used when dismissing from a viewcontroller
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    
+        return self
+    }
+
 }

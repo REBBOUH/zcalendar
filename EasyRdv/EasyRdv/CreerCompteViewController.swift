@@ -51,14 +51,14 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
         
         self.view.addGestureRecognizer(TapGestureRecognizer)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillShow(sender:)), name: NSNotification.Name.UIKeyboardWillShow.rawValue, object: nil)
-        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillHide(sender:)), name: NSNotification.Name.UIKeyboardWillHide.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillShow(sender:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.keyboardWillHide(sender:)), name:.UIKeyboardWillHide, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications), name: Constants.notificationuseraddok.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications), name: .notificationuseraddok, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications), name: Constants.notificationuseradderror.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications), name: .notificationuseradderror, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications), name: Constants.notificationconxerror.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(CreerCompteViewController.handleNotifications), name: .notificationconxerror, object: nil)
         // Do any additional setup after loading the view.
     }
     
@@ -190,7 +190,7 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
             self.viewConx.frame = frame;
             self.viewConx.layoutIfNeeded()
             
-            NotificationCenter.default.removeObserver(sender.name)
+            NotificationCenter.default.removeObserver(self, name: sender.name, object: nil)
         }
         
     }
@@ -205,7 +205,8 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
         self.viewConx.frame = frame;
         beginEdit = false
         self.viewConx.layoutIfNeeded()
-        NotificationCenter.default.removeObserver(sender.name)
+        NotificationCenter.default.removeObserver(self, name: sender.name, object: nil)
+
     }
     
     // MARK - handle notification
@@ -219,16 +220,10 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
                 DispatchQueue.main.async(execute: {
                     self.loadingView.hideLoadingIndicator()
                     self.view.isMultipleTouchEnabled = true
-                    let viewAlert = UIAlertController(title: "Compte", message: "votre compte a été bien crée ", preferredStyle: .alert)
-                    
-                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
-                        
-                        self.dismiss(animated: true, completion: {})
-                        
+                   
+                    self.afficheAlert(title: "Compte", message: "votre compte a été bien crée ",handleFunction: {
+                     self.dismiss(animated: true, completion: {})
                     })
-                    
-                    viewAlert.addAction(defaultAction)
-                    self.present(viewAlert, animated: true, completion: {})
                 })
             })
             
@@ -240,8 +235,10 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isMultipleTouchEnabled = true
             
-                let viewAlert = UIAlertController(title: "errorr",message: "cet utilisateur existe deja  ", preferredStyle: .alert)
-                self.present(viewAlert, animated: true, completion: {})
+                
+                self.afficheAlert(title: "errorr",message: "cet utilisateur existe deja  ",handleFunction: {
+                   
+                })
             })
         }
         if notification.name == .notificationconxerror {
@@ -249,14 +246,16 @@ class CreerCompteViewController: UIViewController,UITextFieldDelegate {
             DispatchQueue.main.async(execute: {
                 self.loadingView.hideLoadingIndicator()
                 self.view.isMultipleTouchEnabled = true
-                let viewAlert = UIAlertController(title: "errorr",message: "erreur de connexion  ",preferredStyle: .alert)
-               self.present(viewAlert, animated: true, completion: {})
+                self.afficheAlert(title: "errorr",message: "cet utilisateur existe deja  ",handleFunction: {
+                    
+                })
             })
         }
         
         
+        NotificationCenter.default.removeObserver(self, name: notification.name, object: nil)
+
         
-        NotificationCenter.default.removeObserver(notification.name)
         
     }
     

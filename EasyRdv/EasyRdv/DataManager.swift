@@ -24,14 +24,13 @@ class DataManager {
     class func getToken() -> String {
         
         if UserDefaults.standard.object(forKey: "token") == nil {
-            
-            
+        
             return ""
         }else{
             
             let token =  UserDefaults.standard.object(forKey: "token") as! String
             
-            print(token)
+            //print(token)
             
             return token
             
@@ -46,10 +45,8 @@ class DataManager {
             
             let userInfo =  UserDefaults.standard.object(forKey: "userInfo") as! [String:AnyObject]
             
-            
              user  = UserApp(userInfo: userInfo)
           
-
         }
         
         return user!

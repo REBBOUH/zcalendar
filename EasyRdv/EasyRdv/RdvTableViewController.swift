@@ -39,13 +39,13 @@ class RdvTableViewController: UITableViewController {
                 
         })
 
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarok.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: .notificationcalendarok, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationcalendarerror.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: .notificationcalendarerror, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationeventupdateokreload.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: .notificationeventupdateokreload, object: nil)
         
-        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: Constants.notificationconxerror.rawValue, object: nil)
+        NotificationCenter.default.setObserver(self, selector: #selector(RdvTableViewController.handleNotifications(_:)), name: .notificationconxerror, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,7 +57,7 @@ class RdvTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -130,8 +130,8 @@ class RdvTableViewController: UITableViewController {
                     if self.calender?.listCalandar?.count == 0 {
                         
                         
-                        let alerview = UIAlertController(title: "Rendez-vous",message: "pas de rendez-vous disponible", preferredStyle: .alert)
-                        self.present(alerview, animated: true, completion: {})
+                                
+                        self.afficheAlert(title: "Rendez-vous",message: "pas de rendez-vous disponible", handleFunction: {})
 
                     }else{
                         
@@ -149,8 +149,7 @@ class RdvTableViewController: UITableViewController {
                 
                 self.view.isUserInteractionEnabled = true
                
-                let alerview = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
-                self.present(alerview, animated: true, completion: {})
+               self.afficheAlert(title: "errorr",message: "erreur de connexion ", handleFunction: {})
 
             })
         }
@@ -176,14 +175,13 @@ class RdvTableViewController: UITableViewController {
                 
                 self.loadingView.hideLoadingIndicator()
                 
-                let alerview = UIAlertController(title: "errorr",message: "erreur de connexion ", preferredStyle: .alert)
-                self.present(alerview, animated: true, completion: {})
+                self.afficheAlert(title: "errorr",message: "erreur de connexion ", handleFunction: {})
 
             })
             
         }
         
-        NotificationCenter.default.removeObserver(notification.name)
+        NotificationCenter.default.removeObserver(self, name: notification.name, object: nil)
         
     }
     
@@ -192,3 +190,16 @@ class RdvTableViewController: UITableViewController {
     }
     
 }
+extension UIViewController {
+    func afficheAlert(title:String,message:String,handleFunction:@escaping ()->()){
+        let alerview = UIAlertController(title: title,message: message, preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+            handleFunction()
+        })
+        
+        alerview.addAction(defaultAction)
+        self.present(alerview, animated: true, completion: {})
+    }
+}
+

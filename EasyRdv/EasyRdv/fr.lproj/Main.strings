@@ -1,0 +1,87 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "1vM-oc-M6j"; */
+"1vM-oc-M6j.text" = "Label";
+
+/* Class = "UILabel"; text = "date debut "; ObjectID = "3P3-Id-v5t"; */
+"3P3-Id-v5t.text" = "date debut ";
+
+/* Class = "UILabel"; text = "Remplissez les champs  requis ci-dessous pour créer votre compte"; ObjectID = "5qG-1z-YfI"; */
+"5qG-1z-YfI.text" = "Remplissez les champs  requis ci-dessous pour créer votre compte";
+
+/* Class = "UILabel"; text = "Nouveau sur EasyRdv ?"; ObjectID = "7wj-JW-eVz"; */
+"7wj-JW-eVz.text" = "Nouveau sur EasyRdv ?";
+
+/* Class = "UIBarButtonItem"; title = "retour"; ObjectID = "8Fr-LT-0kY"; */
+"8Fr-LT-0kY.title" = "retour";
+
+/* Class = "UIButton"; normalTitle = "Réserver"; ObjectID = "AQU-sL-VDz"; */
+"AQU-sL-VDz.normalTitle" = "Réserver";
+
+/* Class = "UITextField"; placeholder = "mot de passe "; ObjectID = "Edd-aT-d27"; */
+"Edd-aT-d27.placeholder" = "mot de passe ";
+
+/* Class = "UILabel"; text = "Section"; ObjectID = "Gxa-dY-oZS"; */
+"Gxa-dY-oZS.text" = "Section";
+
+/* Class = "UIButton"; normalTitle = "Continuer"; ObjectID = "HtB-6J-4P0"; */
+"HtB-6J-4P0.normalTitle" = "Continuer";
+
+/* Class = "UILabel"; text = "User Name"; ObjectID = "It0-pg-VLp"; */
+"It0-pg-VLp.text" = "User Name";
+
+/* Class = "UILabel"; text = "Prendre le rendez-vous le : "; ObjectID = "ThC-fP-OMd"; */
+"ThC-fP-OMd.text" = "Prendre le rendez-vous le : ";
+
+/* Class = "UITextField"; placeholder = "nom complet "; ObjectID = "UqK-aS-WM5"; */
+"UqK-aS-WM5.placeholder" = "nom complet ";
+
+/* Class = "UILabel"; text = "jeudi "; ObjectID = "Vb8-Y9-Vt6"; */
+"Vb8-Y9-Vt6.text" = "jeudi ";
+
+/* Class = "UILabel"; text = "Créer un compte ou se connecter"; ObjectID = "W0l-fA-ydY"; */
+"W0l-fA-ydY.text" = "Créer un compte ou se connecter";
+
+/* Class = "UITextField"; placeholder = "identifiant"; ObjectID = "XDn-tv-fvJ"; */
+"XDn-tv-fvJ.placeholder" = "identifiant";
+
+/* Class = "UIButton"; normalTitle = "CRÉER COMPTE"; ObjectID = "bDB-0m-VBe"; */
+"bDB-0m-VBe.normalTitle" = "CRÉER COMPTE";
+
+/* Class = "UIButton"; normalTitle = "Accueil"; ObjectID = "gjM-S5-Kjr"; */
+"gjM-S5-Kjr.normalTitle" = "Accueil";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "jZP-aS-Q0t"; */
+"jZP-aS-Q0t.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "retour"; ObjectID = "nEN-OB-W4X"; */
+"nEN-OB-W4X.title" = "retour";
+
+/* Class = "UILabel"; text = "Business Manager"; ObjectID = "qUn-u5-grr"; */
+"qUn-u5-grr.text" = "Business Manager";
+
+/* Class = "UIButton"; normalTitle = "CONNEXION"; ObjectID = "r8s-CB-Dys"; */
+"r8s-CB-Dys.normalTitle" = "CONNEXION";
+
+/* Class = "UITextField"; placeholder = "mail"; ObjectID = "rNX-RS-XtE"; */
+"rNX-RS-XtE.placeholder" = "mail";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "sLd-uv-WGf"; */
+"sLd-uv-WGf.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Annuler"; ObjectID = "the-oc-kxm"; */
+"the-oc-kxm.normalTitle" = "Annuler";
+
+/* Class = "UITextField"; placeholder = "numéro de téléphone"; ObjectID = "tkg-6V-HSm"; */
+"tkg-6V-HSm.placeholder" = "numéro de téléphone";
+
+/* Class = "UIButton"; normalTitle = "vous avez dèja un compte esyRdv"; ObjectID = "ud7-61-036"; */
+"ud7-61-036.normalTitle" = "vous avez dèja un compte esyRdv";
+
+/* Class = "UITextField"; placeholder = "confirmer votre mail"; ObjectID = "vHL-Ih-KVg"; */
+"vHL-Ih-KVg.placeholder" = "confirmer votre mail";
+
+/* Class = "UITextField"; placeholder = "mot de passe"; ObjectID = "wWS-7V-nOv"; */
+"wWS-7V-nOv.placeholder" = "mot de passe";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "zjO-lO-GQy"; */
+"zjO-lO-GQy.text" = "Label";
